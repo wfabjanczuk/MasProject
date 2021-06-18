@@ -1,8 +1,10 @@
 package mas;
 
+import client.BookStoreClient;
+
 public class Main {
 
     public static void main(String[] args) {
-	// write your code here
+        BookStoreClient.main(args);
     }
 }
