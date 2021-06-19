@@ -1,10 +1,10 @@
 package mas;
 
-import client.ComponentMappingClient;
+import client.CascadesClient;
 
 public class Main {
 
     public static void main(String[] args) {
-        ComponentMappingClient.main(args);
+        CascadesClient.main(args);
     }
 }
