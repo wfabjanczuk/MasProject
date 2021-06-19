@@ -15,8 +15,7 @@
         <!-- SQL dialect -->
         <property name="dialect">org.hibernate.dialect.MySQL5Dialect</property>
 
-        <!-- DROP and then CREATE schema when SessionFactory is built -->
-        <property name="hibernate.hbm2ddl.auto">update</property>
+        <property name="hibernate.hbm2ddl.auto">create</property>
 
         <!-- Activate Hibernate Statistics -->
         <property name="hibernate.generate_statistics">true</property>
@@ -27,6 +26,8 @@
         <mapping class="entity.Message"/>
         <mapping class="entity.Person"/>
         <mapping class="entity.Address"/>
+        <mapping class="entity.Customer"/>
+        <mapping class="entity.Passport"/>
 
     </session-factory>
 </hibernate-configuration>

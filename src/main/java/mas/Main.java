@@ -1,10 +1,10 @@
 package mas;
 
-import client.CascadesClient;
+import client.HelloWorldClient;
 
 public class Main {
 
     public static void main(String[] args) {
-        CascadesClient.main(args);
+        HelloWorldClient.main(args);
     }
 }

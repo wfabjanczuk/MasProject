@@ -1,13 +1,38 @@
 package client;
 
+import entity.Customer;
 import entity.Message;
+import entity.Passport;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 import util.HibernateUtil;
 
 public class HelloWorldClient {
     public static void main(String[] args) {
-        createMessage();
+        Session session = HibernateUtil.getSessionFactory().openSession();
+        Transaction transaction = session.getTransaction();
+
+        try {
+            transaction.begin();
+
+            Passport passport = new Passport("925076473");
+            Customer customer = new Customer("Nicole Scott", passport);
+
+            session.persist(customer);
+
+            transaction.commit();
+        } catch (Exception e) {
+            if (transaction != null) {
+                transaction.rollback();
+            }
+
+            e.printStackTrace();
+        } finally {
+            if (session != null) {
+                session.close();
+            }
+        }
+
 
         HibernateUtil.closeSessionFactory();
     }

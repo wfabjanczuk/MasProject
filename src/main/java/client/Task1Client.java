@@ -1,11 +1,10 @@
 package client;
 
+import entity.Student;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 
 import util.HibernateUtil;
-import entity.Guide;
-import entity.Student;
 
 
 public class Task1Client {

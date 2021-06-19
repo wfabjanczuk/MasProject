@@ -13,7 +13,7 @@ public class Student {
 
     private String name;
 
-    @ManyToOne(cascade = {CascadeType.PERSIST, CascadeType.REMOVE})
+    @ManyToOne(cascade = {CascadeType.PERSIST})
     @JoinColumn(name = "guide_id")
     private Guide guide;
 
@@ -26,6 +26,10 @@ public class Student {
         this.guide = guide;
     }
 
+    public String getName() {
+        return name;
+    }
+
     public Guide getGuide() {
         return guide;
     }
@@ -35,14 +39,6 @@ public class Student {
     }
 
 }
-
-
-
-
-
-
-
-
 
 
 
