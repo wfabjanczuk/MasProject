@@ -13,14 +13,19 @@
         <property name="connection.password">root</property>
 
         <!-- SQL dialect -->
-        <property name="dialect">org.hibernate.dialect.MySQLDialect</property>
+        <property name="dialect">org.hibernate.dialect.MySQL5Dialect</property>
+
+        <!-- DROP and then CREATE schema when SessionFactory is built -->
+        <property name="hibernate.hbm2ddl.auto">create</property>
 
         <!-- Activate Hibernate Statistics -->
         <property name="hibernate.generate_statistics">true</property>
-        
+
         <!-- Use Annotation-based mapping metadata -->
         <mapping class="entity.Message"/>
-        
+        <mapping class="entity.Person"/>
+        <mapping class="entity.Address"/>
+
     </session-factory>
 </hibernate-configuration>
 
