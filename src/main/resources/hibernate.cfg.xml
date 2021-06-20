@@ -28,6 +28,8 @@
         <mapping class="entity.Address"/>
         <mapping class="entity.Customer"/>
         <mapping class="entity.Passport"/>
+        <mapping class="entity.Movie" />
+        <mapping class="entity.Actor" />
 
     </session-factory>
 </hibernate-configuration>
