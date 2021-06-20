@@ -1,4 +1,4 @@
-package exampleEntity;
+package udemy.exampleEntity;
 
 public enum EmployeeLevel {
     JUNIOR,

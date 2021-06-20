@@ -1,10 +1,10 @@
-package exampleClient;
+package udemy.exampleClient;
 
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 
-import exampleEntity.Actor;
-import exampleEntity.Movie;
+import udemy.exampleEntity.Actor;
+import udemy.exampleEntity.Movie;
 import util.HibernateUtil;
 
 public class Question1Client {

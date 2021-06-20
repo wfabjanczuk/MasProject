@@ -21,18 +21,20 @@
         <property name="hibernate.generate_statistics">true</property>
 
         <!-- Use Annotation-based mapping metadata -->
-        <mapping class="exampleEntity.Guide" />
-        <mapping class="exampleEntity.Student" />
-        <mapping class="exampleEntity.Message"/>
-        <mapping class="exampleEntity.Person"/>
-        <mapping class="exampleEntity.Address"/>
-        <mapping class="exampleEntity.Customer"/>
-        <mapping class="exampleEntity.Passport"/>
-        <mapping class="exampleEntity.Movie" />
-        <mapping class="exampleEntity.Actor" />
-        <mapping class="exampleEntity.Employee" />
-        <mapping class="exampleEntity.Friend" />
-        <mapping class="exampleEntity.Item" />
+        <!--        <mapping class="udemy.exampleEntity.Guide" />-->
+        <!--        <mapping class="udemy.exampleEntity.Student" />-->
+        <!--        <mapping class="udemy.exampleEntity.Message"/>-->
+        <!--        <mapping class="udemy.exampleEntity.Person"/>-->
+        <!--        <mapping class="udemy.exampleEntity.Address"/>-->
+        <!--        <mapping class="udemy.exampleEntity.Customer"/>-->
+        <!--        <mapping class="udemy.exampleEntity.Passport"/>-->
+        <!--        <mapping class="udemy.exampleEntity.Movie" />-->
+        <!--        <mapping class="udemy.exampleEntity.Actor" />-->
+        <!--        <mapping class="udemy.exampleEntity.Employee" />-->
+        <!--        <mapping class="udemy.exampleEntity.Friend" />-->
+        <!--        <mapping class="udemy.exampleEntity.Item" />-->
+
+        <mapping class="mas.entity.Person"/>
 
     </session-factory>
 </hibernate-configuration>

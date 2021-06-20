@@ -1,12 +1,12 @@
-package exampleClient;
+package udemy.exampleClient;
 
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 
 import util.HibernateUtil;
-import exampleEntity.Address;
-import exampleEntity.Person;
+import udemy.exampleEntity.Address;
+import udemy.exampleEntity.Person;
 
 public class Question4Client {
 	public static void main(String[] args) {

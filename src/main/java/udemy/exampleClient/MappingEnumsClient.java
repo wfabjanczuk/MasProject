@@ -1,8 +1,8 @@
-package exampleClient;
+package udemy.exampleClient;
 
-import exampleEntity.Employee;
-import exampleEntity.EmployeeLevel;
-import exampleEntity.EmployeeStatus;
+import udemy.exampleEntity.Employee;
+import udemy.exampleEntity.EmployeeLevel;
+import udemy.exampleEntity.EmployeeStatus;
 import org.hibernate.Session;
 import util.HibernateUtil;
 

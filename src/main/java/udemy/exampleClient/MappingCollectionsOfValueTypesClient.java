@@ -1,9 +1,9 @@
-package exampleClient;
+package udemy.exampleClient;
 
 import org.hibernate.Session;
 
 import util.HibernateUtil;
-import exampleEntity.Friend;
+import udemy.exampleEntity.Friend;
 
 public class MappingCollectionsOfValueTypesClient {
 	public static void main(String[] args) {

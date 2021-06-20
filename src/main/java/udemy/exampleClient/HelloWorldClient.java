@@ -1,8 +1,8 @@
-package exampleClient;
+package udemy.exampleClient;
 
-import exampleEntity.Customer;
-import exampleEntity.Message;
-import exampleEntity.Passport;
+import udemy.exampleEntity.Customer;
+import udemy.exampleEntity.Message;
+import udemy.exampleEntity.Passport;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 import util.HibernateUtil;

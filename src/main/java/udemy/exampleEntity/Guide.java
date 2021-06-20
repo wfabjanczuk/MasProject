@@ -1,4 +1,4 @@
-package exampleEntity;
+package udemy.exampleEntity;
 
 import javax.persistence.*;
 import java.util.HashSet;

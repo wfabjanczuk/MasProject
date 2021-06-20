@@ -1,10 +1,10 @@
 package mas;
 
-import exampleClient.MappingCollectionsOfValueTypesClient;
+import mas.example.DataCreator;
 
 public class Main {
 
     public static void main(String[] args) {
-        MappingCollectionsOfValueTypesClient.main(args);
+        DataCreator.main(args);
     }
 }

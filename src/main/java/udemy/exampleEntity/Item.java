@@ -1,4 +1,4 @@
-package exampleEntity;
+package udemy.exampleEntity;
 import java.util.ArrayList;
 import java.util.Collection;
 import javax.persistence.*;
