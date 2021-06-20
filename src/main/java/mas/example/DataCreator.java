@@ -3,12 +3,14 @@ package mas.example;
 import mas.entity.Client;
 import mas.entity.Employee;
 import mas.entity.Person;
+import mas.entity.Technician;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 import util.HibernateUtil;
 
 import java.math.BigDecimal;
 import java.sql.Date;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Set;
 import java.util.stream.Collectors;
@@ -30,6 +32,7 @@ public class DataCreator {
 
         createClientRows();
         createEmployeeRows();
+        createTechnicianRows();
 
         session.close();
     }
@@ -139,6 +142,71 @@ public class DataCreator {
     private static Stream<Person> getPersonObjectStreamForEmployees() {
         return createPersonObjects()
                 .stream()
-                .filter(person -> person.getFirstname().substring(0, 1).compareToIgnoreCase("K") >= 0);
+                .filter(person -> person.getFirstname().substring(0, 1).compareToIgnoreCase("K") >= 0)
+                .filter(person -> person.getFirstname().substring(0, 1).compareToIgnoreCase("P") < 0);
+    }
+
+    private static void createTechnicianRows() {
+        Transaction transaction = session.getTransaction();
+
+        try {
+            transaction.begin();
+
+            getTechnicianObjects().forEach(session::persist);
+
+            transaction.commit();
+        } catch (Exception exception) {
+            if (transaction != null) {
+                transaction.rollback();
+            }
+            exception.printStackTrace();
+        }
+    }
+
+    private static Set<Technician> getTechnicianObjects() {
+        return getPersonObjectStreamForTechnicians()
+                .map(person -> {
+                    int dayOfMonth = 1 + (int) (Math.random() * 30),
+                            buildingNumber = 1 + (int) (Math.random() * 255),
+                            salaryPrefix = 2 + (int) (Math.random() * 4),
+                            telephoneSuffix = (int) (Math.random() * 9);
+                    String address = "Koszykowa " + buildingNumber + ", 02-008 Warszawa",
+                            telephone = "22584450" + telephoneSuffix;
+                    Date employmentDate = Date.valueOf("2000-01-" + dayOfMonth);
+                    BigDecimal salary = new BigDecimal(salaryPrefix + "000");
+
+                    return new Employee(
+                            person,
+                            getNextPesel(),
+                            address,
+                            telephone,
+                            employmentDate,
+                            salary
+                    );
+                })
+                .map(employee -> {
+                    ArrayList<String> skills = new ArrayList<>();
+
+                    int skillsOption = (int) (Math.random() * 4);
+
+                    if (skillsOption > 0) {
+                        skills.add("sharpening");
+                    }
+                    if (skillsOption > 1) {
+                        skills.add("replacing parts");
+                    }
+                    if (skillsOption > 2) {
+                        skills.add("repairing");
+                    }
+
+                    return new Technician(employee, skills);
+                })
+                .collect(Collectors.toSet());
+    }
+
+    private static Stream<Person> getPersonObjectStreamForTechnicians() {
+        return createPersonObjects()
+                .stream()
+                .filter(person -> person.getFirstname().substring(0, 1).compareToIgnoreCase("P") >= 0);
     }
 }
