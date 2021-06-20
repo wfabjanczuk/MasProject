@@ -35,6 +35,7 @@
         <!--        <mapping class="udemy.exampleEntity.Item" />-->
 
         <mapping class="mas.entity.Person"/>
+        <mapping class="mas.entity.Client"/>
 
     </session-factory>
 </hibernate-configuration>

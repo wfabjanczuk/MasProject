@@ -1,5 +1,6 @@
 package mas.example;
 
+import mas.entity.Client;
 import mas.entity.Person;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
@@ -16,7 +17,7 @@ public class DataCreator {
     public static void main(String[] args) {
         session = HibernateUtil.getSessionFactory().openSession();
 
-        createPersonRows();
+        createClientRows();
 
         session.close();
         HibernateUtil.getSessionFactory().close();
@@ -52,5 +53,32 @@ public class DataCreator {
 
             return new Person(email, firstname, lastname, birthdate);
         }).collect(Collectors.toSet());
+    }
+
+    private static void createClientRows() {
+        Transaction transaction = session.getTransaction();
+
+        try {
+            transaction.begin();
+
+            createClientObjects().forEach(session::persist);
+
+            transaction.commit();
+        } catch (Exception exception) {
+            if (transaction != null) {
+                transaction.rollback();
+            }
+            exception.printStackTrace();
+        }
+    }
+
+    private static Set<Client> createClientObjects() {
+        Set<Person> personSet = createPersonObjects();
+
+        return personSet
+                .stream()
+                .filter(person -> person.getFirstname().substring(0, 1).compareToIgnoreCase("K") < 0)
+                .map(person -> new Client(person, false, 0))
+                .collect(Collectors.toSet());
     }
 }
