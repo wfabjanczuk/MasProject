@@ -38,6 +38,7 @@
         <mapping class="mas.entity.Client"/>
         <mapping class="mas.entity.Employee"/>
         <mapping class="mas.entity.Technician"/>
+        <mapping class="mas.entity.TicketCollector"/>
 
     </session-factory>
 </hibernate-configuration>

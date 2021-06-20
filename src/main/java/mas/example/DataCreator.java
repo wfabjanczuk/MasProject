@@ -1,9 +1,6 @@
 package mas.example;
 
-import mas.entity.Client;
-import mas.entity.Employee;
-import mas.entity.Person;
-import mas.entity.Technician;
+import mas.entity.*;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 import util.HibernateUtil;
@@ -29,21 +26,14 @@ public class DataCreator {
 
     public static void main(String[] args) {
         session = HibernateUtil.getSessionFactory().openSession();
-
-        createClientRows();
-        createEmployeeRows();
-        createTechnicianRows();
-
-        session.close();
-    }
-
-    private static void createPersonRows() {
         Transaction transaction = session.getTransaction();
 
         try {
             transaction.begin();
 
-            createPersonObjects().forEach(session::persist);
+            getClientObjects().forEach(session::persist);
+            getTechnicianObjects().forEach(session::persist);
+            getTicketCollectorObjects().forEach(session::persist);
 
             transaction.commit();
         } catch (Exception exception) {
@@ -52,9 +42,11 @@ public class DataCreator {
             }
             exception.printStackTrace();
         }
+
+        session.close();
     }
 
-    private static Set<Person> createPersonObjects() {
+    private static Set<Person> getPersonObjects() {
         String[] names = {"Andrzej", "Barbara", "Celina", "Damian", "Edmund", "Ferdynand", "Gabriela", "Halina", "Iga", "Jan", "Karolina", "Lech", "Magdalena", "Natalia", "Olaf", "Patryk", "Robert", "Urban", "Wiktoria", "Zenon"};
 
         return Arrays.stream(names).map(firstname -> {
@@ -69,54 +61,23 @@ public class DataCreator {
         }).collect(Collectors.toSet());
     }
 
-    private static void createClientRows() {
-        Transaction transaction = session.getTransaction();
-
-        try {
-            transaction.begin();
-
-            getClientObjects().forEach(session::persist);
-
-            transaction.commit();
-        } catch (Exception exception) {
-            if (transaction != null) {
-                transaction.rollback();
-            }
-            exception.printStackTrace();
-        }
-    }
-
     private static Set<Client> getClientObjects() {
-        return getPersonObjectStreamForClients()
-                .map(person -> new Client(person, false, 0))
+        return getPersonObjects()
+                .stream()
+                .filter(person -> person.getFirstname().substring(0, 1).compareToIgnoreCase("K") < 0)
+                .map(person -> {
+                    boolean marketingConsent = ((int) (Math.random() * 2)) > 0;
+                    int discountPercent = ((int) (Math.random() * 3)) * 5;
+
+                    return new Client(person, marketingConsent, discountPercent);
+                })
                 .collect(Collectors.toSet());
     }
 
-    private static Stream<Person> getPersonObjectStreamForClients() {
-        return createPersonObjects()
+    private static Stream<Employee> getEmployeeObjectStream() {
+        return getPersonObjects()
                 .stream()
-                .filter(person -> person.getFirstname().substring(0, 1).compareToIgnoreCase("K") < 0);
-    }
-
-    private static void createEmployeeRows() {
-        Transaction transaction = session.getTransaction();
-
-        try {
-            transaction.begin();
-
-            getEmployeeObjects().forEach(session::persist);
-
-            transaction.commit();
-        } catch (Exception exception) {
-            if (transaction != null) {
-                transaction.rollback();
-            }
-            exception.printStackTrace();
-        }
-    }
-
-    private static Set<Employee> getEmployeeObjects() {
-        return getPersonObjectStreamForEmployees()
+                .filter(person -> person.getFirstname().substring(0, 1).compareToIgnoreCase("K") >= 0)
                 .map(person -> {
                     int dayOfMonth = 1 + (int) (Math.random() * 30),
                             buildingNumber = 1 + (int) (Math.random() * 255),
@@ -135,55 +96,12 @@ public class DataCreator {
                             employmentDate,
                             salary
                     );
-                })
-                .collect(Collectors.toSet());
-    }
-
-    private static Stream<Person> getPersonObjectStreamForEmployees() {
-        return createPersonObjects()
-                .stream()
-                .filter(person -> person.getFirstname().substring(0, 1).compareToIgnoreCase("K") >= 0)
-                .filter(person -> person.getFirstname().substring(0, 1).compareToIgnoreCase("P") < 0);
-    }
-
-    private static void createTechnicianRows() {
-        Transaction transaction = session.getTransaction();
-
-        try {
-            transaction.begin();
-
-            getTechnicianObjects().forEach(session::persist);
-
-            transaction.commit();
-        } catch (Exception exception) {
-            if (transaction != null) {
-                transaction.rollback();
-            }
-            exception.printStackTrace();
-        }
+                });
     }
 
     private static Set<Technician> getTechnicianObjects() {
-        return getPersonObjectStreamForTechnicians()
-                .map(person -> {
-                    int dayOfMonth = 1 + (int) (Math.random() * 30),
-                            buildingNumber = 1 + (int) (Math.random() * 255),
-                            salaryPrefix = 2 + (int) (Math.random() * 4),
-                            telephoneSuffix = (int) (Math.random() * 9);
-                    String address = "Koszykowa " + buildingNumber + ", 02-008 Warszawa",
-                            telephone = "22584450" + telephoneSuffix;
-                    Date employmentDate = Date.valueOf("2000-01-" + dayOfMonth);
-                    BigDecimal salary = new BigDecimal(salaryPrefix + "000");
-
-                    return new Employee(
-                            person,
-                            getNextPesel(),
-                            address,
-                            telephone,
-                            employmentDate,
-                            salary
-                    );
-                })
+        return getEmployeeObjectStream()
+                .filter(employee -> employee.getPerson().getFirstname().substring(0, 1).compareToIgnoreCase("P") < 0)
                 .map(employee -> {
                     ArrayList<String> skills = new ArrayList<>();
 
@@ -204,9 +122,14 @@ public class DataCreator {
                 .collect(Collectors.toSet());
     }
 
-    private static Stream<Person> getPersonObjectStreamForTechnicians() {
-        return createPersonObjects()
-                .stream()
-                .filter(person -> person.getFirstname().substring(0, 1).compareToIgnoreCase("P") >= 0);
+    private static Set<TicketCollector> getTicketCollectorObjects() {
+        return getEmployeeObjectStream()
+                .filter(employee -> employee.getPerson().getFirstname().substring(0, 1).compareToIgnoreCase("P") >= 0)
+                .map(employee -> {
+                    boolean isAllowedToSell = ((int) (Math.random() * 2)) > 0;
+
+                    return new TicketCollector(employee, isAllowedToSell);
+                })
+                .collect(Collectors.toSet());
     }
 }

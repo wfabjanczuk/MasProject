@@ -16,7 +16,7 @@ public class Technician {
 
     @ElementCollection
     @CollectionTable(name = "technician_skill", joinColumns = @JoinColumn(name = "technician_id"))
-    @Column(name = "skill")
+    @Column(name = "skill", length = 255)
     private Collection<String> skills = new ArrayList<>();
 
     public Technician() {

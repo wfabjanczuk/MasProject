@@ -29,6 +29,12 @@ public class Employee {
     @Column(precision = 10, scale = 2)
     private BigDecimal salary;
 
+    @OneToOne(mappedBy = "employee")
+    private Technician technician;
+
+    @OneToOne(mappedBy = "employee")
+    private TicketCollector ticketCollector;
+
     public Employee() {
     }
 
@@ -91,5 +97,23 @@ public class Employee {
 
     public void setSalary(BigDecimal salary) {
         this.salary = salary;
+    }
+
+    public Technician getTechnician() {
+        return technician;
+    }
+
+    public void setTechnician(Technician technician) {
+        this.technician = technician;
+        technician.setEmployee(this);
+    }
+
+    public TicketCollector getTicketCollector() {
+        return ticketCollector;
+    }
+
+    public void setTicketCollector(TicketCollector ticketCollector) {
+        this.ticketCollector = ticketCollector;
+        ticketCollector.setEmployee(this);
     }
 }

@@ -87,7 +87,17 @@ public class Person {
         return client;
     }
 
+    public void setClient(Client client) {
+        this.client = client;
+        client.setPerson(this);
+    }
+
     public Employee getEmployee() {
         return employee;
+    }
+
+    public void setEmployee(Employee employee) {
+        this.employee = employee;
+        employee.setPerson(this);
     }
 }
