@@ -1,10 +1,10 @@
 package mas;
 
-import client.MappingEnumsClient;
+import client.MappingCollectionsOfValueTypesClient;
 
 public class Main {
 
     public static void main(String[] args) {
-        MappingEnumsClient.main(args);
+        MappingCollectionsOfValueTypesClient.main(args);
     }
 }

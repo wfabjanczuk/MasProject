@@ -31,6 +31,8 @@
         <mapping class="entity.Movie" />
         <mapping class="entity.Actor" />
         <mapping class="entity.Employee" />
+        <mapping class="entity.Friend" />
+        <mapping class="entity.Item" />
 
     </session-factory>
 </hibernate-configuration>
