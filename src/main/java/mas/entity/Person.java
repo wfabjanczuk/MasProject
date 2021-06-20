@@ -23,6 +23,12 @@ public class Person {
     @Column(nullable = false)
     private Date birthdate;
 
+    @OneToOne(mappedBy = "person")
+    private Client client;
+
+    @OneToOne(mappedBy = "person")
+    private Employee employee;
+
     public Person() {
     }
 
@@ -75,5 +81,13 @@ public class Person {
         }
 
         return DateUtil.getYearDifference(birthdate, new Date());
+    }
+
+    public Client getClient() {
+        return client;
+    }
+
+    public Employee getEmployee() {
+        return employee;
     }
 }

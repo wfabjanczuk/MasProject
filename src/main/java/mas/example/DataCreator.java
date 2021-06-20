@@ -32,7 +32,6 @@ public class DataCreator {
         createEmployeeRows();
 
         session.close();
-        HibernateUtil.getSessionFactory().close();
     }
 
     private static void createPersonRows() {

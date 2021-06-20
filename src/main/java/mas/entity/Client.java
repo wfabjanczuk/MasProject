@@ -5,10 +5,10 @@ import javax.persistence.*;
 @Entity
 public class Client {
     @Id
-    private Integer personId;
+    private Integer id;
 
     @OneToOne(cascade = {CascadeType.PERSIST})
-    @JoinColumn(name = "person_id")
+    @JoinColumn(name = "id")
     @MapsId
     private Person person;
 
@@ -27,8 +27,8 @@ public class Client {
         this.discountPercent = discountPercent;
     }
 
-    public Integer getPersonId() {
-        return personId;
+    public Integer getId() {
+        return id;
     }
 
     public Person getPerson() {
