@@ -1,4 +1,4 @@
-package entity;
+package exampleEntity;
 
 public enum EmployeeStatus {
     FULL_TIME,

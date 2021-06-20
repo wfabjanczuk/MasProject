@@ -1,11 +1,11 @@
-package client;
+package exampleClient;
 
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 
 import util.HibernateUtil;
-import entity.Actor;
-import entity.Movie;
+import exampleEntity.Actor;
+import exampleEntity.Movie;
 
 public class ManyToManyClient {
 	public static void main(String[] args) {

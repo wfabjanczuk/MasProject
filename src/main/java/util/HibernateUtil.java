@@ -7,18 +7,22 @@ import org.hibernate.boot.registry.StandardServiceRegistry;
 import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
 
 public class HibernateUtil {
-
+    private static final String configFilename = "hibernate.cfg.xml";
     private static final SessionFactory sessionFactory = buildSessionFactory();
 
     private static SessionFactory buildSessionFactory() {
         try {
-            StandardServiceRegistry serviceRegistry = new StandardServiceRegistryBuilder().configure("hibernate.cfg.xml").build();
-            Metadata metadata = new MetadataSources(serviceRegistry).getMetadataBuilder().build();
+            StandardServiceRegistry serviceRegistry;
+            Metadata metadata;
+
+            serviceRegistry = new StandardServiceRegistryBuilder().configure(configFilename).build();
+            metadata = new MetadataSources(serviceRegistry).getMetadataBuilder().build();
+
             return metadata.getSessionFactoryBuilder().build();
-        } catch (Throwable ex) {
-            // Make sure you log the exception, as it might be swallowed
-            System.err.println("Initial SessionFactory creation failed." + ex);
-            throw new ExceptionInInitializerError(ex);
+        } catch (Throwable exception) {
+            System.err.println("Initial SessionFactory creation failed." + exception);
+
+            throw new ExceptionInInitializerError(exception);
         }
     }
 
@@ -29,7 +33,6 @@ public class HibernateUtil {
     public static void closeSessionFactory() {
         sessionFactory.close();
     }
-
 }
 
 

@@ -1,8 +1,8 @@
-package client;
+package exampleClient;
 
-import entity.Customer;
-import entity.Message;
-import entity.Passport;
+import exampleEntity.Customer;
+import exampleEntity.Message;
+import exampleEntity.Passport;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 import util.HibernateUtil;

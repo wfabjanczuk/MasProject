@@ -1,8 +1,8 @@
-package client;
+package exampleClient;
 
-import entity.Employee;
-import entity.EmployeeLevel;
-import entity.EmployeeStatus;
+import exampleEntity.Employee;
+import exampleEntity.EmployeeLevel;
+import exampleEntity.EmployeeStatus;
 import org.hibernate.Session;
 import util.HibernateUtil;
 

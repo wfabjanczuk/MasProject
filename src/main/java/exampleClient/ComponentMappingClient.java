@@ -1,7 +1,7 @@
-package client;
+package exampleClient;
 
-import entity.Address;
-import entity.Person;
+import exampleEntity.Address;
+import exampleEntity.Person;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 import util.HibernateUtil;

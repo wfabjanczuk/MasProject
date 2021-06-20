@@ -1,10 +1,10 @@
-package client;
+package exampleClient;
 
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 
-import entity.Actor;
-import entity.Movie;
+import exampleEntity.Actor;
+import exampleEntity.Movie;
 import util.HibernateUtil;
 
 public class Question1Client {

@@ -1,10 +1,9 @@
-package client;
+package exampleClient;
 
 import org.hibernate.Session;
 
 import util.HibernateUtil;
-import entity.Address;
-import entity.Friend;
+import exampleEntity.Friend;
 
 public class MappingCollectionsOfValueTypesClient {
 	public static void main(String[] args) {

@@ -1,6 +1,6 @@
 package mas;
 
-import client.MappingCollectionsOfValueTypesClient;
+import exampleClient.MappingCollectionsOfValueTypesClient;
 
 public class Main {
 

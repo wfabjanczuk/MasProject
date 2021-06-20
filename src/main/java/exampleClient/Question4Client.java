@@ -1,12 +1,12 @@
-package client;
+package exampleClient;
 
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 
 import util.HibernateUtil;
-import entity.Address;
-import entity.Person;
+import exampleEntity.Address;
+import exampleEntity.Person;
 
 public class Question4Client {
 	public static void main(String[] args) {
