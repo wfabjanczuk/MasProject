@@ -1,12 +1,10 @@
 package mas;
 
-import client.ManyToManyClient;
-import client.Question1Client;
+import client.MappingEnumsClient;
 
 public class Main {
 
     public static void main(String[] args) {
-        ManyToManyClient.main(args);
-        Question1Client.main(args);
+        MappingEnumsClient.main(args);
     }
 }

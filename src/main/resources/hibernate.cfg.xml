@@ -30,6 +30,7 @@
         <mapping class="entity.Passport"/>
         <mapping class="entity.Movie" />
         <mapping class="entity.Actor" />
+        <mapping class="entity.Employee" />
 
     </session-factory>
 </hibernate-configuration>
