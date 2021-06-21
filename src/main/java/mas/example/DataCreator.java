@@ -1,6 +1,9 @@
 package mas.example;
 
-import mas.entity.*;
+import mas.entity.IceRink;
+import mas.entity.person.*;
+import mas.entity.skatingsession.SkatingSession;
+import mas.entity.skatingsession.SkatingSessionOneTime;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 import util.HibernateUtil;
@@ -151,8 +154,8 @@ public class DataCreator {
                 .collect(Collectors.toSet());
     }
 
-    private static Set<SkatingSession> getSkatingSessions() {
-        Set<SkatingSession> skatingSessionSet = new HashSet<>();
+    private static Set<SkatingSessionOneTime> getSkatingSessions() {
+        Set<SkatingSessionOneTime> skatingSessionSet = new HashSet<>();
 
         Calendar calendarIterator = Calendar.getInstance();
         Calendar calendarMax = Calendar.getInstance();
@@ -169,13 +172,13 @@ public class DataCreator {
             Date dateSessionStart = calendarIterator.getTime();
             Date dateSessionEnd = calendarSessionEnd.getTime();
 
-            iceRinkSet.forEach(iceRink -> skatingSessionSet.add(new SkatingSession(
+            iceRinkSet.forEach(iceRink -> skatingSessionSet.add(new SkatingSessionOneTime(new SkatingSession(
                     dateSessionStart,
                     dateSessionEnd,
                     new BigDecimal("10.00"),
                     DescriptionGenerator.generateText(200),
                     iceRink
-            )));
+            ))));
 
             calendarIterator = calendarSessionEnd;
         }

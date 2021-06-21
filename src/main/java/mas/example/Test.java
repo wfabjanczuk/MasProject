@@ -1,6 +1,6 @@
 package mas.example;
 
-import mas.entity.Person;
+import mas.entity.person.Person;
 import org.hibernate.Session;
 import util.HibernateUtil;
 

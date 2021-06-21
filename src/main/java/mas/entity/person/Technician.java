@@ -1,4 +1,4 @@
-package mas.entity;
+package mas.entity.person;
 
 import javax.persistence.*;
 import java.util.ArrayList;

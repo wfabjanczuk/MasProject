@@ -34,13 +34,17 @@
         <!--        <mapping class="udemy.exampleEntity.Friend" />-->
         <!--        <mapping class="udemy.exampleEntity.Item" />-->
 
-        <mapping class="mas.entity.Person"/>
-        <mapping class="mas.entity.Client"/>
-        <mapping class="mas.entity.Employee"/>
-        <mapping class="mas.entity.Technician"/>
-        <mapping class="mas.entity.TicketCollector"/>
+        <mapping class="mas.entity.person.Person"/>
+        <mapping class="mas.entity.person.Client"/>
+        <mapping class="mas.entity.person.Employee"/>
+        <mapping class="mas.entity.person.Technician"/>
+        <mapping class="mas.entity.person.TicketCollector"/>
         <mapping class="mas.entity.IceRink"/>
-        <mapping class="mas.entity.SkatingSession"/>
+        <mapping class="mas.entity.skatingsession.SkatingSession"/>
+        <mapping class="mas.entity.skatingsession.SkatingSessionOneTime"/>
+        <mapping class="mas.entity.skatingsession.SkatingSessionRegular"/>
+        <mapping class="mas.entity.skatingsession.SkatingSessionPrivate"/>
+        <mapping class="mas.entity.skatingsession.SkatingSessionPublic"/>
 
     </session-factory>
 </hibernate-configuration>
