@@ -23,28 +23,30 @@ public class Employee {
     @Column(length = 15, nullable = false)
     private String telephone;
 
-    @Column(name = "employment_date", nullable = false)
-    private Date employmentDate;
+    @Column(name = "date_employment", nullable = false)
+    private Date dateEmployment;
 
-    @Column(precision = 10, scale = 2)
+    @Column(precision = 10, scale = 2, nullable = false)
     private BigDecimal salary;
 
-    @OneToOne(mappedBy = "employee")
+    @OneToOne(mappedBy = "employee", cascade = {CascadeType.PERSIST})
     private Technician technician;
 
-    @OneToOne(mappedBy = "employee")
+    @OneToOne(mappedBy = "employee", cascade = {CascadeType.PERSIST})
     private TicketCollector ticketCollector;
 
     public Employee() {
     }
 
-    public Employee(Person person, String pesel, String address, String telephone, Date employmentDate, BigDecimal salary) {
+    public Employee(Person person, String pesel, String address, String telephone, Date dateEmployment, BigDecimal salary) {
         this.person = person;
         this.pesel = pesel;
         this.address = address;
         this.telephone = telephone;
-        this.employmentDate = employmentDate;
+        this.dateEmployment = dateEmployment;
         this.salary = salary;
+
+        person.setEmployee(this);
     }
 
     public Integer getId() {
@@ -56,7 +58,10 @@ public class Employee {
     }
 
     public void setPerson(Person person) {
-        this.person = person;
+        if (this.person != person) {
+            this.person = person;
+            person.setEmployee(this);
+        }
     }
 
     public String getPesel() {
@@ -83,12 +88,12 @@ public class Employee {
         this.telephone = telephone;
     }
 
-    public Date getEmploymentDate() {
-        return employmentDate;
+    public Date getDateEmployment() {
+        return dateEmployment;
     }
 
-    public void setEmploymentDate(Date employmentDate) {
-        this.employmentDate = employmentDate;
+    public void setDateEmployment(Date dateEmployment) {
+        this.dateEmployment = dateEmployment;
     }
 
     public BigDecimal getSalary() {
@@ -104,8 +109,10 @@ public class Employee {
     }
 
     public void setTechnician(Technician technician) {
-        this.technician = technician;
-        technician.setEmployee(this);
+        if (this.technician != technician) {
+            this.technician = technician;
+            technician.setEmployee(this);
+        }
     }
 
     public TicketCollector getTicketCollector() {
@@ -113,7 +120,9 @@ public class Employee {
     }
 
     public void setTicketCollector(TicketCollector ticketCollector) {
-        this.ticketCollector = ticketCollector;
-        ticketCollector.setEmployee(this);
+        if (this.ticketCollector != ticketCollector) {
+            this.ticketCollector = ticketCollector;
+            ticketCollector.setEmployee(this);
+        }
     }
 }

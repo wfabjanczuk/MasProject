@@ -40,6 +40,7 @@
         <mapping class="mas.entity.Technician"/>
         <mapping class="mas.entity.TicketCollector"/>
         <mapping class="mas.entity.IceRink"/>
+        <mapping class="mas.entity.SkatingSession"/>
 
     </session-factory>
 </hibernate-configuration>

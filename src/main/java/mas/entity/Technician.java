@@ -25,6 +25,8 @@ public class Technician {
     public Technician(Employee employee, Collection<String> skills) {
         this.employee = employee;
         this.skills = skills;
+
+        employee.setTechnician(this);
     }
 
     public Integer getId() {
@@ -36,7 +38,10 @@ public class Technician {
     }
 
     public void setEmployee(Employee employee) {
-        this.employee = employee;
+        if (this.employee != employee) {
+            this.employee = employee;
+            employee.setTechnician(this);
+        }
     }
 
     public Collection<String> getSkills() {

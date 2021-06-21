@@ -6,11 +6,7 @@ import org.hibernate.Transaction;
 import util.HibernateUtil;
 
 import java.math.BigDecimal;
-import java.sql.Date;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.HashSet;
-import java.util.Set;
+import java.util.*;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
@@ -25,10 +21,10 @@ public class DataCreator {
         try {
             transaction.begin();
 
-            getClientObjects().forEach(session::persist);
-            getTechnicianObjects().forEach(session::persist);
-            getTicketCollectorObjects().forEach(session::persist);
-            getIceRinks().forEach(session::persist);
+            getClients().forEach(session::persist);
+            getTechnicians().forEach(session::persist);
+            getTicketCollectors().forEach(session::persist);
+            getSkatingSessions().forEach(session::persist);
 
             transaction.commit();
         } catch (Exception exception) {
@@ -72,13 +68,13 @@ public class DataCreator {
                     email = firstname.toLowerCase() + "@gmail.com";
 
             int dayOfMonth = 1 + (int) (Math.random() * 30);
-            Date birthdate = Date.valueOf("2000-01-" + dayOfMonth);
+            Date birthdate = java.sql.Date.valueOf("2000-01-" + dayOfMonth);
 
             return new Person(email, firstname, lastname, birthdate);
         }).collect(Collectors.toSet());
     }
 
-    private static Set<Client> getClientObjects() {
+    private static Set<Client> getClients() {
         return getPersonObjects()
                 .stream()
                 .filter(person -> person.getFirstname().substring(0, 1).compareToIgnoreCase("K") < 0)
@@ -102,7 +98,7 @@ public class DataCreator {
                             telephoneSuffix = (int) (Math.random() * 9);
                     String address = "Koszykowa " + buildingNumber + ", 02-008 Warszawa",
                             telephone = "22584450" + telephoneSuffix;
-                    Date employmentDate = Date.valueOf("2000-01-" + dayOfMonth);
+                    Date employmentDate = java.sql.Date.valueOf("2000-01-" + dayOfMonth);
                     BigDecimal salary = new BigDecimal(salaryPrefix + "000");
 
                     return new Employee(
@@ -121,7 +117,7 @@ public class DataCreator {
         return String.valueOf(Math.abs(peselSeed)).substring(0, 11);
     }
 
-    private static Set<Technician> getTechnicianObjects() {
+    private static Set<Technician> getTechnicians() {
         return getEmployeeObjectStream()
                 .filter(employee -> employee.getPerson().getFirstname().substring(0, 1).compareToIgnoreCase("P") < 0)
                 .map(employee -> {
@@ -144,7 +140,7 @@ public class DataCreator {
                 .collect(Collectors.toSet());
     }
 
-    private static Set<TicketCollector> getTicketCollectorObjects() {
+    private static Set<TicketCollector> getTicketCollectors() {
         return getEmployeeObjectStream()
                 .filter(employee -> employee.getPerson().getFirstname().substring(0, 1).compareToIgnoreCase("P") >= 0)
                 .map(employee -> {
@@ -154,4 +150,37 @@ public class DataCreator {
                 })
                 .collect(Collectors.toSet());
     }
+
+    private static Set<SkatingSession> getSkatingSessions() {
+        Set<SkatingSession> skatingSessionSet = new HashSet<>();
+
+        Calendar calendarIterator = Calendar.getInstance();
+        Calendar calendarMax = Calendar.getInstance();
+
+        calendarIterator.setTime(java.sql.Date.valueOf("2021-06-01"));
+        calendarMax.setTime(java.sql.Date.valueOf("2021-06-03"));
+
+        Set<IceRink> iceRinkSet = getIceRinks();
+
+        while (calendarIterator.before(calendarMax)) {
+            Calendar calendarSessionEnd = (Calendar) calendarIterator.clone();
+            calendarSessionEnd.add(Calendar.HOUR_OF_DAY, 1);
+
+            Date dateSessionStart = calendarIterator.getTime();
+            Date dateSessionEnd = calendarSessionEnd.getTime();
+
+            iceRinkSet.forEach(iceRink -> skatingSessionSet.add(new SkatingSession(
+                    dateSessionStart,
+                    dateSessionEnd,
+                    new BigDecimal("10.00"),
+                    DescriptionGenerator.generateText(200),
+                    iceRink
+            )));
+
+            calendarIterator = calendarSessionEnd;
+        }
+
+        return skatingSessionSet;
+    }
+
 }

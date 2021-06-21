@@ -20,23 +20,23 @@ public class Person {
     @Column(length = 64, nullable = false)
     private String lastname;
 
-    @Column(nullable = false)
-    private Date birthdate;
+    @Column(name = "date_birth", nullable = false)
+    private Date dateBirth;
 
-    @OneToOne(mappedBy = "person")
+    @OneToOne(mappedBy = "person", cascade = {CascadeType.PERSIST})
     private Client client;
 
-    @OneToOne(mappedBy = "person")
+    @OneToOne(mappedBy = "person", cascade = {CascadeType.PERSIST})
     private Employee employee;
 
     public Person() {
     }
 
-    public Person(String email, String firstname, String lastname, Date birthdate) {
+    public Person(String email, String firstname, String lastname, Date dateBirth) {
         this.email = email;
         this.firstname = firstname;
         this.lastname = lastname;
-        this.birthdate = birthdate;
+        this.dateBirth = dateBirth;
     }
 
     public Integer getId() {
@@ -67,20 +67,20 @@ public class Person {
         this.lastname = lastname;
     }
 
-    public Date getBirthdate() {
-        return birthdate;
+    public Date getDateBirth() {
+        return dateBirth;
     }
 
-    public void setBirthdate(Date birthdate) {
-        this.birthdate = birthdate;
+    public void setDateBirth(Date dateBirth) {
+        this.dateBirth = dateBirth;
     }
 
     public Integer getAge() {
-        if (birthdate == null) {
+        if (dateBirth == null) {
             return null;
         }
 
-        return DateUtil.getYearDifference(birthdate, new Date());
+        return DateUtil.getYearDifference(dateBirth, new Date());
     }
 
     public Client getClient() {
@@ -88,8 +88,10 @@ public class Person {
     }
 
     public void setClient(Client client) {
-        this.client = client;
-        client.setPerson(this);
+        if (this.client != client) {
+            this.client = client;
+            client.setPerson(this);
+        }
     }
 
     public Employee getEmployee() {
@@ -97,7 +99,9 @@ public class Person {
     }
 
     public void setEmployee(Employee employee) {
-        this.employee = employee;
-        employee.setPerson(this);
+        if (this.employee != employee) {
+            this.employee = employee;
+            employee.setPerson(this);
+        }
     }
 }

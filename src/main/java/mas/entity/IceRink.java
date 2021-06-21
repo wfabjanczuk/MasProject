@@ -1,8 +1,11 @@
 package mas.entity;
 
 import javax.persistence.*;
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity
+@Table(name = "ice_rink")
 public class IceRink {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -16,6 +19,9 @@ public class IceRink {
 
     @Column(nullable = false)
     private Integer area;
+
+    @OneToMany(mappedBy = "iceRink", cascade = {CascadeType.PERSIST})
+    private Set<SkatingSession> skatingSessions = new HashSet<>();
 
     public IceRink() {
     }
@@ -52,5 +58,16 @@ public class IceRink {
 
     public void setArea(Integer area) {
         this.area = area;
+    }
+
+    public void addSkatingSession(SkatingSession skatingSession) {
+        if (!skatingSessions.contains(skatingSession)) {
+            skatingSessions.add(skatingSession);
+            skatingSession.setIceRink(this);
+        }
+    }
+
+    public Set<SkatingSession> getSkatingSessions() {
+        return skatingSessions;
     }
 }

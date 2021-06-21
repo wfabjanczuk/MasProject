@@ -13,7 +13,7 @@ public class TicketCollector {
     @MapsId
     private Employee employee;
 
-    @Column(nullable = false)
+    @Column(name = "is_allowed_to_sell", nullable = false)
     private Boolean isAllowedToSell;
 
     public TicketCollector() {
@@ -22,6 +22,8 @@ public class TicketCollector {
     public TicketCollector(Employee employee, Boolean isAllowedToSell) {
         this.employee = employee;
         this.isAllowedToSell = isAllowedToSell;
+
+        employee.setTicketCollector(this);
     }
 
     public Integer getId() {
@@ -33,7 +35,10 @@ public class TicketCollector {
     }
 
     public void setEmployee(Employee employee) {
-        this.employee = employee;
+        if (this.employee != employee) {
+            this.employee = employee;
+            employee.setTicketCollector(this);
+        }
     }
 
     public Boolean getAllowedToSell() {

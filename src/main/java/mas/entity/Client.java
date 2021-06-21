@@ -25,6 +25,8 @@ public class Client {
         this.person = person;
         this.marketingConsent = marketingConsent;
         this.discountPercent = discountPercent;
+
+        person.setClient(this);
     }
 
     public Integer getId() {
@@ -36,7 +38,10 @@ public class Client {
     }
 
     public void setPerson(Person person) {
-        this.person = person;
+        if (this.person != person) {
+            this.person = person;
+            person.setClient(this);
+        }
     }
 
     public Boolean getMarketingConsent() {
