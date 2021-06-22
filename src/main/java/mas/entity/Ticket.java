@@ -7,6 +7,7 @@ import javax.persistence.*;
 import java.util.Date;
 
 @Entity
+@Table(uniqueConstraints = @UniqueConstraint(columnNames = {"client_id", "skating_session_id"}))
 public class Ticket {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

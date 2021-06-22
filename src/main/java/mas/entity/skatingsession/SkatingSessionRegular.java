@@ -16,7 +16,11 @@ public class SkatingSessionRegular {
     private SkatingSession skatingSession;
 
     @ElementCollection
-    @CollectionTable(name = "skating_session_regular_days", joinColumns = @JoinColumn(name = "skating_session_regular_id"))
+    @CollectionTable(
+            name = "skating_session_regular_days",
+            joinColumns = @JoinColumn(name = "skating_session_regular_id"),
+            uniqueConstraints = @UniqueConstraint(columnNames = {"skating_session_regular_id", "day_of_week"})
+    )
     @Column(name = "day_of_week")
     private Collection<Integer> daysOfWeek = new ArrayList<>();
 
