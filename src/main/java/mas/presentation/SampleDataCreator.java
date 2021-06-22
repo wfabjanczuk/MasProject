@@ -2,7 +2,7 @@ package mas.presentation;
 
 import mas.entity.IceRink;
 import mas.entity.person.*;
-import mas.entity.skatingsession.*;
+import mas.entity.SkatingSession;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 import util.HibernateUtil;
@@ -32,11 +32,8 @@ public class SampleDataCreator {
             Set<IceRink> iceRinks = getIceRinks();
             iceRinks.forEach(session::persist);
 
-            Set<SkatingSession> skatingSessions = getSkatingSessions(iceRinks);
-            getOneTimeSkatingSessions(skatingSessions).forEach(session::persist);
-            getRegularSkatingSessions(skatingSessions).forEach(session::persist);
-            getPublicSkatingSessions(skatingSessions).forEach(session::persist);
-            getPrivateSkatingSessions(skatingSessions, clients).forEach(session::persist);
+            Set<SkatingSession> skatingSessions = getSkatingSessions(iceRinks, clients);
+            skatingSessions.forEach(session::persist);
             clients.forEach(session::persist);
 
             transaction.commit();
@@ -164,7 +161,7 @@ public class SampleDataCreator {
                 .collect(Collectors.toSet());
     }
 
-    private static Set<SkatingSession> getSkatingSessions(Set<IceRink> iceRinkSet) {
+    private static Set<SkatingSession> getSkatingSessions(Set<IceRink> iceRinkSet, Set<Client> clients) {
         Set<SkatingSession> skatingSessionSet = new HashSet<>();
 
         Calendar calendarIterator = Calendar.getInstance();
@@ -185,31 +182,26 @@ public class SampleDataCreator {
                     dateSessionEnd,
                     new BigDecimal("10.00"),
                     DescriptionGenerator.generateText(200),
+                    (int) (Math.random() * 2) > 0,
+                    (int) (Math.random() * 2) > 0,
                     iceRink
             )));
 
             calendarIterator = calendarSessionEnd;
         }
 
+        skatingSessionSet.stream()
+                .filter(SkatingSession::getRegular)
+                .forEach(skatingSession -> skatingSession.setDaysOfWeek(getRandomDaysOfWeek()));
+
+        skatingSessionSet.stream()
+                .filter(SkatingSession::getPrivate)
+                .forEach(skatingSession -> clients.stream()
+                        .filter(c -> (int) (Math.random() * 2) > 0)
+                        .forEach(c -> c.getPrivateSkatingSessions().add(skatingSession))
+                );
+
         return skatingSessionSet;
-    }
-
-    private static Set<SkatingSessionOneTime> getOneTimeSkatingSessions(Set<SkatingSession> skatingSessions) {
-        Date dateMax = java.sql.Date.valueOf("2021-06-02");
-
-        return skatingSessions.stream()
-                .filter(skatingSession -> skatingSession.getDateStart().before(dateMax))
-                .map(SkatingSessionOneTime::new)
-                .collect(Collectors.toSet());
-    }
-
-    private static Set<SkatingSessionRegular> getRegularSkatingSessions(Set<SkatingSession> skatingSessions) {
-        Date dateMin = java.sql.Date.valueOf("2021-06-02");
-
-        return skatingSessions.stream()
-                .filter(skatingSession -> skatingSession.getDateStart().after(dateMin))
-                .map(skatingSession -> new SkatingSessionRegular(skatingSession, getRandomDaysOfWeek()))
-                .collect(Collectors.toSet());
     }
 
     private static Set<Integer> getRandomDaysOfWeek() {
@@ -223,31 +215,5 @@ public class SampleDataCreator {
         }
 
         return daysOfWeek;
-    }
-
-    private static Set<SkatingSessionPublic> getPublicSkatingSessions(Set<SkatingSession> skatingSessions) {
-        Date dateMax = java.sql.Date.valueOf("2021-06-02");
-
-        return skatingSessions.stream()
-                .filter(skatingSession -> skatingSession.getDateStart().before(dateMax))
-                .map(skatingSession -> new SkatingSessionPublic(skatingSession, skatingSession.getIceRink().getArea() / 10))
-                .collect(Collectors.toSet());
-    }
-
-    private static Set<SkatingSessionPrivate> getPrivateSkatingSessions(Set<SkatingSession> skatingSessions, Set<Client> clients) {
-        Date dateMin = java.sql.Date.valueOf("2021-06-02");
-
-        return skatingSessions.stream()
-                .filter(skatingSession -> skatingSession.getDateStart().after(dateMin))
-                .map(skatingSession -> {
-                    SkatingSessionPrivate privateSkatingSession = new SkatingSessionPrivate(skatingSession);
-
-                    clients.stream()
-                            .filter(c -> (int) (Math.random() * 2) > 0)
-                            .forEach(c -> c.getPrivateSkatingSessions().add(privateSkatingSession));
-
-                    return privateSkatingSession;
-                })
-                .collect(Collectors.toSet());
     }
 }

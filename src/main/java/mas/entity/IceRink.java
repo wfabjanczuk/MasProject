@@ -1,7 +1,5 @@
 package mas.entity;
 
-import mas.entity.skatingsession.SkatingSession;
-
 import javax.persistence.*;
 import java.util.HashSet;
 import java.util.Set;

@@ -1,7 +1,6 @@
 package mas.entity;
 
 import mas.entity.person.Client;
-import mas.entity.skatingsession.SkatingSession;
 
 import javax.persistence.*;
 import java.util.Date;

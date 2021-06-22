@@ -40,11 +40,7 @@
         <mapping class="mas.entity.person.Technician"/>
         <mapping class="mas.entity.person.TicketCollector"/>
         <mapping class="mas.entity.IceRink"/>
-        <mapping class="mas.entity.skatingsession.SkatingSession"/>
-        <mapping class="mas.entity.skatingsession.SkatingSessionOneTime"/>
-        <mapping class="mas.entity.skatingsession.SkatingSessionRegular"/>
-        <mapping class="mas.entity.skatingsession.SkatingSessionPrivate"/>
-        <mapping class="mas.entity.skatingsession.SkatingSessionPublic"/>
+        <mapping class="mas.entity.SkatingSession"/>
         <mapping class="mas.entity.Ticket"/>
 
     </session-factory>

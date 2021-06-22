@@ -2,7 +2,7 @@ package mas.service;
 
 import mas.entity.Ticket;
 import mas.entity.person.Client;
-import mas.entity.skatingsession.SkatingSession;
+import mas.entity.SkatingSession;
 
 import java.math.BigDecimal;
 import java.math.RoundingMode;

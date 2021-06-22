@@ -1,7 +1,7 @@
 package mas.entity.person;
 
 import mas.entity.Ticket;
-import mas.entity.skatingsession.SkatingSessionPrivate;
+import mas.entity.SkatingSession;
 
 import javax.persistence.*;
 import java.util.HashSet;
@@ -25,11 +25,11 @@ public class Client {
 
     @ManyToMany(cascade = {CascadeType.ALL})
     @JoinTable(
-            name = "client_skating_session_private",
+            name = "client_private_skating_session",
             joinColumns = {@JoinColumn(name = "client_id")},
-            inverseJoinColumns = {@JoinColumn(name = "skating_session_private_id")}
+            inverseJoinColumns = {@JoinColumn(name = "private_skating_session_id")}
     )
-    private Set<SkatingSessionPrivate> privateSkatingSessions = new HashSet<>();
+    private Set<SkatingSession> privateSkatingSessions = new HashSet<>();
 
     @OneToMany(mappedBy = "client")
     private Set<Ticket> tickets = new HashSet<>();
@@ -75,11 +75,11 @@ public class Client {
         this.discountPercent = discountPercent;
     }
 
-    public Set<SkatingSessionPrivate> getPrivateSkatingSessions() {
+    public Set<SkatingSession> getPrivateSkatingSessions() {
         return privateSkatingSessions;
     }
 
-    public void setPrivateSkatingSessions(Set<SkatingSessionPrivate> privateSkatingSessions) {
+    public void setPrivateSkatingSessions(Set<SkatingSession> privateSkatingSessions) {
         this.privateSkatingSessions = privateSkatingSessions;
     }
 
