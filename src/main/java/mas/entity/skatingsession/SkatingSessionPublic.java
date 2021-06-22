@@ -13,6 +13,9 @@ public class SkatingSessionPublic {
     @MapsId
     private SkatingSession skatingSession;
 
+    @Column(name = "max_participants", nullable = false)
+    private Integer maxParticipants;
+
     public SkatingSessionPublic() {
     }
 
@@ -35,5 +38,13 @@ public class SkatingSessionPublic {
             this.skatingSession = skatingSession;
             skatingSession.setSkatingSessionPublic(this);
         }
+    }
+
+    public Integer getMaxParticipants() {
+        return maxParticipants;
+    }
+
+    public void setMaxParticipants(Integer maxParticipants) {
+        this.maxParticipants = maxParticipants;
     }
 }
