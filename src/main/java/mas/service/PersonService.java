@@ -1,7 +1,6 @@
 package mas.service;
 
 import mas.entity.person.Person;
-import util.DateUtil;
 
 import java.util.Date;
 
@@ -11,6 +10,6 @@ public class PersonService {
             return null;
         }
 
-        return DateUtil.getYearDifference(person.getDateBirth(), new Date());
+        return DateService.getYearDifference(person.getDateBirth(), new Date());
     }
 }

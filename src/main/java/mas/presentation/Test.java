@@ -1,4 +1,4 @@
-package mas.example;
+package mas.presentation;
 
 import mas.entity.person.Person;
 import mas.service.PersonService;

@@ -19,8 +19,9 @@ public class SkatingSessionPublic {
     public SkatingSessionPublic() {
     }
 
-    public SkatingSessionPublic(SkatingSession skatingSession) {
+    public SkatingSessionPublic(SkatingSession skatingSession, Integer maxParticipants) {
         this.skatingSession = skatingSession;
+        this.maxParticipants = maxParticipants;
     }
 
     public Integer getId() {

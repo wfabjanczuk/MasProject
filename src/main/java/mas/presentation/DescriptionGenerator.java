@@ -1,4 +1,4 @@
-package mas.example;
+package mas.presentation;
 
 import java.util.Arrays;
 import java.util.LinkedList;

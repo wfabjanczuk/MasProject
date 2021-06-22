@@ -1,4 +1,4 @@
-package util;
+package mas.service;
 
 import java.util.Calendar;
 import java.util.Date;
@@ -6,7 +6,7 @@ import java.util.Locale;
 
 import static java.util.Calendar.*;
 
-public class DateUtil {
+public class DateService {
     public static int getYearDifference(Date date1, Date date2) {
         boolean isNaturalOrder = date1.before(date2);
 
