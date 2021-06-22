@@ -1,6 +1,7 @@
 package mas.example;
 
 import mas.entity.person.Person;
+import mas.service.PersonService;
 import org.hibernate.Session;
 import util.HibernateUtil;
 
@@ -11,7 +12,7 @@ public class Test {
         Person person = session.get(Person.class, 1);
         System.out.println(person.getFirstname());
         System.out.println(person.getLastname());
-        System.out.println(person.getAge());
+        System.out.println(PersonService.getAge(person));
         System.out.println(person.getClient());
         System.out.println(person.getEmployee());
 

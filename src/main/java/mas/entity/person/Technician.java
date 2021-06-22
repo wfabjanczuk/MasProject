@@ -9,7 +9,7 @@ public class Technician {
     @Id
     private Integer id;
 
-    @OneToOne(cascade = {CascadeType.PERSIST})
+    @OneToOne(cascade = {CascadeType.ALL})
     @JoinColumn(name = "id")
     @MapsId
     private Employee employee;
@@ -25,12 +25,14 @@ public class Technician {
     public Technician(Employee employee, Collection<String> skills) {
         this.employee = employee;
         this.skills = skills;
-
-        employee.setTechnician(this);
     }
 
     public Integer getId() {
         return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
     }
 
     public Employee getEmployee() {
@@ -38,10 +40,7 @@ public class Technician {
     }
 
     public void setEmployee(Employee employee) {
-        if (this.employee != employee) {
-            this.employee = employee;
-            employee.setTechnician(this);
-        }
+        this.employee = employee;
     }
 
     public Collection<String> getSkills() {

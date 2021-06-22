@@ -28,23 +28,23 @@ public class SkatingSession {
     @Column(length = 255, nullable = false)
     private String description;
 
-    @ManyToOne(cascade = {CascadeType.PERSIST})
-    @JoinColumn(name = "ice_rink_id")
+    @ManyToOne(cascade = {CascadeType.ALL})
+    @JoinColumn(name = "ice_rink_id", nullable = false)
     private IceRink iceRink;
 
-    @OneToMany(mappedBy = "skatingSession", cascade = {CascadeType.PERSIST})
+    @OneToMany(mappedBy = "skatingSession")
     private Set<Ticket> tickets = new HashSet<>();
 
-    @OneToOne(mappedBy = "skatingSession", cascade = {CascadeType.PERSIST})
+    @OneToOne(mappedBy = "skatingSession")
     private SkatingSessionOneTime skatingSessionOneTime;
 
-    @OneToOne(mappedBy = "skatingSession", cascade = {CascadeType.PERSIST})
+    @OneToOne(mappedBy = "skatingSession")
     private SkatingSessionRegular skatingSessionRegular;
 
-    @OneToOne(mappedBy = "skatingSession", cascade = {CascadeType.PERSIST})
+    @OneToOne(mappedBy = "skatingSession")
     private SkatingSessionPrivate skatingSessionPrivate;
 
-    @OneToOne(mappedBy = "skatingSession", cascade = {CascadeType.PERSIST})
+    @OneToOne(mappedBy = "skatingSession")
     private SkatingSessionPublic skatingSessionPublic;
 
     public SkatingSession() {
@@ -56,12 +56,14 @@ public class SkatingSession {
         this.ticketPrice = ticketPrice;
         this.description = description;
         this.iceRink = iceRink;
-
-        iceRink.addSkatingSession(this);
     }
 
     public Integer getId() {
         return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
     }
 
     public Date getDateStart() {
@@ -101,21 +103,15 @@ public class SkatingSession {
     }
 
     public void setIceRink(IceRink iceRink) {
-        if (this.iceRink != iceRink) {
-            this.iceRink = iceRink;
-            iceRink.addSkatingSession(this);
-        }
+        this.iceRink = iceRink;
     }
 
     public Set<Ticket> getTickets() {
         return tickets;
     }
 
-    public void addTicket(Ticket ticket) {
-        if (!tickets.contains(ticket)) {
-            this.tickets.add(ticket);
-            ticket.setSkatingSession(this);
-        }
+    public void setTickets(Set<Ticket> tickets) {
+        this.tickets = tickets;
     }
 
     public SkatingSessionOneTime getSkatingSessionOneTime() {
@@ -123,10 +119,7 @@ public class SkatingSession {
     }
 
     public void setSkatingSessionOneTime(SkatingSessionOneTime skatingSessionOneTime) {
-        if (this.skatingSessionOneTime != skatingSessionOneTime) {
-            this.skatingSessionOneTime = skatingSessionOneTime;
-            skatingSessionOneTime.setSkatingSession(this);
-        }
+        this.skatingSessionOneTime = skatingSessionOneTime;
     }
 
     public SkatingSessionRegular getSkatingSessionRegular() {
@@ -134,10 +127,7 @@ public class SkatingSession {
     }
 
     public void setSkatingSessionRegular(SkatingSessionRegular skatingSessionRegular) {
-        if (this.skatingSessionRegular != skatingSessionRegular) {
-            this.skatingSessionRegular = skatingSessionRegular;
-            skatingSessionRegular.setSkatingSession(this);
-        }
+        this.skatingSessionRegular = skatingSessionRegular;
     }
 
     public SkatingSessionPrivate getSkatingSessionPrivate() {
@@ -145,10 +135,7 @@ public class SkatingSession {
     }
 
     public void setSkatingSessionPrivate(SkatingSessionPrivate skatingSessionPrivate) {
-        if (this.skatingSessionPrivate != skatingSessionPrivate) {
-            this.skatingSessionPrivate = skatingSessionPrivate;
-            skatingSessionPrivate.setSkatingSession(this);
-        }
+        this.skatingSessionPrivate = skatingSessionPrivate;
     }
 
     public SkatingSessionPublic getSkatingSessionPublic() {
@@ -156,9 +143,6 @@ public class SkatingSession {
     }
 
     public void setSkatingSessionPublic(SkatingSessionPublic skatingSessionPublic) {
-        if (this.skatingSessionPublic != skatingSessionPublic) {
-            this.skatingSessionPublic = skatingSessionPublic;
-            skatingSessionPublic.setSkatingSession(this);
-        }
+        this.skatingSessionPublic = skatingSessionPublic;
     }
 }

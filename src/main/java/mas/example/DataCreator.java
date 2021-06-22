@@ -27,7 +27,10 @@ public class DataCreator {
             getClients().forEach(session::persist);
             getTechnicians().forEach(session::persist);
             getTicketCollectors().forEach(session::persist);
-            getSkatingSessions().forEach(session::persist);
+
+            Set<IceRink> iceRinks = getIceRinks();
+            iceRinks.forEach(session::persist);
+            getSkatingSessions(iceRinks).forEach(session::persist);
 
             transaction.commit();
         } catch (Exception exception) {
@@ -154,7 +157,7 @@ public class DataCreator {
                 .collect(Collectors.toSet());
     }
 
-    private static Set<SkatingSessionOneTime> getSkatingSessions() {
+    private static Set<SkatingSessionOneTime> getSkatingSessions(Set<IceRink> iceRinkSet) {
         Set<SkatingSessionOneTime> skatingSessionSet = new HashSet<>();
 
         Calendar calendarIterator = Calendar.getInstance();
@@ -162,8 +165,6 @@ public class DataCreator {
 
         calendarIterator.setTime(java.sql.Date.valueOf("2021-06-01"));
         calendarMax.setTime(java.sql.Date.valueOf("2021-06-03"));
-
-        Set<IceRink> iceRinkSet = getIceRinks();
 
         while (calendarIterator.before(calendarMax)) {
             Calendar calendarSessionEnd = (Calendar) calendarIterator.clone();

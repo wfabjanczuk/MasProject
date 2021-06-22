@@ -12,12 +12,12 @@ public class SkatingSessionPrivate {
     @Id
     private Integer id;
 
-    @OneToOne(cascade = {CascadeType.PERSIST})
+    @OneToOne(cascade = {CascadeType.ALL})
     @JoinColumn(name = "id")
     @MapsId
     private SkatingSession skatingSession;
 
-    @ManyToMany(mappedBy = "privateSkatingSessions", cascade = {CascadeType.PERSIST})
+    @ManyToMany(mappedBy = "privateSkatingSessions")
     private Set<Client> clients = new HashSet<>();
 
     public SkatingSessionPrivate() {
@@ -25,12 +25,14 @@ public class SkatingSessionPrivate {
 
     public SkatingSessionPrivate(SkatingSession skatingSession) {
         this.skatingSession = skatingSession;
-
-        skatingSession.setSkatingSessionPrivate(this);
     }
 
     public Integer getId() {
         return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
     }
 
     public SkatingSession getSkatingSession() {
@@ -38,20 +40,14 @@ public class SkatingSessionPrivate {
     }
 
     public void setSkatingSession(SkatingSession skatingSession) {
-        if (this.skatingSession != skatingSession) {
-            this.skatingSession = skatingSession;
-            skatingSession.setSkatingSessionPrivate(this);
-        }
+        this.skatingSession = skatingSession;
     }
 
     public Set<Client> getClients() {
         return clients;
     }
 
-    public void addClient(Client client) {
-        if (!this.clients.contains(client)) {
-            this.clients.add(client);
-            client.addPrivateSkatingSession(this);
-        }
+    public void setClients(Set<Client> clients) {
+        this.clients = clients;
     }
 }

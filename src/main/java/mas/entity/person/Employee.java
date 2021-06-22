@@ -9,7 +9,7 @@ public class Employee {
     @Id
     private Integer id;
 
-    @OneToOne(cascade = {CascadeType.PERSIST})
+    @OneToOne(cascade = {CascadeType.ALL})
     @JoinColumn(name = "id")
     @MapsId
     private Person person;
@@ -29,10 +29,10 @@ public class Employee {
     @Column(precision = 10, scale = 2, nullable = false)
     private BigDecimal salary;
 
-    @OneToOne(mappedBy = "employee", cascade = {CascadeType.PERSIST})
+    @OneToOne(mappedBy = "employee")
     private Technician technician;
 
-    @OneToOne(mappedBy = "employee", cascade = {CascadeType.PERSIST})
+    @OneToOne(mappedBy = "employee")
     private TicketCollector ticketCollector;
 
     public Employee() {
@@ -45,12 +45,14 @@ public class Employee {
         this.telephone = telephone;
         this.dateEmployment = dateEmployment;
         this.salary = salary;
-
-        person.setEmployee(this);
     }
 
     public Integer getId() {
         return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
     }
 
     public Person getPerson() {
@@ -58,10 +60,7 @@ public class Employee {
     }
 
     public void setPerson(Person person) {
-        if (this.person != person) {
-            this.person = person;
-            person.setEmployee(this);
-        }
+        this.person = person;
     }
 
     public String getPesel() {
@@ -109,10 +108,7 @@ public class Employee {
     }
 
     public void setTechnician(Technician technician) {
-        if (this.technician != technician) {
-            this.technician = technician;
-            technician.setEmployee(this);
-        }
+        this.technician = technician;
     }
 
     public TicketCollector getTicketCollector() {
@@ -120,9 +116,6 @@ public class Employee {
     }
 
     public void setTicketCollector(TicketCollector ticketCollector) {
-        if (this.ticketCollector != ticketCollector) {
-            this.ticketCollector = ticketCollector;
-            ticketCollector.setEmployee(this);
-        }
+        this.ticketCollector = ticketCollector;
     }
 }

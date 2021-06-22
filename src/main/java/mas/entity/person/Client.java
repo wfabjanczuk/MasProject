@@ -12,7 +12,7 @@ public class Client {
     @Id
     private Integer id;
 
-    @OneToOne(cascade = {CascadeType.PERSIST})
+    @OneToOne(cascade = {CascadeType.ALL})
     @JoinColumn(name = "id")
     @MapsId
     private Person person;
@@ -23,7 +23,7 @@ public class Client {
     @Column(name = "discount_percent", nullable = false)
     private Integer discountPercent;
 
-    @ManyToMany(cascade = {CascadeType.PERSIST})
+    @ManyToMany(cascade = {CascadeType.ALL})
     @JoinTable(
             name = "client_skating_session_private",
             joinColumns = {@JoinColumn(name = "client_id")},
@@ -31,7 +31,7 @@ public class Client {
     )
     private Set<SkatingSessionPrivate> privateSkatingSessions = new HashSet<>();
 
-    @OneToMany(mappedBy = "client", cascade = {CascadeType.PERSIST})
+    @OneToMany(mappedBy = "client")
     private Set<Ticket> tickets = new HashSet<>();
 
     public Client() {
@@ -41,12 +41,14 @@ public class Client {
         this.person = person;
         this.marketingConsent = marketingConsent;
         this.discountPercent = discountPercent;
-
-        person.setClient(this);
     }
 
     public Integer getId() {
         return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
     }
 
     public Person getPerson() {
@@ -54,10 +56,7 @@ public class Client {
     }
 
     public void setPerson(Person person) {
-        if (this.person != person) {
-            this.person = person;
-            person.setClient(this);
-        }
+        this.person = person;
     }
 
     public Boolean getMarketingConsent() {
@@ -80,21 +79,15 @@ public class Client {
         return privateSkatingSessions;
     }
 
-    public void addPrivateSkatingSession(SkatingSessionPrivate privateSkatingSession) {
-        if (!this.privateSkatingSessions.contains(privateSkatingSession)) {
-            this.privateSkatingSessions.add(privateSkatingSession);
-            privateSkatingSession.addClient(this);
-        }
+    public void setPrivateSkatingSessions(Set<SkatingSessionPrivate> privateSkatingSessions) {
+        this.privateSkatingSessions = privateSkatingSessions;
     }
 
     public Set<Ticket> getTickets() {
         return tickets;
     }
 
-    public void addTicket(Ticket ticket) {
-        if (!tickets.contains(ticket)) {
-            this.tickets.add(ticket);
-            ticket.setClient(this);
-        }
+    public void setTickets(Set<Ticket> tickets) {
+        this.tickets = tickets;
     }
 }

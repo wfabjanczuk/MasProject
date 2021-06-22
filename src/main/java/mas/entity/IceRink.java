@@ -22,7 +22,7 @@ public class IceRink {
     @Column(nullable = false)
     private Integer area;
 
-    @OneToMany(mappedBy = "iceRink", cascade = {CascadeType.PERSIST})
+    @OneToMany(mappedBy = "iceRink")
     private Set<SkatingSession> skatingSessions = new HashSet<>();
 
     public IceRink() {
@@ -36,6 +36,10 @@ public class IceRink {
 
     public Integer getId() {
         return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
     }
 
     public String getName() {
@@ -62,14 +66,11 @@ public class IceRink {
         this.area = area;
     }
 
-    public void addSkatingSession(SkatingSession skatingSession) {
-        if (!skatingSessions.contains(skatingSession)) {
-            skatingSessions.add(skatingSession);
-            skatingSession.setIceRink(this);
-        }
-    }
-
     public Set<SkatingSession> getSkatingSessions() {
         return skatingSessions;
+    }
+
+    public void setSkatingSessions(Set<SkatingSession> skatingSessions) {
+        this.skatingSessions = skatingSessions;
     }
 }

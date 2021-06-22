@@ -8,7 +8,7 @@ public class SkatingSessionOneTime {
     @Id
     private Integer id;
 
-    @OneToOne(cascade = {CascadeType.PERSIST})
+    @OneToOne(cascade = {CascadeType.ALL})
     @JoinColumn(name = "id")
     @MapsId
     private SkatingSession skatingSession;
@@ -18,12 +18,14 @@ public class SkatingSessionOneTime {
 
     public SkatingSessionOneTime(SkatingSession skatingSession) {
         this.skatingSession = skatingSession;
-
-        skatingSession.setSkatingSessionOneTime(this);
     }
 
     public Integer getId() {
         return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
     }
 
     public SkatingSession getSkatingSession() {
@@ -31,9 +33,6 @@ public class SkatingSessionOneTime {
     }
 
     public void setSkatingSession(SkatingSession skatingSession) {
-        if (this.skatingSession != skatingSession) {
-            this.skatingSession = skatingSession;
-            skatingSession.setSkatingSessionOneTime(this);
-        }
+        this.skatingSession = skatingSession;
     }
 }

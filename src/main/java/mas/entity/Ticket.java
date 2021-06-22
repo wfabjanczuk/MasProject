@@ -15,19 +15,29 @@ public class Ticket {
     @Column(name = "date_sold", nullable = false)
     private Date dateSold;
 
-    @ManyToOne(cascade = {CascadeType.PERSIST})
-    @JoinColumn(name = "client_id")
+    @ManyToOne(cascade = {CascadeType.ALL})
+    @JoinColumn(name = "client_id", nullable = false)
     private Client client;
 
-    @ManyToOne(cascade = {CascadeType.PERSIST})
-    @JoinColumn(name = "skating_session_id")
+    @ManyToOne(cascade = {CascadeType.ALL})
+    @JoinColumn(name = "skating_session_id", nullable = false)
     private SkatingSession skatingSession;
 
     public Ticket() {
     }
 
+    public Ticket(Date dateSold, Client client, SkatingSession skatingSession) {
+        this.dateSold = dateSold;
+        this.client = client;
+        this.skatingSession = skatingSession;
+    }
+
     public Integer getId() {
         return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
     }
 
     public Date getDateSold() {
@@ -43,10 +53,7 @@ public class Ticket {
     }
 
     public void setClient(Client client) {
-        if (this.client != client) {
-            this.client = client;
-            client.addTicket(this);
-        }
+        this.client = client;
     }
 
     public SkatingSession getSkatingSession() {
@@ -54,9 +61,6 @@ public class Ticket {
     }
 
     public void setSkatingSession(SkatingSession skatingSession) {
-        if (this.skatingSession != skatingSession) {
-            this.skatingSession = skatingSession;
-            skatingSession.addTicket(this);
-        }
+        this.skatingSession = skatingSession;
     }
 }

@@ -8,7 +8,7 @@ public class TicketCollector {
     @Id
     private Integer id;
 
-    @OneToOne(cascade = {CascadeType.PERSIST})
+    @OneToOne(cascade = {CascadeType.ALL})
     @JoinColumn(name = "id")
     @MapsId
     private Employee employee;
@@ -22,12 +22,14 @@ public class TicketCollector {
     public TicketCollector(Employee employee, Boolean isAllowedToSell) {
         this.employee = employee;
         this.isAllowedToSell = isAllowedToSell;
-
-        employee.setTicketCollector(this);
     }
 
     public Integer getId() {
         return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
     }
 
     public Employee getEmployee() {
@@ -35,10 +37,7 @@ public class TicketCollector {
     }
 
     public void setEmployee(Employee employee) {
-        if (this.employee != employee) {
-            this.employee = employee;
-            employee.setTicketCollector(this);
-        }
+        this.employee = employee;
     }
 
     public Boolean getAllowedToSell() {

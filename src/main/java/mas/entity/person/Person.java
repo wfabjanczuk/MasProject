@@ -1,7 +1,5 @@
 package mas.entity.person;
 
-import util.DateUtil;
-
 import javax.persistence.*;
 import java.util.Date;
 
@@ -23,10 +21,10 @@ public class Person {
     @Column(name = "date_birth", nullable = false)
     private Date dateBirth;
 
-    @OneToOne(mappedBy = "person", cascade = {CascadeType.PERSIST})
+    @OneToOne(mappedBy = "person")
     private Client client;
 
-    @OneToOne(mappedBy = "person", cascade = {CascadeType.PERSIST})
+    @OneToOne(mappedBy = "person")
     private Employee employee;
 
     public Person() {
@@ -41,6 +39,10 @@ public class Person {
 
     public Integer getId() {
         return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
     }
 
     public String getEmail() {
@@ -75,23 +77,12 @@ public class Person {
         this.dateBirth = dateBirth;
     }
 
-    public Integer getAge() {
-        if (dateBirth == null) {
-            return null;
-        }
-
-        return DateUtil.getYearDifference(dateBirth, new Date());
-    }
-
     public Client getClient() {
         return client;
     }
 
     public void setClient(Client client) {
-        if (this.client != client) {
-            this.client = client;
-            client.setPerson(this);
-        }
+        this.client = client;
     }
 
     public Employee getEmployee() {
@@ -99,9 +90,6 @@ public class Person {
     }
 
     public void setEmployee(Employee employee) {
-        if (this.employee != employee) {
-            this.employee = employee;
-            employee.setPerson(this);
-        }
+        this.employee = employee;
     }
 }

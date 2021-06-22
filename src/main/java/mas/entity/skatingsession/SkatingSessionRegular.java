@@ -10,7 +10,7 @@ public class SkatingSessionRegular {
     @Id
     private Integer id;
 
-    @OneToOne(cascade = {CascadeType.PERSIST})
+    @OneToOne(cascade = {CascadeType.ALL})
     @JoinColumn(name = "id")
     @MapsId
     private SkatingSession skatingSession;
@@ -26,12 +26,14 @@ public class SkatingSessionRegular {
     public SkatingSessionRegular(SkatingSession skatingSession, Collection<Integer> daysOfWeek) {
         this.skatingSession = skatingSession;
         this.daysOfWeek = daysOfWeek;
-
-        skatingSession.setSkatingSessionRegular(this);
     }
 
     public Integer getId() {
         return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
     }
 
     public SkatingSession getSkatingSession() {
@@ -39,10 +41,7 @@ public class SkatingSessionRegular {
     }
 
     public void setSkatingSession(SkatingSession skatingSession) {
-        if (this.skatingSession != skatingSession) {
-            this.skatingSession = skatingSession;
-            skatingSession.setSkatingSessionRegular(this);
-        }
+        this.skatingSession = skatingSession;
     }
 
     public Collection<Integer> getDaysOfWeek() {
