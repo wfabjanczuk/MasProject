@@ -1,6 +1,8 @@
 package mas.entity.skatingsession;
 
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.Collection;
 
 @Entity
 @Table(name = "skating_session_regular")
@@ -13,11 +15,17 @@ public class SkatingSessionRegular {
     @MapsId
     private SkatingSession skatingSession;
 
+    @ElementCollection
+    @CollectionTable(name = "skating_session_regular_days", joinColumns = @JoinColumn(name = "skating_session_regular_id"))
+    @Column(name = "day_of_week")
+    private Collection<Integer> daysOfWeek = new ArrayList<>();
+
     public SkatingSessionRegular() {
     }
 
-    public SkatingSessionRegular(SkatingSession skatingSession) {
+    public SkatingSessionRegular(SkatingSession skatingSession, Collection<Integer> daysOfWeek) {
         this.skatingSession = skatingSession;
+        this.daysOfWeek = daysOfWeek;
 
         skatingSession.setSkatingSessionRegular(this);
     }
@@ -35,5 +43,13 @@ public class SkatingSessionRegular {
             this.skatingSession = skatingSession;
             skatingSession.setSkatingSessionRegular(this);
         }
+    }
+
+    public Collection<Integer> getDaysOfWeek() {
+        return daysOfWeek;
+    }
+
+    public void setDaysOfWeek(Collection<Integer> daysOfWeek) {
+        this.daysOfWeek = daysOfWeek;
     }
 }
