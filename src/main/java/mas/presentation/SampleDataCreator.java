@@ -1,8 +1,9 @@
 package mas.presentation;
 
 import mas.entity.IceRink;
-import mas.entity.person.*;
 import mas.entity.SkatingSession;
+import mas.entity.Ticket;
+import mas.entity.person.*;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 import util.HibernateUtil;
@@ -35,6 +36,8 @@ public class SampleDataCreator {
             Set<SkatingSession> skatingSessions = getSkatingSessions(iceRinks, clients);
             skatingSessions.forEach(session::persist);
             clients.forEach(session::persist);
+
+            getTickets(skatingSessions, clients).forEach(session::persist);
 
             transaction.commit();
         } catch (Exception exception) {
@@ -215,5 +218,21 @@ public class SampleDataCreator {
         }
 
         return daysOfWeek;
+    }
+
+    private static Set<Ticket> getTickets(Set<SkatingSession> skatingSessions, Set<Client> clients) {
+        Set<Ticket> ticketSet = new HashSet<>();
+
+        skatingSessions.forEach(skatingSession -> clients.stream()
+                .filter(c -> (int) (Math.random() * 3) == 0)
+                .forEach(client -> {
+                    int dayOfMonth = 1 + (int) (Math.random() * 30);
+                    Date dateSold = java.sql.Date.valueOf("2021-05-" + dayOfMonth);
+
+                    ticketSet.add(new Ticket(dateSold, client, skatingSession));
+                })
+        );
+
+        return ticketSet;
     }
 }
