@@ -1,6 +1,10 @@
 package mas.entity.skatingsession;
 
+import mas.entity.person.Client;
+
 import javax.persistence.*;
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity
 @Table(name = "skating_session_private")
@@ -12,6 +16,9 @@ public class SkatingSessionPrivate {
     @JoinColumn(name = "id")
     @MapsId
     private SkatingSession skatingSession;
+
+    @ManyToMany(mappedBy = "privateSkatingSessions", cascade = {CascadeType.PERSIST})
+    private Set<Client> clients = new HashSet<>();
 
     public SkatingSessionPrivate() {
     }
@@ -34,6 +41,17 @@ public class SkatingSessionPrivate {
         if (this.skatingSession != skatingSession) {
             this.skatingSession = skatingSession;
             skatingSession.setSkatingSessionPrivate(this);
+        }
+    }
+
+    public Set<Client> getClients() {
+        return clients;
+    }
+
+    public void addClient(Client client) {
+        if (!this.clients.contains(client)) {
+            this.clients.add(client);
+            client.addPrivateSkatingSession(this);
         }
     }
 }

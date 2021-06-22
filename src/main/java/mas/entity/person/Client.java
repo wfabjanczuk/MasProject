@@ -1,6 +1,10 @@
 package mas.entity.person;
 
+import mas.entity.skatingsession.SkatingSessionPrivate;
+
 import javax.persistence.*;
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity
 public class Client {
@@ -17,6 +21,14 @@ public class Client {
 
     @Column(name = "discount_percent", nullable = false)
     private Integer discountPercent;
+
+    @ManyToMany(cascade = {CascadeType.PERSIST})
+    @JoinTable(
+            name = "client_skating_session_private",
+            joinColumns = {@JoinColumn(name = "client_id")},
+            inverseJoinColumns = {@JoinColumn(name = "skating_session_private_id")}
+    )
+    private Set<SkatingSessionPrivate> privateSkatingSessions = new HashSet<>();
 
     public Client() {
     }
@@ -58,5 +70,16 @@ public class Client {
 
     public void setDiscountPercent(Integer discountPercent) {
         this.discountPercent = discountPercent;
+    }
+
+    public Set<SkatingSessionPrivate> getPrivateSkatingSessions() {
+        return privateSkatingSessions;
+    }
+
+    public void addPrivateSkatingSession(SkatingSessionPrivate privateSkatingSession) {
+        if (!this.privateSkatingSessions.contains(privateSkatingSession)) {
+            this.privateSkatingSessions.add(privateSkatingSession);
+            privateSkatingSession.addClient(this);
+        }
     }
 }
