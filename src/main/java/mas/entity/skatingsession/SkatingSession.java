@@ -1,10 +1,13 @@
 package mas.entity.skatingsession;
 
 import mas.entity.IceRink;
+import mas.entity.Ticket;
 
 import javax.persistence.*;
 import java.math.BigDecimal;
 import java.util.Date;
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity
 @Table(name = "skating_session")
@@ -28,6 +31,9 @@ public class SkatingSession {
     @ManyToOne(cascade = {CascadeType.PERSIST})
     @JoinColumn(name = "ice_rink_id")
     private IceRink iceRink;
+
+    @OneToMany(mappedBy = "skatingSession", cascade = {CascadeType.PERSIST})
+    private Set<Ticket> tickets = new HashSet<>();
 
     @OneToOne(mappedBy = "skatingSession", cascade = {CascadeType.PERSIST})
     private SkatingSessionOneTime skatingSessionOneTime;
@@ -98,6 +104,17 @@ public class SkatingSession {
         if (this.iceRink != iceRink) {
             this.iceRink = iceRink;
             iceRink.addSkatingSession(this);
+        }
+    }
+
+    public Set<Ticket> getTickets() {
+        return tickets;
+    }
+
+    public void addTicket(Ticket ticket) {
+        if (!tickets.contains(ticket)) {
+            this.tickets.add(ticket);
+            ticket.setSkatingSession(this);
         }
     }
 

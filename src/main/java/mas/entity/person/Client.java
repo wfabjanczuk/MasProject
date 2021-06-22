@@ -1,5 +1,6 @@
 package mas.entity.person;
 
+import mas.entity.Ticket;
 import mas.entity.skatingsession.SkatingSessionPrivate;
 
 import javax.persistence.*;
@@ -29,6 +30,9 @@ public class Client {
             inverseJoinColumns = {@JoinColumn(name = "skating_session_private_id")}
     )
     private Set<SkatingSessionPrivate> privateSkatingSessions = new HashSet<>();
+
+    @OneToMany(mappedBy = "client", cascade = {CascadeType.PERSIST})
+    private Set<Ticket> tickets = new HashSet<>();
 
     public Client() {
     }
@@ -80,6 +84,17 @@ public class Client {
         if (!this.privateSkatingSessions.contains(privateSkatingSession)) {
             this.privateSkatingSessions.add(privateSkatingSession);
             privateSkatingSession.addClient(this);
+        }
+    }
+
+    public Set<Ticket> getTickets() {
+        return tickets;
+    }
+
+    public void addTicket(Ticket ticket) {
+        if (!tickets.contains(ticket)) {
+            this.tickets.add(ticket);
+            ticket.setClient(this);
         }
     }
 }
