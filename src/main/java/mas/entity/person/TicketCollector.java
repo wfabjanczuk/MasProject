@@ -1,6 +1,10 @@
 package mas.entity.person;
 
+import mas.entity.SkatingSession;
+
 import javax.persistence.*;
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity
 @Table(name = "ticket_collector")
@@ -15,6 +19,9 @@ public class TicketCollector {
 
     @Column(name = "is_allowed_to_sell", nullable = false)
     private Boolean isAllowedToSell;
+
+    @ManyToMany(mappedBy = "ticketCollectors")
+    private Set<SkatingSession> skatingSessions = new HashSet<>();
 
     public TicketCollector() {
     }
@@ -46,5 +53,13 @@ public class TicketCollector {
 
     public void setAllowedToSell(Boolean allowedToSell) {
         isAllowedToSell = allowedToSell;
+    }
+
+    public Set<SkatingSession> getSkatingSessions() {
+        return skatingSessions;
+    }
+
+    public void setSkatingSessions(Set<SkatingSession> skatingSessions) {
+        this.skatingSessions = skatingSessions;
     }
 }

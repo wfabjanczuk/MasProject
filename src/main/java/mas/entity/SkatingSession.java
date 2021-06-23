@@ -1,6 +1,7 @@
 package mas.entity;
 
 import mas.entity.person.Client;
+import mas.entity.person.TicketCollector;
 
 import javax.persistence.*;
 import java.math.BigDecimal;
@@ -46,6 +47,14 @@ public class SkatingSession {
 
     @OneToMany(mappedBy = "skatingSession")
     private Set<SkatesBooking> skatesBookings = new HashSet<>();
+
+    @ManyToMany(cascade = {CascadeType.ALL})
+    @JoinTable(
+            name = "skating_session_ticket_collector",
+            joinColumns = {@JoinColumn(name = "skating_session_id")},
+            inverseJoinColumns = {@JoinColumn(name = "ticket_collector_id")}
+    )
+    private Set<TicketCollector> ticketCollectors = new HashSet<>();
 
     @ElementCollection
     @CollectionTable(
@@ -164,6 +173,14 @@ public class SkatingSession {
 
     public void setSkatesBookings(Set<SkatesBooking> skatesBookings) {
         this.skatesBookings = skatesBookings;
+    }
+
+    public Set<TicketCollector> getTicketCollectors() {
+        return ticketCollectors;
+    }
+
+    public void setTicketCollectors(Set<TicketCollector> ticketCollectors) {
+        this.ticketCollectors = ticketCollectors;
     }
 
     public Collection<Integer> getDaysOfWeek() {
