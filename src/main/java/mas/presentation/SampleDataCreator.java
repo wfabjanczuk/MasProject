@@ -25,15 +25,19 @@ public class SampleDataCreator {
             Set<Client> clients = getClients();
             clients.forEach(session::persist);
 
-            getTechnicians().forEach(session::persist);
-            getTicketCollectors().forEach(session::persist);
+            Set<Technician> technicians = getTechnicians();
+            technicians.forEach(session::persist);
+
+            Set<TicketCollector> ticketCollectors = getTicketCollectors();
+            ticketCollectors.forEach(session::persist);
 
             Set<IceRink> iceRinks = getIceRinks();
             iceRinks.forEach(session::persist);
 
-            Set<SkatingSession> skatingSessions = getSkatingSessions(iceRinks, clients);
+            Set<SkatingSession> skatingSessions = getSkatingSessions(iceRinks, clients, ticketCollectors);
             skatingSessions.forEach(session::persist);
             clients.forEach(session::persist);
+            ticketCollectors.forEach(session::persist);
 
             getTickets(skatingSessions, clients).forEach(session::persist);
 
@@ -164,7 +168,7 @@ public class SampleDataCreator {
                 .collect(Collectors.toSet());
     }
 
-    private static Set<SkatingSession> getSkatingSessions(Set<IceRink> iceRinks, Set<Client> clients) {
+    private static Set<SkatingSession> getSkatingSessions(Set<IceRink> iceRinks, Set<Client> clients, Set<TicketCollector> ticketCollectors) {
         Set<SkatingSession> skatingSessions = new HashSet<>();
 
         Calendar calendarIterator = Calendar.getInstance();
@@ -210,6 +214,11 @@ public class SampleDataCreator {
                         .filter(c -> (int) (Math.random() * 2) > 0)
                         .forEach(c -> c.getPrivateSkatingSessions().add(skatingSession))
                 );
+
+        skatingSessions.forEach(skatingSession -> ticketCollectors.stream()
+                .filter(tc -> (int) (Math.random() * 2) > 0)
+                .forEach(tc -> skatingSession.getTicketCollectors().add(tc))
+        );
 
         return skatingSessions;
     }
