@@ -90,7 +90,7 @@ public class SampleDataCreator {
     private static Set<Client> getClients() {
         return getPersonObjects()
                 .stream()
-                .filter(person -> person.getFirstname().substring(0, 1).compareToIgnoreCase("K") < 0)
+                .filter(person -> person.getFirstName().substring(0, 1).compareToIgnoreCase("K") < 0)
                 .map(person -> {
                     boolean marketingConsent = ((int) (Math.random() * 2)) > 0;
                     int discountPercent = ((int) (Math.random() * 3)) * 5;
@@ -103,7 +103,7 @@ public class SampleDataCreator {
     private static Stream<Employee> getEmployeeObjectStream() {
         return getPersonObjects()
                 .stream()
-                .filter(person -> person.getFirstname().substring(0, 1).compareToIgnoreCase("K") >= 0)
+                .filter(person -> person.getFirstName().substring(0, 1).compareToIgnoreCase("K") >= 0)
                 .map(person -> {
                     int buildingNumber = 1 + (int) (Math.random() * 255),
                             salaryPrefix = 2 + (int) (Math.random() * 4),
@@ -131,7 +131,7 @@ public class SampleDataCreator {
 
     private static Set<Technician> getTechnicians() {
         return getEmployeeObjectStream()
-                .filter(employee -> employee.getPerson().getFirstname().substring(0, 1).compareToIgnoreCase("P") < 0)
+                .filter(employee -> employee.getPerson().getFirstName().substring(0, 1).compareToIgnoreCase("P") < 0)
                 .map(employee -> {
                     ArrayList<String> skills = new ArrayList<>();
 
@@ -154,7 +154,7 @@ public class SampleDataCreator {
 
     private static Set<TicketCollector> getTicketCollectors() {
         return getEmployeeObjectStream()
-                .filter(employee -> employee.getPerson().getFirstname().substring(0, 1).compareToIgnoreCase("P") >= 0)
+                .filter(employee -> employee.getPerson().getFirstName().substring(0, 1).compareToIgnoreCase("P") >= 0)
                 .map(employee -> {
                     boolean isAllowedToSell = ((int) (Math.random() * 2)) > 0;
 
@@ -179,15 +179,22 @@ public class SampleDataCreator {
             Date dateSessionStart = calendarIterator.getTime();
             Date dateSessionEnd = calendarSessionEnd.getTime();
 
-            iceRinks.forEach(iceRink -> skatingSessions.add(new SkatingSession(
-                    dateSessionStart,
-                    dateSessionEnd,
-                    new BigDecimal("10.00"),
-                    DescriptionGenerator.generateText(200),
-                    (int) (Math.random() * 2) > 0,
-                    (int) (Math.random() * 2) > 0,
-                    iceRink
-            )));
+            iceRinks.forEach(iceRink -> {
+                boolean isPrivate = (int) (Math.random() * 2) > 0,
+                        isRegular = (int) (Math.random() * 2) > 0;
+                int ticketPrice = 10 + ((int) (Math.random() * 4)) * 10;
+
+                skatingSessions.add(new SkatingSession(
+                        dateSessionStart,
+                        dateSessionEnd,
+                        new BigDecimal(ticketPrice),
+                        DescriptionGenerator.generateText(200),
+                        isPrivate,
+                        isRegular,
+                        isPrivate ? null : iceRink.getArea() / 10,
+                        iceRink
+                ));
+            });
 
             calendarIterator = calendarSessionEnd;
         }

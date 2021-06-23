@@ -12,11 +12,11 @@ public class Person {
     @Column(length = 320, nullable = false, unique = true)
     private String email;
 
-    @Column(length = 64, nullable = false)
-    private String firstname;
+    @Column(name = "first_name", length = 64, nullable = false)
+    private String firstName;
 
-    @Column(length = 64, nullable = false)
-    private String lastname;
+    @Column(name = "last_name", length = 64, nullable = false)
+    private String lastName;
 
     @Column(name = "date_birth", nullable = false)
     private Date dateBirth;
@@ -30,10 +30,10 @@ public class Person {
     public Person() {
     }
 
-    public Person(String email, String firstname, String lastname, Date dateBirth) {
+    public Person(String email, String firstName, String lastName, Date dateBirth) {
         this.email = email;
-        this.firstname = firstname;
-        this.lastname = lastname;
+        this.firstName = firstName;
+        this.lastName = lastName;
         this.dateBirth = dateBirth;
     }
 
@@ -53,20 +53,20 @@ public class Person {
         this.email = email;
     }
 
-    public String getFirstname() {
-        return firstname;
+    public String getFirstName() {
+        return firstName;
     }
 
-    public void setFirstname(String firstname) {
-        this.firstname = firstname;
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
     }
 
-    public String getLastname() {
-        return lastname;
+    public String getLastName() {
+        return lastName;
     }
 
-    public void setLastname(String lastname) {
-        this.lastname = lastname;
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
     }
 
     public Date getDateBirth() {

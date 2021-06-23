@@ -31,6 +31,9 @@ public class SkatingSession {
     @Column(name = "is_regular", nullable = false)
     private Boolean isRegular;
 
+    @Column(name = "max_participants", nullable = true)
+    private Integer maxParticipants;
+
     @ManyToOne(cascade = {CascadeType.ALL})
     @JoinColumn(name = "ice_rink_id", nullable = false)
     private IceRink iceRink;
@@ -53,13 +56,14 @@ public class SkatingSession {
     public SkatingSession() {
     }
 
-    public SkatingSession(Date dateStart, Date dateEnd, BigDecimal ticketPrice, String description, Boolean isPrivate, Boolean isRegular, IceRink iceRink) {
+    public SkatingSession(Date dateStart, Date dateEnd, BigDecimal ticketPrice, String description, Boolean isPrivate, Boolean isRegular, Integer maxParticipants, IceRink iceRink) {
         this.dateStart = dateStart;
         this.dateEnd = dateEnd;
         this.ticketPrice = ticketPrice;
         this.description = description;
         this.isPrivate = isPrivate;
         this.isRegular = isRegular;
+        this.maxParticipants = maxParticipants;
         this.iceRink = iceRink;
     }
 
@@ -107,16 +111,24 @@ public class SkatingSession {
         return isPrivate;
     }
 
-    public void setPrivate(Boolean isPrivate) {
-        this.isPrivate = isPrivate;
+    public void setPrivate(Boolean aPrivate) {
+        isPrivate = aPrivate;
     }
 
     public Boolean getRegular() {
         return isRegular;
     }
 
-    public void setRegular(Boolean isRegular) {
-        this.isRegular = isRegular;
+    public void setRegular(Boolean regular) {
+        isRegular = regular;
+    }
+
+    public Integer getMaxParticipants() {
+        return maxParticipants;
+    }
+
+    public void setMaxParticipants(Integer maxParticipants) {
+        this.maxParticipants = maxParticipants;
     }
 
     public IceRink getIceRink() {

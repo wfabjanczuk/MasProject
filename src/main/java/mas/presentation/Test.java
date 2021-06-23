@@ -10,8 +10,8 @@ public class Test {
         Session session = HibernateUtil.getSessionFactory().openSession();
 
         Person person = session.get(Person.class, 1);
-        System.out.println(person.getFirstname());
-        System.out.println(person.getLastname());
+        System.out.println(person.getFirstName());
+        System.out.println(person.getLastName());
         System.out.println(PersonService.getAge(person));
         System.out.println(person.getClient());
         System.out.println(person.getEmployee());
