@@ -39,6 +39,7 @@ public class SampleDataCreator {
 
             Set<Skates> skates = getSkates();
             skates.forEach(session::persist);
+            getSkatesBookings(skatingSessions, clients, skates).forEach(session::persist);
 
             transaction.commit();
         } catch (Exception exception) {
@@ -281,6 +282,26 @@ public class SampleDataCreator {
         ));
 
         return skates;
+    }
+
+    private static Set<SkatesBooking> getSkatesBookings(Set<SkatingSession> skatingSessions, Set<Client> clients, Set<Skates> skates) {
+        Set<SkatesBooking> skatesBookings = new HashSet<>();
+
+        skatingSessions.forEach(skatingSession -> {
+            Client chosenClient = clients.stream()
+                    .filter(client -> client.getId() > (int) (Math.random() * 10))
+                    .findAny()
+                    .get();
+            Skates chosenSkates = skates.stream()
+                    .filter(s -> s.getId() > (2 + (int) (Math.random() * 3)))
+                    .findAny()
+                    .get();
+            Date dateBooking = java.sql.Date.valueOf("2021-05-" + getRandomDayOfMonth());
+
+            skatesBookings.add(new SkatesBooking(dateBooking, false, chosenClient, skatingSession, chosenSkates));
+        });
+
+        return skatesBookings;
     }
 
     private static int getRandomDayOfMonth() {
