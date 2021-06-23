@@ -1,7 +1,8 @@
 package mas.entity.person;
 
-import mas.entity.Ticket;
+import mas.entity.SkatesBooking;
 import mas.entity.SkatingSession;
+import mas.entity.Ticket;
 
 import javax.persistence.*;
 import java.util.HashSet;
@@ -33,6 +34,9 @@ public class Client {
 
     @OneToMany(mappedBy = "client")
     private Set<Ticket> tickets = new HashSet<>();
+
+    @OneToMany(mappedBy = "client")
+    private Set<SkatesBooking> skatesBookings = new HashSet<>();
 
     public Client() {
     }
@@ -89,5 +93,13 @@ public class Client {
 
     public void setTickets(Set<Ticket> tickets) {
         this.tickets = tickets;
+    }
+
+    public Set<SkatesBooking> getSkatesBookings() {
+        return skatesBookings;
+    }
+
+    public void setSkatesBookings(Set<SkatesBooking> skatesBookings) {
+        this.skatesBookings = skatesBookings;
     }
 }

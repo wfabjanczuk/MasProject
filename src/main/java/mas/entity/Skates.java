@@ -3,6 +3,8 @@ package mas.entity;
 import javax.persistence.*;
 import java.math.BigDecimal;
 import java.util.Date;
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity
 public class Skates {
@@ -25,6 +27,12 @@ public class Skates {
     @Enumerated(EnumType.STRING)
     @Column(name = "skates_state", length = 63, nullable = false)
     private SkatesState skatesState;
+
+    @OneToMany(mappedBy = "skates")
+    private Set<SkatesBooking> skatesBookings = new HashSet<>();
+
+    @OneToMany(mappedBy = "skates")
+    private Set<SkatesService> skatesServices = new HashSet<>();
 
     public Skates() {
     }
@@ -83,5 +91,21 @@ public class Skates {
 
     public void setSkatesState(SkatesState skatesState) {
         this.skatesState = skatesState;
+    }
+
+    public Set<SkatesBooking> getSkatesBookings() {
+        return skatesBookings;
+    }
+
+    public void setSkatesBookings(Set<SkatesBooking> skatesBookings) {
+        this.skatesBookings = skatesBookings;
+    }
+
+    public Set<SkatesService> getSkatesServices() {
+        return skatesServices;
+    }
+
+    public void setSkatesServices(Set<SkatesService> skatesServices) {
+        this.skatesServices = skatesServices;
     }
 }

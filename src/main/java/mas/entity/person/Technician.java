@@ -1,8 +1,12 @@
 package mas.entity.person;
 
+import mas.entity.SkatesService;
+
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity
 public class Technician {
@@ -15,9 +19,16 @@ public class Technician {
     private Employee employee;
 
     @ElementCollection
-    @CollectionTable(name = "technician_skill", joinColumns = @JoinColumn(name = "technician_id"))
+    @CollectionTable(
+            name = "technician_skill",
+            joinColumns = @JoinColumn(name = "technician_id"),
+            uniqueConstraints = @UniqueConstraint(columnNames = {"technician_id", "skill"})
+    )
     @Column(name = "skill", length = 255)
     private Collection<String> skills = new ArrayList<>();
+
+    @ManyToMany(mappedBy = "technicians")
+    private Set<SkatesService> skatesServices = new HashSet<>();
 
     public Technician() {
     }
@@ -49,5 +60,13 @@ public class Technician {
 
     public void setSkills(Collection<String> skills) {
         this.skills = skills;
+    }
+
+    public Set<SkatesService> getSkatesServices() {
+        return skatesServices;
+    }
+
+    public void setSkatesServices(Set<SkatesService> skatesServices) {
+        this.skatesServices = skatesServices;
     }
 }

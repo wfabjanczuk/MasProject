@@ -44,6 +44,9 @@ public class SkatingSession {
     @ManyToMany(mappedBy = "privateSkatingSessions")
     private Set<Client> clients = new HashSet<>();
 
+    @OneToMany(mappedBy = "skatingSession")
+    private Set<SkatesBooking> skatesBookings = new HashSet<>();
+
     @ElementCollection
     @CollectionTable(
             name = "skating_session_regular_days",
@@ -153,6 +156,14 @@ public class SkatingSession {
 
     public void setClients(Set<Client> clients) {
         this.clients = clients;
+    }
+
+    public Set<SkatesBooking> getSkatesBookings() {
+        return skatesBookings;
+    }
+
+    public void setSkatesBookings(Set<SkatesBooking> skatesBookings) {
+        this.skatesBookings = skatesBookings;
     }
 
     public Collection<Integer> getDaysOfWeek() {

@@ -44,6 +44,7 @@
         <mapping class="mas.entity.Ticket"/>
         <mapping class="mas.entity.Skates"/>
         <mapping class="mas.entity.SkatesBooking"/>
+        <mapping class="mas.entity.SkatesService"/>
 
     </session-factory>
 </hibernate-configuration>
