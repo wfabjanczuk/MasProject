@@ -42,6 +42,7 @@
         <mapping class="mas.entity.IceRink"/>
         <mapping class="mas.entity.SkatingSession"/>
         <mapping class="mas.entity.Ticket"/>
+        <mapping class="mas.entity.Skates"/>
 
     </session-factory>
 </hibernate-configuration>

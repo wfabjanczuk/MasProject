@@ -1,8 +1,6 @@
 package mas.presentation;
 
-import mas.entity.IceRink;
-import mas.entity.SkatingSession;
-import mas.entity.Ticket;
+import mas.entity.*;
 import mas.entity.person.*;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
@@ -38,6 +36,9 @@ public class SampleDataCreator {
             clients.forEach(session::persist);
 
             getTickets(skatingSessions, clients).forEach(session::persist);
+
+            Set<Skates> skates = getSkates();
+            skates.forEach(session::persist);
 
             transaction.commit();
         } catch (Exception exception) {
@@ -80,8 +81,7 @@ public class SampleDataCreator {
                     lastname = firstLetter + new StringBuilder(firstname.toLowerCase()).reverse(),
                     email = firstname.toLowerCase() + "@gmail.com";
 
-            int dayOfMonth = 1 + (int) (Math.random() * 30);
-            Date birthdate = java.sql.Date.valueOf("2000-01-" + dayOfMonth);
+            Date birthdate = java.sql.Date.valueOf("2000-01-" + getRandomDayOfMonth());
 
             return new Person(email, firstname, lastname, birthdate);
         }).collect(Collectors.toSet());
@@ -105,13 +105,12 @@ public class SampleDataCreator {
                 .stream()
                 .filter(person -> person.getFirstname().substring(0, 1).compareToIgnoreCase("K") >= 0)
                 .map(person -> {
-                    int dayOfMonth = 1 + (int) (Math.random() * 30),
-                            buildingNumber = 1 + (int) (Math.random() * 255),
+                    int buildingNumber = 1 + (int) (Math.random() * 255),
                             salaryPrefix = 2 + (int) (Math.random() * 4),
                             telephoneSuffix = (int) (Math.random() * 9);
                     String address = "Koszykowa " + buildingNumber + ", 02-008 Warszawa",
                             telephone = "22584450" + telephoneSuffix;
-                    Date employmentDate = java.sql.Date.valueOf("2000-01-" + dayOfMonth);
+                    Date employmentDate = java.sql.Date.valueOf("2000-01-" + getRandomDayOfMonth());
                     BigDecimal salary = new BigDecimal(salaryPrefix + "000");
 
                     return new Employee(
@@ -164,8 +163,8 @@ public class SampleDataCreator {
                 .collect(Collectors.toSet());
     }
 
-    private static Set<SkatingSession> getSkatingSessions(Set<IceRink> iceRinkSet, Set<Client> clients) {
-        Set<SkatingSession> skatingSessionSet = new HashSet<>();
+    private static Set<SkatingSession> getSkatingSessions(Set<IceRink> iceRinks, Set<Client> clients) {
+        Set<SkatingSession> skatingSessions = new HashSet<>();
 
         Calendar calendarIterator = Calendar.getInstance();
         Calendar calendarMax = Calendar.getInstance();
@@ -180,7 +179,7 @@ public class SampleDataCreator {
             Date dateSessionStart = calendarIterator.getTime();
             Date dateSessionEnd = calendarSessionEnd.getTime();
 
-            iceRinkSet.forEach(iceRink -> skatingSessionSet.add(new SkatingSession(
+            iceRinks.forEach(iceRink -> skatingSessions.add(new SkatingSession(
                     dateSessionStart,
                     dateSessionEnd,
                     new BigDecimal("10.00"),
@@ -193,18 +192,18 @@ public class SampleDataCreator {
             calendarIterator = calendarSessionEnd;
         }
 
-        skatingSessionSet.stream()
+        skatingSessions.stream()
                 .filter(SkatingSession::getRegular)
                 .forEach(skatingSession -> skatingSession.setDaysOfWeek(getRandomDaysOfWeek()));
 
-        skatingSessionSet.stream()
+        skatingSessions.stream()
                 .filter(SkatingSession::getPrivate)
                 .forEach(skatingSession -> clients.stream()
                         .filter(c -> (int) (Math.random() * 2) > 0)
                         .forEach(c -> c.getPrivateSkatingSessions().add(skatingSession))
                 );
 
-        return skatingSessionSet;
+        return skatingSessions;
     }
 
     private static Set<Integer> getRandomDaysOfWeek() {
@@ -221,18 +220,63 @@ public class SampleDataCreator {
     }
 
     private static Set<Ticket> getTickets(Set<SkatingSession> skatingSessions, Set<Client> clients) {
-        Set<Ticket> ticketSet = new HashSet<>();
+        Set<Ticket> tickets = new HashSet<>();
 
         skatingSessions.forEach(skatingSession -> clients.stream()
                 .filter(c -> (int) (Math.random() * 3) == 0)
                 .forEach(client -> {
-                    int dayOfMonth = 1 + (int) (Math.random() * 30);
-                    Date dateSold = java.sql.Date.valueOf("2021-05-" + dayOfMonth);
+                    Date dateSold = java.sql.Date.valueOf("2021-05-" + getRandomDayOfMonth());
 
-                    ticketSet.add(new Ticket(dateSold, client, skatingSession));
+                    tickets.add(new Ticket(dateSold, client, skatingSession));
                 })
         );
 
-        return ticketSet;
+        return tickets;
+    }
+
+    private static Set<Skates> getSkates() {
+        Set<Skates> skates = new HashSet<>();
+
+        skates.add(new Skates(
+                "Łyżwy hokejowe Bauer Vapor X700 2017 SR",
+                "42 / 7.0 EE",
+                java.sql.Date.valueOf("2021-05-" + getRandomDayOfMonth()),
+                BigDecimal.valueOf(50),
+                SkatesState.FUNCTIONAL
+        ));
+        skates.add(new Skates(
+                "Łyżwy hokejowe Bauer Supreme Ultrasonic SR",
+                "8.5 / Fit1",
+                java.sql.Date.valueOf("2021-05-" + getRandomDayOfMonth()),
+                BigDecimal.valueOf(100),
+                SkatesState.WITHDRAWN
+        ));
+        skates.add(new Skates(
+                "Łyżwy figurowe Risport Rf Light z płozą MK Flight białe SR",
+                "41",
+                java.sql.Date.valueOf("2021-05-" + getRandomDayOfMonth()),
+                BigDecimal.valueOf(25),
+                SkatesState.FUNCTIONAL
+        ));
+        skates.add(new Skates(
+                "Łyżwy figurowe Graf Arosa Gold SR",
+                "39",
+                java.sql.Date.valueOf("2021-05-" + getRandomDayOfMonth()),
+                BigDecimal.valueOf(20),
+                SkatesState.WITHDRAWN
+        ));
+        skates.add(new Skates(
+                "Łyżwy regulowane Bladerunner Meet The Invaders",
+                "33 - 36.5",
+                java.sql.Date.valueOf("2021-05-" + getRandomDayOfMonth()),
+                BigDecimal.valueOf(10),
+                SkatesState.IN_SERVICE
+        ));
+
+        return skates;
+    }
+
+    private static int getRandomDayOfMonth() {
+        return 1 + (int) (Math.random() * 27);
     }
 }
