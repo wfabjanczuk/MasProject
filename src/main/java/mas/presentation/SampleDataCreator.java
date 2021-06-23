@@ -37,13 +37,14 @@ public class SampleDataCreator {
             Set<SkatingSession> skatingSessions = getSkatingSessions(iceRinks, clients, ticketCollectors);
             skatingSessions.forEach(session::persist);
             clients.forEach(session::persist);
-            ticketCollectors.forEach(session::persist);
 
             getTickets(skatingSessions, clients).forEach(session::persist);
 
             Set<Skates> skates = getSkates();
             skates.forEach(session::persist);
             getSkatesBookings(skatingSessions, clients, skates).forEach(session::persist);
+
+            getSkatesServices(skates, technicians).forEach(session::persist);
 
             transaction.commit();
         } catch (Exception exception) {
@@ -311,6 +312,43 @@ public class SampleDataCreator {
         });
 
         return skatesBookings;
+    }
+
+    private static Set<SkatesService> getSkatesServices(Set<Skates> skates, Set<Technician> technicians) {
+        Set<SkatesService> skatesServices = new HashSet<>();
+
+        skates.stream()
+                .filter(s -> s.getId() > 2)
+                .forEach(s -> {
+                    Set<Technician> chosenTechnicians = new HashSet<>();
+
+                    technicians.stream()
+                            .filter(t -> (int) (Math.random() * 3) == 0 || chosenTechnicians.isEmpty())
+                            .forEach(chosenTechnicians::add);
+
+                    SkatesService randomSkateService = new SkatesService(
+                            java.sql.Date.valueOf("2021-05-01"),
+                            java.sql.Date.valueOf("2021-05-" + getRandomDayOfMonth()),
+                            (int) (Math.random() * 2) > 0,
+                            (int) (Math.random() * 2) > 0,
+                            s.getSkatesState(),
+                            s
+                    ), lastDaySkateService = new SkatesService(
+                            java.sql.Date.valueOf("2021-05-30"),
+                            java.sql.Date.valueOf("2021-05-31"),
+                            (int) (Math.random() * 2) > 0,
+                            (int) (Math.random() * 2) > 0,
+                            s.getSkatesState(),
+                            s
+                    );
+                    randomSkateService.setTechnicians(chosenTechnicians);
+                    lastDaySkateService.setTechnicians(chosenTechnicians);
+
+                    skatesServices.add(randomSkateService);
+                    skatesServices.add(lastDaySkateService);
+                });
+
+        return skatesServices;
     }
 
     private static int getRandomDayOfMonth() {
