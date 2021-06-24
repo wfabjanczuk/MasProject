@@ -1,4 +1,4 @@
-package mas.test;
+package generator;
 
 import java.util.Arrays;
 import java.util.LinkedList;

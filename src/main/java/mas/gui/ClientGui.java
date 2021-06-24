@@ -12,11 +12,19 @@ import java.net.URL;
 
 public class ClientGui extends Application {
     private static final String templateIntro = "template/intro.fxml";
+    private static final String templateConfirmSkates = "template/confirm-skates.fxml";
+
     private static Stage primaryStage;
+    private static ClientGuiState clientGuiState;
 
     public void initialize() {
+        clientGuiState = new ClientGuiState();
         Controller.setClientGui(this);
         launch();
+    }
+
+    public ClientGuiState getState() {
+        return clientGuiState;
     }
 
     @Override
@@ -29,18 +37,18 @@ public class ClientGui extends Application {
         setScene(primaryStage, templateIntro, "Intro");
     }
 
+    public void setConfirmSkatesScene() throws IOException {
+        setScene(primaryStage, templateConfirmSkates, "Dodaj przegląd: Łyżwy");
+    }
+
     private void setScene(Stage primaryStage, String template, String title) throws IOException {
         FXMLLoader loader = new FXMLLoader();
-        loader.setLocation(getResource(template));
+        loader.setLocation(getClass().getClassLoader().getResource(template));
 
         Scene scene = new Scene(loader.load());
         primaryStage.setScene(scene);
         primaryStage.setTitle(title);
         primaryStage.show();
-    }
-
-    private URL getResource(String name) {
-        return getClass().getClassLoader().getResource(name);
     }
 
     @Override

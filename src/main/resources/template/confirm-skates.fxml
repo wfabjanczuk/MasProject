@@ -1,0 +1,152 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="360.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="mas.gui.controller.ConfirmSkatesController">
+   <children>
+      <VBox alignment="TOP_CENTER" prefHeight="360.0" prefWidth="560.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <children>
+            <VBox maxHeight="360.0" maxWidth="560.0" prefHeight="360.0" prefWidth="560.0">
+               <children>
+                  <VBox alignment="CENTER_LEFT" prefHeight="60.0" prefWidth="300.0">
+                     <children>
+                        <Label text="Zaznaczono łyżwy:">
+                           <font>
+                              <Font name="System Bold" size="18.0" />
+                           </font>
+                           <VBox.margin>
+                              <Insets left="40.0" />
+                           </VBox.margin>
+                        </Label>
+                     </children>
+                  </VBox>
+                  <HBox alignment="CENTER_LEFT" prefHeight="200.0" prefWidth="560.0">
+                     <children>
+                        <VBox alignment="CENTER" prefHeight="200.0" prefWidth="200.0">
+                           <children>
+                              <ImageView fx:id="skatesImageView" fitHeight="200.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../image/skates/placeholder-skates.jpg" />
+                                 </image>
+                                 <VBox.margin>
+                                    <Insets left="40.0" right="40.0" />
+                                 </VBox.margin>
+                              </ImageView>
+                           </children>
+                        </VBox>
+                        <VBox alignment="CENTER_LEFT" prefHeight="200.0" prefWidth="260.0">
+                           <children>
+                              <VBox prefHeight="20.0" prefWidth="100.0">
+                                 <children>
+                                    <Label text="Model:">
+                                       <font>
+                                          <Font name="System Bold" size="12.0" />
+                                       </font>
+                                    </Label>
+                                    <Text fx:id="skatesModelText" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="200.0" />
+                                 </children>
+                              </VBox>
+                              <HBox prefHeight="16.0" prefWidth="200.0">
+                                 <children>
+                                    <Label minWidth="120.0" prefWidth="120.0" text="ID:">
+                                       <padding>
+                                          <Insets right="20.0" />
+                                       </padding>
+                                       <font>
+                                          <Font name="System Bold" size="12.0" />
+                                       </font>
+                                    </Label>
+                                    <Text fx:id="skatesIdText" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="140.0" />
+                                 </children>
+                                 <VBox.margin>
+                                    <Insets top="20.0" />
+                                 </VBox.margin>
+                              </HBox>
+                              <HBox prefHeight="16.0" prefWidth="200.0">
+                                 <children>
+                                    <Label minWidth="120.0" prefWidth="120.0" text="Rozmiar:">
+                                       <padding>
+                                          <Insets right="20.0" />
+                                       </padding>
+                                       <font>
+                                          <Font name="System Bold" size="12.0" />
+                                       </font>
+                                    </Label>
+                                    <Text fx:id="skatesSizeText" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="140.0" />
+                                 </children>
+                              </HBox>
+                              <HBox prefHeight="16.0" prefWidth="200.0">
+                                 <children>
+                                    <Label minWidth="120.0" prefWidth="120.0" text="Data zakupu:">
+                                       <padding>
+                                          <Insets right="20.0" />
+                                       </padding>
+                                       <font>
+                                          <Font name="System Bold" size="12.0" />
+                                       </font>
+                                    </Label>
+                                    <Text fx:id="skatesDateBoughtText" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="140.0" />
+                                 </children>
+                              </HBox>
+                              <HBox prefHeight="16.0" prefWidth="200.0">
+                                 <children>
+                                    <Label minWidth="120.0" prefWidth="120.0" text="Cena rezerwacji:" wrapText="true">
+                                       <padding>
+                                          <Insets right="20.0" />
+                                       </padding>
+                                       <font>
+                                          <Font name="System Bold" size="12.0" />
+                                       </font>
+                                    </Label>
+                                    <Text fx:id="skatesBookingPriceText" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="140.0" />
+                                 </children>
+                              </HBox>
+                              <HBox prefHeight="16.0" prefWidth="200.0">
+                                 <children>
+                                    <Label minWidth="120.0" prefWidth="120.0" text="Obecny stan:">
+                                       <padding>
+                                          <Insets right="20.0" />
+                                       </padding>
+                                       <font>
+                                          <Font name="System Bold" size="12.0" />
+                                       </font>
+                                    </Label>
+                                    <Text fx:id="skatesStateText" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="140.0" />
+                                 </children>
+                              </HBox>
+                           </children>
+                        </VBox>
+                     </children>
+                     <VBox.margin>
+                        <Insets />
+                     </VBox.margin>
+                  </HBox>
+                  <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
+                     <children>
+                        <VBox alignment="CENTER" prefHeight="200.0" prefWidth="180.0">
+                           <children>
+                              <Button fx:id="confirmSkatesButton" mnemonicParsing="false" onAction="#onConfirmSkatesClicked" text="Potwierdź wybór łyżew" />
+                           </children>
+                        </VBox>
+                        <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0">
+                           <children>
+                              <Button fx:id="cancelButton" mnemonicParsing="false" onAction="#onCancelClicked" text="Rezygnuj" />
+                           </children>
+                        </VBox>
+                     </children>
+                  </HBox>
+               </children>
+            </VBox>
+         </children>
+      </VBox>
+   </children>
+</AnchorPane>

@@ -1,4 +1,4 @@
-package mas.test;
+package generator;
 
 import mas.entity.*;
 import mas.entity.person.*;
@@ -11,7 +11,7 @@ import java.util.*;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
-public class TestDataCreator {
+public class TestDataGenerator {
     private static long peselSeed = 73110167178L;
     private static final long peselInterval = 723627797L;
 
@@ -260,35 +260,40 @@ public class TestDataCreator {
                 "42 / 7.0 EE",
                 java.sql.Date.valueOf("2021-05-" + getRandomDayOfMonth()),
                 BigDecimal.valueOf(50),
-                SkatesState.FUNCTIONAL
+                SkatesState.FUNCTIONAL,
+                "vapor.jpg"
         ));
         skates.add(new Skates(
                 "Łyżwy hokejowe Bauer Supreme Ultrasonic SR",
                 "8.5 / Fit1",
                 java.sql.Date.valueOf("2021-05-" + getRandomDayOfMonth()),
                 BigDecimal.valueOf(100),
-                SkatesState.WITHDRAWN
+                SkatesState.WITHDRAWN,
+                "supreme.jpg"
         ));
         skates.add(new Skates(
                 "Łyżwy figurowe Risport Rf Light z płozą MK Flight białe SR",
                 "41",
                 java.sql.Date.valueOf("2021-05-" + getRandomDayOfMonth()),
                 BigDecimal.valueOf(25),
-                SkatesState.FUNCTIONAL
+                SkatesState.FUNCTIONAL,
+                "risport.jpg"
         ));
         skates.add(new Skates(
                 "Łyżwy figurowe Graf Arosa Gold SR",
                 "39",
                 java.sql.Date.valueOf("2021-05-" + getRandomDayOfMonth()),
                 BigDecimal.valueOf(20),
-                SkatesState.WITHDRAWN
+                SkatesState.WITHDRAWN,
+                "graf.jpg"
         ));
         skates.add(new Skates(
                 "Łyżwy regulowane Bladerunner Meet The Invaders",
                 "33 - 36.5",
                 java.sql.Date.valueOf("2021-05-" + getRandomDayOfMonth()),
                 BigDecimal.valueOf(10),
-                SkatesState.IN_SERVICE
+                SkatesState.IN_SERVICE,
+                "bladerunner.jpg"
         ));
 
         return skates;

@@ -28,6 +28,9 @@ public class Skates {
     @Column(name = "skates_state", length = 63, nullable = false)
     private SkatesState skatesState;
 
+    @Column(length = 255, nullable = false)
+    private String image;
+
     @OneToMany(mappedBy = "skates")
     private Set<SkatesBooking> skatesBookings = new HashSet<>();
 
@@ -37,12 +40,13 @@ public class Skates {
     public Skates() {
     }
 
-    public Skates(String model, String size, Date dateBought, BigDecimal skatesBookingPrice, SkatesState skatesState) {
+    public Skates(String model, String size, Date dateBought, BigDecimal skatesBookingPrice, SkatesState skatesState, String image) {
         this.model = model;
         this.size = size;
         this.dateBought = dateBought;
         this.skatesBookingPrice = skatesBookingPrice;
         this.skatesState = skatesState;
+        this.image = image;
     }
 
     public Integer getId() {
@@ -91,6 +95,14 @@ public class Skates {
 
     public void setSkatesState(SkatesState skatesState) {
         this.skatesState = skatesState;
+    }
+
+    public String getImage() {
+        return image;
+    }
+
+    public void setImage(String image) {
+        this.image = image;
     }
 
     public Set<SkatesBooking> getSkatesBookings() {

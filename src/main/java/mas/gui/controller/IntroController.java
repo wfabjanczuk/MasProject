@@ -31,9 +31,14 @@ public class IntroController extends Controller {
     }
 
     public void onAddSkatesServiceClicked(Event e) throws IOException {
-        if (this.skatesChoiceBox.getValue() == null) {
+        SkatesChoice skatesChoice = this.skatesChoiceBox.getValue();
+
+        if (skatesChoice == null) {
             errorText.setText(skatesNotChosenError);
             return;
         }
+
+        clientGui.getState().setSkatesChoice(skatesChoice);
+        clientGui.setConfirmSkatesScene();
     }
 }

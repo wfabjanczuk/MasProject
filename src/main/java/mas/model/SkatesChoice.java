@@ -13,6 +13,7 @@ public class SkatesChoice {
     private Date dateBought;
     private BigDecimal skatesBookingPrice;
     private SkatesState skatesState;
+    private String image;
 
     public SkatesChoice(Skates skatesPrototype) {
         id = skatesPrototype.getId();
@@ -21,6 +22,7 @@ public class SkatesChoice {
         dateBought = skatesPrototype.getDateBought();
         skatesBookingPrice = skatesPrototype.getSkatesBookingPrice();
         skatesState = skatesPrototype.getSkatesState();
+        image = skatesPrototype.getImage();
     }
 
     public Integer getId() {
@@ -69,6 +71,14 @@ public class SkatesChoice {
 
     public void setSkatesState(SkatesState skatesState) {
         this.skatesState = skatesState;
+    }
+
+    public String getImage() {
+        return image;
+    }
+
+    public void setImage(String image) {
+        this.image = image;
     }
 
     public String toString() {
