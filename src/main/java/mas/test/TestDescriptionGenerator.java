@@ -1,10 +1,10 @@
-package mas.presentation;
+package mas.test;
 
 import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.List;
 
-public class DescriptionGenerator {
+public class TestDescriptionGenerator {
     private static int minLatinChar = 97;
     private static int maxLatinChar = 122;
 

@@ -1,4 +1,4 @@
-package mas.presentation;
+package mas.test;
 
 import mas.entity.*;
 import mas.entity.person.*;
@@ -11,7 +11,7 @@ import java.util.*;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
-public class SampleDataCreator {
+public class TestDataCreator {
     private static long peselSeed = 73110167178L;
     private static final long peselInterval = 723627797L;
 
@@ -194,7 +194,7 @@ public class SampleDataCreator {
                         dateSessionStart,
                         dateSessionEnd,
                         new BigDecimal(ticketPrice),
-                        DescriptionGenerator.generateText(200),
+                        TestDescriptionGenerator.generateText(200),
                         isPrivate,
                         isRegular,
                         isPrivate ? null : iceRink.getArea() / 10,

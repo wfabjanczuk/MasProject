@@ -1,12 +1,13 @@
 package mas;
 
-import mas.presentation.SampleDataCreator;
-import mas.presentation.Test;
+import mas.gui.ClientGui;
+import mas.test.TestDataCreator;
 
 public class Main {
-
     public static void main(String[] args) {
-        SampleDataCreator.main(args);
-        Test.main(args);
+//        TestDataCreator.main(args);
+
+        ClientGui clientGui = new ClientGui();
+        clientGui.initialize();
     }
 }

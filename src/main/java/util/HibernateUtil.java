@@ -7,8 +7,8 @@ import org.hibernate.boot.registry.StandardServiceRegistry;
 import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
 
 public class HibernateUtil {
+    private static SessionFactory sessionFactory = buildSessionFactory();
     private static final String configFilename = "hibernate.cfg.xml";
-    private static final SessionFactory sessionFactory = buildSessionFactory();
 
     private static SessionFactory buildSessionFactory() {
         try {
@@ -27,11 +27,15 @@ public class HibernateUtil {
     }
 
     public static SessionFactory getSessionFactory() {
+        if (sessionFactory == null) {
+            sessionFactory = buildSessionFactory();
+        }
         return sessionFactory;
     }
 
     public static void closeSessionFactory() {
         sessionFactory.close();
+        sessionFactory = null;
     }
 }
 
