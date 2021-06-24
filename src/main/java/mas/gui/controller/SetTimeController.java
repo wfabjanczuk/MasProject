@@ -41,10 +41,13 @@ public class SetTimeController extends ChosenSkatesController {
 
         switch (result) {
             case DATE_START_IS_NULL:
-                errorText.setText("Data rozpoczęcia nie może być pusta!");
+                errorText.setText("Błąd: data rozpoczęcia nie może być pusta.");
                 return false;
             case DATE_START_AFTER_DATE_END:
-                errorText.setText("Data rozpoczęcia nie może wystąpić po dacie zakończenia!");
+                errorText.setText("Błąd: data rozpoczęcia nie może wystąpić po dacie zakończenia.");
+                return false;
+            case OVERLAPPING_SERVICE_EXISTS:
+                errorText.setText("Błąd: istnieje już przegląd wybranym okresie.");
                 return false;
             case SUCCESS:
                 errorText.setText(null);

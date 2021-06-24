@@ -10,7 +10,7 @@ import util.HibernateUtil;
 import java.io.IOException;
 
 public class IntroController extends Controller {
-    private static final String skatesNotChosenError = "Nie wybrano łyżew do przeglądu.";
+    private static final String skatesNotChosenError = "Błąd: nie wybrano łyżew do przeglądu.";
 
     private final SkatesService skatesService;
 
