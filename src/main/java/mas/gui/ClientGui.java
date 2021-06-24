@@ -8,11 +8,11 @@ import mas.gui.controller.Controller;
 import util.HibernateUtil;
 
 import java.io.IOException;
-import java.net.URL;
 
 public class ClientGui extends Application {
     private static final String templateIntro = "template/intro.fxml";
     private static final String templateConfirmSkates = "template/confirm-skates.fxml";
+    private static final String templateSetTime = "template/set-time.fxml";
 
     private static Stage primaryStage;
     private static ClientGuiState clientGuiState;
@@ -39,6 +39,10 @@ public class ClientGui extends Application {
 
     public void setConfirmSkatesScene() throws IOException {
         setScene(primaryStage, templateConfirmSkates, "Dodaj przegląd: Łyżwy");
+    }
+
+    public void setSaveTimeScene() throws IOException {
+        setScene(primaryStage, templateSetTime, "Dodaj przegląd: Czas trwania");
     }
 
     private void setScene(Stage primaryStage, String template, String title) throws IOException {

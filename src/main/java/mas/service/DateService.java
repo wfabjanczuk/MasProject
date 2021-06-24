@@ -1,5 +1,6 @@
 package mas.service;
 
+import java.time.LocalDate;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.Locale;
@@ -39,5 +40,11 @@ public class DateService {
                 isFirstDayOfMonthEarlierOrEqual = firstCalendar.get(DATE) <= lastCalendar.get(DATE);
 
         return isFirstMonthEarlier || isFirstMonthEqual && isFirstDayOfMonthEarlierOrEqual;
+    }
+
+    public static Date convertToDateViaSqlDate(LocalDate dateToConvert) {
+        return (dateToConvert != null)
+                ? java.sql.Date.valueOf(dateToConvert)
+                : null;
     }
 }
