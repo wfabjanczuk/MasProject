@@ -1,4 +1,4 @@
-package mas.gui;
+package mas.gui.skatesservice.creation;
 
 import mas.entity.Skates;
 import mas.entity.SkatesBooking;

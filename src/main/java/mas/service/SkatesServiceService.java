@@ -1,7 +1,7 @@
 package mas.service;
 
 import mas.entity.SkatesService;
-import mas.gui.ClientGuiState;
+import mas.gui.skatesservice.creation.ClientGuiState;
 import mas.model.SkatesServiceTimeValidation;
 import mas.repository.SkatesServiceRepository;
 

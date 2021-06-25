@@ -1,7 +1,7 @@
-package mas.gui.controller.base;
+package mas.gui.skatesservice.creation.controller.base;
 
-import mas.gui.ClientGui;
-import mas.gui.ClientGuiState;
+import mas.gui.skatesservice.creation.ClientGui;
+import mas.gui.skatesservice.creation.ClientGuiState;
 
 import java.text.SimpleDateFormat;
 

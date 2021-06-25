@@ -1,7 +1,7 @@
-package mas.gui.controller;
+package mas.gui.skatesservice.creation.controller;
 
 import javafx.event.Event;
-import mas.gui.controller.base.Controller;
+import mas.gui.skatesservice.creation.controller.base.Controller;
 
 import java.io.IOException;
 

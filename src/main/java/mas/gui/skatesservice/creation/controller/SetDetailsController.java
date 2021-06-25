@@ -1,4 +1,4 @@
-package mas.gui.controller;
+package mas.gui.skatesservice.creation.controller;
 
 import javafx.event.Event;
 import javafx.scene.control.CheckBox;
@@ -6,7 +6,7 @@ import javafx.scene.control.ChoiceBox;
 import javafx.scene.text.Text;
 import jfxtras.scene.control.LocalDateTimeTextField;
 import mas.entity.SkatesState;
-import mas.gui.controller.base.SkatesServiceTimeValidationController;
+import mas.gui.skatesservice.creation.controller.base.SkatesServiceTimeValidationController;
 import mas.service.DateService;
 import mas.service.SkatesStateService;
 

@@ -1,4 +1,4 @@
-package mas.gui.controller.base;
+package mas.gui.skatesservice.creation.controller.base;
 
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;

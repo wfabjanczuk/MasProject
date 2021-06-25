@@ -1,5 +1,5 @@
 import generator.DataGenerator;
-import mas.gui.ClientGui;
+import mas.gui.skatesservice.creation.ClientGui;
 
 public class Main {
     public static void main(String[] args) {
