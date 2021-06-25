@@ -34,7 +34,7 @@ public class DataGenerator {
             Set<TicketCollector> ticketCollectors = getTicketCollectors();
             ticketCollectors.forEach(session::persist);
 
-            Set<IceRink> iceRinks = getIceRinks();
+            List<IceRink> iceRinks = getIceRinks();
             iceRinks.forEach(session::persist);
 
             Set<SkatingSession> skatingSessions = getSkatingSessions(iceRinks, clients, ticketCollectors);
@@ -59,8 +59,8 @@ public class DataGenerator {
         session.close();
     }
 
-    private static Set<IceRink> getIceRinks() {
-        Set<IceRink> iceRinks = new HashSet<>();
+    private static List<IceRink> getIceRinks() {
+        List<IceRink> iceRinks = new LinkedList<>();
 
         iceRinks.add(new IceRink(
                 "Hockey rink",
@@ -171,7 +171,7 @@ public class DataGenerator {
                 .collect(Collectors.toSet());
     }
 
-    private static Set<SkatingSession> getSkatingSessions(Set<IceRink> iceRinks, Set<Client> clients, Set<TicketCollector> ticketCollectors) {
+    private static Set<SkatingSession> getSkatingSessions(List<IceRink> iceRinks, Set<Client> clients, Set<TicketCollector> ticketCollectors) {
         Set<SkatingSession> skatingSessions = new HashSet<>();
 
         Calendar calendarIterator = Calendar.getInstance();
@@ -314,21 +314,23 @@ public class DataGenerator {
     private static Set<SkatesBooking> getSkatesBookings(Set<SkatingSession> skatingSessions, Set<Client> clients) {
         Set<SkatesBooking> skatesBookings = new HashSet<>();
 
-        skatingSessions.forEach(skatingSession -> {
-            Client chosenClient = clients.stream()
-                    .filter(client -> client.getId() > (int) (Math.random() * 10))
-                    .findAny()
-                    .get();
-            Date dateBooking = java.sql.Date.valueOf("2021-05-" + getRandomDayOfMonth());
+        skatingSessions.stream()
+                .filter(skatingSession -> skatingSession.getIceRink().getId() == 1)
+                .forEach(skatingSession -> {
+                    Client chosenClient = clients.stream()
+                            .filter(client -> client.getId() > (int) (Math.random() * 10))
+                            .findAny()
+                            .get();
+                    Date dateBooking = java.sql.Date.valueOf("2021-05-" + getRandomDayOfMonth());
 
-            skatesWithBookings.forEach(skates -> skatesBookings.add(new SkatesBooking(
-                    dateBooking,
-                    false,
-                    chosenClient,
-                    skatingSession,
-                    skates
-            )));
-        });
+                    skatesWithBookings.forEach(skates -> skatesBookings.add(new SkatesBooking(
+                            dateBooking,
+                            false,
+                            chosenClient,
+                            skatingSession,
+                            skates
+                    )));
+                });
 
         return skatesBookings;
     }
