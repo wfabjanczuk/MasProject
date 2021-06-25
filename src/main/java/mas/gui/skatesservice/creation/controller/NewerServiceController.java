@@ -2,7 +2,9 @@ package mas.gui.skatesservice.creation.controller;
 
 import javafx.event.Event;
 import javafx.scene.text.Text;
+import mas.entity.SkatesService;
 import mas.gui.skatesservice.creation.controller.base.Controller;
+import mas.service.DateService;
 
 import java.io.IOException;
 
@@ -15,18 +17,20 @@ public class NewerServiceController extends Controller {
     public Text newestServiceStateAfterService;
 
     public void initialize() {
-        newestServiceId.setText(clientGuiState.getNewestService().getId().toString());
-        newestServiceDateStart.setText(clientGuiState.getNewestService().getDateStart() == null
+        SkatesService newestService = clientGuiState.getNewestService();
+
+        newestServiceId.setText(newestService.getId().toString());
+        newestServiceDateStart.setText(newestService.getDateStart() == null
                 ? ""
-                : simpleDateTimeFormat.format(clientGuiState.getNewestService().getDateStart())
+                : DateService.simpleDateTimeFormat.format(newestService.getDateStart())
         );
-        newestServiceDateEnd.setText(clientGuiState.getNewestService().getDateEnd() == null
+        newestServiceDateEnd.setText(newestService.getDateEnd() == null
                 ? ""
-                : simpleDateTimeFormat.format(clientGuiState.getNewestService().getDateEnd())
+                : DateService.simpleDateTimeFormat.format(newestService.getDateEnd())
         );
-        newestServiceIsSharpening.setText(clientGuiState.getNewestService().getSharpening() ? "tak" : "nie");
-        newestServiceIsRepairing.setText(clientGuiState.getNewestService().getRepairing() ? "tak" : "nie");
-        newestServiceStateAfterService.setText(clientGuiState.getNewestService().getSkatesStateAfterService().toString());
+        newestServiceIsSharpening.setText(newestService.getSharpening() ? "tak" : "nie");
+        newestServiceIsRepairing.setText(newestService.getRepairing() ? "tak" : "nie");
+        newestServiceStateAfterService.setText(newestService.getSkatesStateAfterService().toString());
     }
 
     public void onContinueClicked(Event e) throws IOException {

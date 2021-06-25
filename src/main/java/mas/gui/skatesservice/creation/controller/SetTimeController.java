@@ -47,7 +47,7 @@ public class SetTimeController extends SkatesServiceTimeValidationController {
             clientGui.setNewerServiceScene();
             return;
         } else if (!validateSkatesBookings(dateStart)) {
-            errorText.setText("Błąd: łyżwy zarezerwowane.");
+            clientGui.setSkatesBookingsScene();
             return;
         }
 

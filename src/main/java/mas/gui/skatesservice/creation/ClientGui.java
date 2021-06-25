@@ -46,6 +46,10 @@ public class ClientGui extends Application {
         setScene(primaryStage, ClientGuiRouter.templateNewerService, "Ostrzeżenie: Istnieje nowszy przegląd");
     }
 
+    public void setSkatesBookingsScene() throws IOException {
+        setScene(primaryStage, ClientGuiRouter.templateSkatesBookings, "Ostrzeżenie: Łyżwy są zarezerwowane");
+    }
+
     public void setDetailsScene() throws IOException {
         setScene(primaryStage, ClientGuiRouter.templateSetDetails, "Dodaj przegląd: Szczegóły");
     }

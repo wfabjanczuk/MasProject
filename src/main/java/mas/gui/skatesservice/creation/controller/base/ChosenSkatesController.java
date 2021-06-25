@@ -4,6 +4,7 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.text.Text;
 import mas.entity.Skates;
+import mas.service.DateService;
 
 abstract public class ChosenSkatesController extends Controller {
     protected Skates skates;
@@ -22,7 +23,7 @@ abstract public class ChosenSkatesController extends Controller {
         skatesIdText.setText(String.valueOf(skates.getId()));
         skatesModelText.setText(skates.getModel());
         skatesSizeText.setText(skates.getSize());
-        skatesDateBoughtText.setText(simpleDateFormat.format(skates.getDateBought()));
+        skatesDateBoughtText.setText(DateService.simpleDateFormat.format(skates.getDateBought()));
         skatesBookingPriceText.setText(skates.getSkatesBookingPrice().toString() + " zł/sesja");
         skatesStateText.setText(skates.getSkatesState().toString());
         skatesImageView.setImage(new Image("image/skates/" + skates.getImage()));

@@ -1,5 +1,6 @@
 package mas.service;
 
+import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
 import java.util.Calendar;
 import java.util.Date;
@@ -8,6 +9,9 @@ import java.util.Locale;
 import static java.util.Calendar.*;
 
 public class DateService {
+    public static final SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
+    public static final SimpleDateFormat simpleDateTimeFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm");
+
     public static int getYearDifference(Date date1, Date date2) {
         boolean isNaturalOrder = date1.before(date2);
 

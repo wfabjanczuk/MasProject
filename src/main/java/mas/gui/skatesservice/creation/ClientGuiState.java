@@ -1,9 +1,9 @@
 package mas.gui.skatesservice.creation;
 
 import mas.entity.Skates;
-import mas.entity.SkatesBooking;
 import mas.entity.SkatesService;
 import mas.entity.SkatesState;
+import mas.model.SkatesBookingChoice;
 
 import java.util.Date;
 import java.util.LinkedList;
@@ -18,7 +18,7 @@ public class ClientGuiState {
     private boolean skatesServiceRepairing = false;
 
     private SkatesService newestService;
-    private List<SkatesBooking> firstSkatesBookings = new LinkedList<>();
+    private List<SkatesBookingChoice> upcomingSkatesBooking = new LinkedList<>();
 
     public ClientGuiState() {
     }
@@ -79,12 +79,12 @@ public class ClientGuiState {
         this.newestService = newestService;
     }
 
-    public List<SkatesBooking> getFirstSkatesBookings() {
-        return firstSkatesBookings;
+    public List<SkatesBookingChoice> getUpcomingSkatesBooking() {
+        return upcomingSkatesBooking;
     }
 
-    public void setFirstSkatesBookings(List<SkatesBooking> firstSkatesBookings) {
-        this.firstSkatesBookings = firstSkatesBookings;
+    public void setUpcomingSkatesBooking(List<SkatesBookingChoice> upcomingSkatesBooking) {
+        this.upcomingSkatesBooking = upcomingSkatesBooking;
     }
 
     public void clear() {
@@ -95,6 +95,6 @@ public class ClientGuiState {
         skatesServiceSharpening = false;
         skatesServiceRepairing = false;
         newestService = null;
-        firstSkatesBookings = new LinkedList<>();
+        upcomingSkatesBooking = new LinkedList<>();
     }
 }

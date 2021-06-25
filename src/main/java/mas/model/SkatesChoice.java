@@ -1,28 +1,16 @@
 package mas.model;
 
 import mas.entity.Skates;
-import mas.entity.SkatesState;
-
-import java.math.BigDecimal;
-import java.util.Date;
 
 public class SkatesChoice {
     private Integer id;
     private String model;
     private String size;
-    private Date dateBought;
-    private BigDecimal skatesBookingPrice;
-    private SkatesState skatesState;
-    private String image;
 
     public SkatesChoice(Skates skatesPrototype) {
         id = skatesPrototype.getId();
         model = skatesPrototype.getModel();
         size = skatesPrototype.getSize();
-        dateBought = skatesPrototype.getDateBought();
-        skatesBookingPrice = skatesPrototype.getSkatesBookingPrice();
-        skatesState = skatesPrototype.getSkatesState();
-        image = skatesPrototype.getImage();
     }
 
     public Integer getId() {
@@ -47,38 +35,6 @@ public class SkatesChoice {
 
     public void setSize(String size) {
         this.size = size;
-    }
-
-    public Date getDateBought() {
-        return dateBought;
-    }
-
-    public void setDateBought(Date dateBought) {
-        this.dateBought = dateBought;
-    }
-
-    public BigDecimal getSkatesBookingPrice() {
-        return skatesBookingPrice;
-    }
-
-    public void setSkatesBookingPrice(BigDecimal skatesBookingPrice) {
-        this.skatesBookingPrice = skatesBookingPrice;
-    }
-
-    public SkatesState getSkatesState() {
-        return skatesState;
-    }
-
-    public void setSkatesState(SkatesState skatesState) {
-        this.skatesState = skatesState;
-    }
-
-    public String getImage() {
-        return image;
-    }
-
-    public void setImage(String image) {
-        this.image = image;
     }
 
     public String toString() {

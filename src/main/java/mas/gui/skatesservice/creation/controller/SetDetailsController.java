@@ -28,7 +28,7 @@ public class SetDetailsController extends SkatesServiceTimeValidationController 
 
         this.dateEndDatePicker.setLocale(DateService.getPolishLocale());
 
-        dateStartText.setText(simpleDateTimeFormat.format(dateStart));
+        dateStartText.setText(DateService.simpleDateTimeFormat.format(dateStart));
         this.dateEndDatePicker.setLocalDateTime(DateService.convertToLocalDateViaSqlDate(dateEnd));
 
         stateAfterServiceChoiceBox.getItems().addAll(SkatesStateService.getPossibleStatesAfterService());
