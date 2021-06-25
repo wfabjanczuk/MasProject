@@ -177,8 +177,8 @@ public class DataGenerator {
         Calendar calendarIterator = Calendar.getInstance();
         Calendar calendarMax = Calendar.getInstance();
 
-        calendarIterator.setTime(java.sql.Date.valueOf("2021-06-01"));
-        calendarMax.setTime(java.sql.Date.valueOf("2021-06-03"));
+        calendarIterator.setTime(java.sql.Date.valueOf("2021-07-01"));
+        calendarMax.setTime(java.sql.Date.valueOf("2021-07-03"));
 
         while (calendarIterator.before(calendarMax)) {
             Calendar calendarSessionEnd = (Calendar) calendarIterator.clone();

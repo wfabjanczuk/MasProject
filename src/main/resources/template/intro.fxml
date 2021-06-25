@@ -10,11 +10,11 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="420.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="mas.gui.controller.IntroController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="480.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="mas.gui.controller.IntroController">
    <children>
       <VBox alignment="TOP_CENTER" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
-            <VBox alignment="CENTER" maxHeight="420.0" maxWidth="600.0" prefHeight="420.0" prefWidth="600.0">
+            <VBox alignment="CENTER" maxHeight="480.0" maxWidth="600.0" prefHeight="480.0" prefWidth="600.0">
                <children>
                   <HBox alignment="CENTER" prefHeight="40.0" prefWidth="200.0">
                      <children>
@@ -79,16 +79,49 @@
                         <Text fx:id="errorText" fill="RED" strokeType="OUTSIDE" strokeWidth="0.0" />
                      </children>
                   </VBox>
-                  <VBox maxWidth="350.0" prefHeight="180.0" prefWidth="100.0">
+                  <VBox maxWidth="350.0" prefHeight="240.0" prefWidth="100.0">
                      <children>
-                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Łyżwy z przeglądami:">
+                        <HBox alignment="CENTER_LEFT" prefHeight="40.0" prefWidth="200.0">
+                           <children>
+                              <VBox prefHeight="200.0" prefWidth="100.0">
+                                 <children>
+                                    <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Testowe przeglądy:">
+                                       <font>
+                                          <Font name="System Bold" size="12.0" />
+                                       </font>
+                                    </Text>
+                                    <Text strokeType="OUTSIDE" strokeWidth="0.0" text="wygenerowane w 2021-05" />
+                                 </children>
+                                 <padding>
+                                    <Insets right="30.0" />
+                                 </padding>
+                              </VBox>
+                              <VBox prefHeight="200.0" prefWidth="100.0">
+                                 <children>
+                                    <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Testowe rezerwacje:">
+                                       <font>
+                                          <Font name="System Bold" size="12.0" />
+                                       </font>
+                                    </Text>
+                                    <Text strokeType="OUTSIDE" strokeWidth="0.0" text="wygenerowane w 2021-07" />
+                                 </children>
+                                 <padding>
+                                    <Insets left="30.0" />
+                                 </padding>
+                              </VBox>
+                           </children>
+                        </HBox>
+                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Testowe łyżwy z przeglądami:">
                            <font>
                               <Font name="System Bold" size="12.0" />
                            </font>
+                           <VBox.margin>
+                              <Insets top="10.0" />
+                           </VBox.margin>
                         </Text>
                         <Text strokeType="OUTSIDE" strokeWidth="0.0" text="[ID: 1] Łyżwy hokejowe Bauer Vapor X700 2017 SR" />
                         <Text strokeType="OUTSIDE" strokeWidth="0.0" text="[ID: 2] Łyżwy hokejowe Bauer Supreme Ultrasonic SR" />
-                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Łyżwy z rezerwacjami:">
+                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Testowe łyżwy z rezerwacjami:">
                            <font>
                               <Font name="System Bold" size="12.0" />
                            </font>
@@ -98,7 +131,7 @@
                         </Text>
                         <Text strokeType="OUTSIDE" strokeWidth="0.0" text="[ID: 3] Łyżwy figurowe Risport Rf Light z płozą MK Flight białe SR" />
                         <Text strokeType="OUTSIDE" strokeWidth="0.0" text="[ID: 4] Łyżwy figurowe Graf Arosa Gold SR" />
-                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Łyżwy z przeglądami i rezerwacjami:">
+                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Testowe łyżwy z przeglądami i rezerwacjami:">
                            <font>
                               <Font name="System Bold" size="12.0" />
                            </font>
