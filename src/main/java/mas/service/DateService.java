@@ -1,6 +1,6 @@
 package mas.service;
 
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.Locale;
@@ -30,7 +30,7 @@ public class DateService {
         return calendar;
     }
 
-    private static Locale getPolishLocale() {
+    public static Locale getPolishLocale() {
         return new Locale("pl", "PL");
     }
 
@@ -42,15 +42,15 @@ public class DateService {
         return isFirstMonthEarlier || isFirstMonthEqual && isFirstDayOfMonthEarlierOrEqual;
     }
 
-    public static Date convertToDateViaSqlDate(LocalDate dateToConvert) {
+    public static Date convertToDateViaSqlDate(LocalDateTime dateToConvert) {
         return (dateToConvert != null)
-                ? java.sql.Date.valueOf(dateToConvert)
+                ? java.sql.Timestamp.valueOf(dateToConvert)
                 : null;
     }
 
-    public static LocalDate convertToLocalDateViaSqlDate(Date dateToConvert) {
+    public static LocalDateTime convertToLocalDateViaSqlDate(Date dateToConvert) {
         return (dateToConvert != null)
-                ? new java.sql.Date(dateToConvert.getTime()).toLocalDate()
+                ? new java.sql.Timestamp(dateToConvert.getTime()).toLocalDateTime()
                 : null;
     }
 }

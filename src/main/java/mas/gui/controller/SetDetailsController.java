@@ -3,8 +3,8 @@ package mas.gui.controller;
 import javafx.event.Event;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.ChoiceBox;
-import javafx.scene.control.DatePicker;
 import javafx.scene.text.Text;
+import jfxtras.scene.control.LocalDateTimeTextField;
 import mas.entity.SkatesState;
 import mas.gui.controller.base.SkatesServiceTimeValidationController;
 import mas.service.DateService;
@@ -14,7 +14,7 @@ import java.io.IOException;
 
 public class SetDetailsController extends SkatesServiceTimeValidationController {
     public Text dateStartText;
-    public DatePicker dateEndDatePicker;
+    public LocalDateTimeTextField dateEndDatePicker;
 
     public ChoiceBox<SkatesState> stateAfterServiceChoiceBox;
     public CheckBox sharpeningCheckBox;
@@ -26,10 +26,10 @@ public class SetDetailsController extends SkatesServiceTimeValidationController 
         dateStart = clientGuiState.getSkatesServiceDateStart();
         dateEnd = clientGuiState.getSkatesServiceDateEnd();
 
-        this.dateEndDatePicker.setOnAction(e -> updateDatesAndValidateTime());
+        this.dateEndDatePicker.setLocale(DateService.getPolishLocale());
 
-        dateStartText.setText(simpleDateFormat.format(dateStart));
-        this.dateEndDatePicker.setValue(DateService.convertToLocalDateViaSqlDate(dateEnd));
+        dateStartText.setText(simpleDateTimeFormat.format(dateStart));
+        this.dateEndDatePicker.setLocalDateTime(DateService.convertToLocalDateViaSqlDate(dateEnd));
 
         stateAfterServiceChoiceBox.getItems().addAll(SkatesStateService.getPossibleStatesAfterService());
         stateAfterServiceChoiceBox.setValue(clientGuiState.getSkatesStateAfterService());
@@ -38,7 +38,7 @@ public class SetDetailsController extends SkatesServiceTimeValidationController 
     }
 
     public boolean updateDatesAndValidateTime() {
-        dateEnd = DateService.convertToDateViaSqlDate(dateEndDatePicker.getValue());
+        dateEnd = DateService.convertToDateViaSqlDate(dateEndDatePicker.getLocalDateTime());
 
         return validateSkatesServiceTime(dateStart, dateEnd);
     }

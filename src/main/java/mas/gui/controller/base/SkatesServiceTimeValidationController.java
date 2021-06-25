@@ -28,6 +28,9 @@ abstract public class SkatesServiceTimeValidationController extends ChosenSkates
             case DATE_START_IS_NULL:
                 errorText.setText("Błąd: data rozpoczęcia nie może być pusta.");
                 return false;
+            case ZERO_TIME_DIFFERENCE:
+                errorText.setText("Błąd: czas trwania przeglądu nie może być równy 0.");
+                return false;
             case DATE_START_AFTER_DATE_END:
                 errorText.setText("Błąd: data rozpoczęcia nie może wystąpić po dacie zakończenia.");
                 return false;

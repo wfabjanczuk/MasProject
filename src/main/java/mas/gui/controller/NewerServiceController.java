@@ -16,8 +16,14 @@ public class NewerServiceController extends Controller {
 
     public void initialize() {
         newestServiceId.setText(clientGuiState.getNewestService().getId().toString());
-        newestServiceDateStart.setText(simpleDateFormat.format(clientGuiState.getNewestService().getDateStart()));
-        newestServiceDateEnd.setText(simpleDateFormat.format(clientGuiState.getNewestService().getDateEnd()));
+        newestServiceDateStart.setText(clientGuiState.getNewestService().getDateStart() == null
+                ? ""
+                : simpleDateTimeFormat.format(clientGuiState.getNewestService().getDateStart())
+        );
+        newestServiceDateEnd.setText(clientGuiState.getNewestService().getDateEnd() == null
+                ? ""
+                : simpleDateTimeFormat.format(clientGuiState.getNewestService().getDateEnd())
+        );
         newestServiceIsSharpening.setText(clientGuiState.getNewestService().getSharpening() ? "tak" : "nie");
         newestServiceIsRepairing.setText(clientGuiState.getNewestService().getRepairing() ? "tak" : "nie");
         newestServiceStateAfterService.setText(clientGuiState.getNewestService().getSkatesStateAfterService().toString());

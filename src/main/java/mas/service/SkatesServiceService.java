@@ -19,6 +19,10 @@ public class SkatesServiceService {
             return SkatesServiceTimeValidation.DATE_START_IS_NULL;
         }
 
+        if (dateStart.equals(dateEnd)) {
+            return SkatesServiceTimeValidation.ZERO_TIME_DIFFERENCE;
+        }
+
         if (dateEnd != null && dateStart.after(dateEnd)) {
             return SkatesServiceTimeValidation.DATE_START_AFTER_DATE_END;
         }
