@@ -1,5 +1,6 @@
 package mas.service;
 
+import mas.gui.ClientGuiState;
 import mas.model.SkatesServiceTimeValidation;
 import mas.repository.SkatesServiceRepository;
 
@@ -26,5 +27,18 @@ public class SkatesServiceService {
         }
 
         return SkatesServiceTimeValidation.SUCCESS;
+    }
+
+    public boolean saveSkatesService(ClientGuiState clientGuiState) {
+        mas.entity.SkatesService skatesService = new mas.entity.SkatesService(
+                clientGuiState.getSkatesServiceDateStart(),
+                clientGuiState.getSkatesServiceDateEnd(),
+                clientGuiState.isSkatesServiceIsSharpening(),
+                clientGuiState.isSkatesServiceIsRepairing(),
+                clientGuiState.getSkatesStateAfterService(),
+                clientGuiState.getSkates()
+        );
+
+        return skatesServiceRepository.saveSkatesService(skatesService);
     }
 }

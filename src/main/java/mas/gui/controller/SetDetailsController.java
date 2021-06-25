@@ -32,8 +32,8 @@ public class SetDetailsController extends SkatesServiceTimeValidationController 
 
         stateAfterServiceChoiceBox.getItems().addAll(SkatesStateService.getPossibleStatesAfterService());
         stateAfterServiceChoiceBox.setValue(clientGuiState.getSkatesStateAfterService());
-        sharpeningCheckBox.setSelected(clientGuiState.getSkatesServiceIsSharpening());
-        repairingCheckBox.setSelected(clientGuiState.getSkatesServiceIsRepairing());
+        sharpeningCheckBox.setSelected(clientGuiState.isSkatesServiceIsSharpening());
+        repairingCheckBox.setSelected(clientGuiState.isSkatesServiceIsSharpening());
     }
 
     public boolean updateDatesAndValidateTime() {
@@ -52,7 +52,8 @@ public class SetDetailsController extends SkatesServiceTimeValidationController 
         clientGuiState.setSkatesStateAfterService(stateAfterServiceChoiceBox.getValue());
         clientGuiState.setSkatesServiceIsSharpening(sharpeningCheckBox.isSelected());
         clientGuiState.setSkatesServiceIsRepairing(repairingCheckBox.isSelected());
-        clientGui.setTimeScene();
+
+        skatesServiceService.saveSkatesService(clientGuiState);
     }
 
     public void onGoBackClicked(Event e) throws IOException {

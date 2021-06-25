@@ -30,7 +30,7 @@ public class SkatesService {
     @Column(name = "skates_state_after_service", length = 63, nullable = true)
     private SkatesState skatesStateAfterService;
 
-    @ManyToOne(cascade = {CascadeType.ALL})
+    @ManyToOne
     @JoinColumn(name = "skates_id", nullable = false)
     private Skates skates;
 

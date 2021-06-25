@@ -19,7 +19,7 @@ abstract public class SkatesServiceTimeValidationController extends ChosenSkates
 
     public boolean validateSkatesServiceTime(Date dateStart, Date dateEnd) {
         SkatesServiceTimeValidation result = skatesServiceService.validateSkatesServiceTime(
-                skatesChoice.getId(),
+                skates.getId(),
                 dateStart,
                 dateEnd
         );

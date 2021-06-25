@@ -11,4 +11,8 @@ public class SkatesRepository extends Repository {
                 .getResultStream()
                 .collect(Collectors.toList());
     }
+
+    public Skates findById(int skatesId) {
+        return session.get(Skates.class, skatesId);
+    }
 }

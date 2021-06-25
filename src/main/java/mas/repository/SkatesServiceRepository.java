@@ -1,6 +1,7 @@
 package mas.repository;
 
 import mas.entity.SkatesService;
+import org.hibernate.Transaction;
 import org.hibernate.query.Query;
 
 import java.util.Date;
@@ -32,5 +33,22 @@ public class SkatesServiceRepository extends Repository {
         return (dateEnd != null)
                 ? query.setParameter("dateEnd", dateEnd)
                 : query;
+    }
+
+    public boolean saveSkatesService(SkatesService skatesService) {
+        Transaction transaction = session.getTransaction();
+
+        try {
+            transaction.begin();
+            session.persist(skatesService);
+            transaction.commit();
+
+            return true;
+        } catch (Exception exception) {
+            transaction.rollback();
+            System.out.println(exception.getMessage());
+
+            return false;
+        }
     }
 }

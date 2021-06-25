@@ -23,4 +23,8 @@ public class SkatesService {
                 .sorted(Comparator.comparingInt(SkatesChoice::getId))
                 .collect(Collectors.toList());
     }
+
+    public Skates findById(int skatesId) {
+        return skatesRepository.findById(skatesId);
+    }
 }

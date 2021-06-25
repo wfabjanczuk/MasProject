@@ -3,13 +3,13 @@ package mas.gui.controller;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.text.Text;
-import mas.model.SkatesChoice;
+import mas.entity.Skates;
 
 import java.text.SimpleDateFormat;
 
 abstract public class ChosenSkatesController extends Controller {
     protected static final SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
-    protected SkatesChoice skatesChoice;
+    protected Skates skates;
 
     public ImageView skatesImageView;
     public Text skatesIdText;
@@ -20,14 +20,14 @@ abstract public class ChosenSkatesController extends Controller {
     public Text skatesStateText;
 
     public void showSkatesChoice() {
-        skatesChoice = clientGuiState.getSkatesChoice();
+        skates = clientGuiState.getSkates();
 
-        skatesIdText.setText(String.valueOf(skatesChoice.getId()));
-        skatesModelText.setText(skatesChoice.getModel());
-        skatesSizeText.setText(skatesChoice.getSize());
-        skatesDateBoughtText.setText(simpleDateFormat.format(skatesChoice.getDateBought()));
-        skatesBookingPriceText.setText(skatesChoice.getSkatesBookingPrice().toString() + " zł/sesja");
-        skatesStateText.setText(skatesChoice.getSkatesState().toString());
-        skatesImageView.setImage(new Image("image/skates/" + skatesChoice.getImage()));
+        skatesIdText.setText(String.valueOf(skates.getId()));
+        skatesModelText.setText(skates.getModel());
+        skatesSizeText.setText(skates.getSize());
+        skatesDateBoughtText.setText(simpleDateFormat.format(skates.getDateBought()));
+        skatesBookingPriceText.setText(skates.getSkatesBookingPrice().toString() + " zł/sesja");
+        skatesStateText.setText(skates.getSkatesState().toString());
+        skatesImageView.setImage(new Image("image/skates/" + skates.getImage()));
     }
 }

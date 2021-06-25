@@ -3,6 +3,7 @@ package mas.gui.controller;
 import javafx.event.Event;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.text.Text;
+import mas.entity.Skates;
 import mas.model.SkatesChoice;
 import mas.service.SkatesService;
 import util.HibernateUtil;
@@ -38,7 +39,8 @@ public class IntroController extends Controller {
             return;
         }
 
-        clientGuiState.setSkatesChoice(skatesChoice);
+        Skates skates = skatesService.findById(skatesChoice.getId());
+        clientGuiState.setSkates(skates);
         clientGui.setConfirmSkatesScene();
     }
 }
