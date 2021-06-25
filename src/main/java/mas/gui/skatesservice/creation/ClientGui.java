@@ -4,6 +4,7 @@ import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
+import mas.gui.skatesservice.creation.controller.SkatesBookingsController;
 import mas.gui.skatesservice.creation.controller.base.Controller;
 import util.HibernateUtil;
 
@@ -46,7 +47,8 @@ public class ClientGui extends Application {
         setScene(primaryStage, ClientGuiRouter.templateNewerService, "Ostrzeżenie: Istnieje nowszy przegląd");
     }
 
-    public void setSkatesBookingsScene() throws IOException {
+    public void setSkatesBookingsScene(boolean isLastStep) throws IOException {
+        SkatesBookingsController.setIsLastStep(isLastStep);
         setScene(primaryStage, ClientGuiRouter.templateSkatesBookings, "Ostrzeżenie: Łyżwy są zarezerwowane");
     }
 

@@ -5,6 +5,7 @@ import javafx.scene.control.CheckBox;
 import mas.gui.skatesservice.creation.controller.base.Controller;
 import mas.model.SkatesBookingChoice;
 import mas.service.SkatesBookingService;
+import mas.service.SkatesServiceService;
 import org.controlsfx.control.CheckListView;
 
 import java.io.IOException;
@@ -12,7 +13,10 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 public class SkatesBookingsController extends Controller {
+    private static boolean isLastStep = false;
+
     private final SkatesBookingService skatesBookingService;
+    private final SkatesServiceService skatesServiceService;
 
     public CheckBox toggleAllCheckBox;
     public CheckListView<SkatesBookingChoice> skatesBookingsListView;
@@ -20,6 +24,15 @@ public class SkatesBookingsController extends Controller {
     public SkatesBookingsController() {
         super();
         skatesBookingService = new SkatesBookingService();
+        skatesServiceService = new SkatesServiceService();
+    }
+
+    public static boolean isIsLastStep() {
+        return isLastStep;
+    }
+
+    public static void setIsLastStep(boolean isLastStep) {
+        SkatesBookingsController.isLastStep = isLastStep;
     }
 
     public void initialize() {
@@ -42,10 +55,22 @@ public class SkatesBookingsController extends Controller {
                 .collect(Collectors.toList());
 
         skatesBookingService.cancelBookings(selectedIds);
-        clientGui.setDetailsScene();
+        continueUseCase();
     }
 
     public void onSaveAndContinueClicked(Event e) throws IOException {
-        clientGui.setDetailsScene();
+        continueUseCase();
+    }
+
+    private void continueUseCase() throws IOException {
+        if (!isLastStep) {
+            clientGui.setDetailsScene();
+            return;
+        }
+
+        skatesServiceService.saveSkatesService(clientGuiState);
+        clientGuiState.clear();
+
+        clientGui.setSuccessScene();
     }
 }

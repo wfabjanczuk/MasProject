@@ -58,6 +58,11 @@ public class SetDetailsController extends SkatesServiceTimeValidationController 
         clientGuiState.setSkatesServiceSharpening(sharpeningCheckBox.isSelected());
         clientGuiState.setSkatesServiceRepairing(repairingCheckBox.isSelected());
 
+        if (!validateSkatesBookings(dateStart)) {
+            clientGui.setSkatesBookingsScene(true);
+            return;
+        }
+
         skatesServiceService.saveSkatesService(clientGuiState);
         clientGuiState.clear();
 
