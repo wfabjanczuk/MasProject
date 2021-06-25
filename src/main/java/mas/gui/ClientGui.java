@@ -33,10 +33,11 @@ public class ClientGui extends Application {
     @Override
     public void start(Stage primaryStage) throws Exception {
         ClientGui.primaryStage = primaryStage;
-        setIntroScene();
+        clearStateAndSetIntroScene();
     }
 
-    public void setIntroScene() throws IOException {
+    public void clearStateAndSetIntroScene() throws IOException {
+        clientGuiState.clear();
         setScene(primaryStage, templateIntro, "Intro");
     }
 

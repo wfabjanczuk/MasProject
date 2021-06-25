@@ -11,8 +11,8 @@ public class ClientGuiState {
     private Date skatesServiceDateStart;
     private Date skatesServiceDateEnd;
     private SkatesState skatesStateAfterService;
-    private boolean skatesServiceIsSharpening = false;
-    private boolean skatesServiceIsRepairing = false;
+    private boolean skatesServiceSharpening = false;
+    private boolean skatesServiceRepairing = false;
 
     private SkatesService newestService;
 
@@ -51,20 +51,20 @@ public class ClientGuiState {
         this.skatesStateAfterService = skatesStateAfterService;
     }
 
-    public boolean isSkatesServiceIsSharpening() {
-        return skatesServiceIsSharpening;
+    public boolean isSkatesServiceSharpening() {
+        return skatesServiceSharpening;
     }
 
-    public void setSkatesServiceIsSharpening(boolean skatesServiceIsSharpening) {
-        this.skatesServiceIsSharpening = skatesServiceIsSharpening;
+    public void setSkatesServiceSharpening(boolean skatesServiceSharpening) {
+        this.skatesServiceSharpening = skatesServiceSharpening;
     }
 
-    public boolean isSkatesServiceIsRepairing() {
-        return skatesServiceIsRepairing;
+    public boolean isSkatesServiceRepairing() {
+        return skatesServiceRepairing;
     }
 
-    public void setSkatesServiceIsRepairing(boolean skatesServiceIsRepairing) {
-        this.skatesServiceIsRepairing = skatesServiceIsRepairing;
+    public void setSkatesServiceRepairing(boolean skatesServiceRepairing) {
+        this.skatesServiceRepairing = skatesServiceRepairing;
     }
 
     public SkatesService getNewestService() {
@@ -80,8 +80,8 @@ public class ClientGuiState {
         skatesServiceDateStart = null;
         skatesServiceDateEnd = null;
         skatesStateAfterService = null;
-        skatesServiceIsSharpening = false;
-        skatesServiceIsRepairing = false;
+        skatesServiceSharpening = false;
+        skatesServiceRepairing = false;
         newestService = null;
     }
 }

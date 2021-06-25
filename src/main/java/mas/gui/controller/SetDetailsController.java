@@ -33,8 +33,8 @@ public class SetDetailsController extends SkatesServiceTimeValidationController 
 
         stateAfterServiceChoiceBox.getItems().addAll(SkatesStateService.getPossibleStatesAfterService());
         stateAfterServiceChoiceBox.setValue(clientGuiState.getSkatesStateAfterService());
-        sharpeningCheckBox.setSelected(clientGuiState.isSkatesServiceIsSharpening());
-        repairingCheckBox.setSelected(clientGuiState.isSkatesServiceIsSharpening());
+        sharpeningCheckBox.setSelected(clientGuiState.isSkatesServiceSharpening());
+        repairingCheckBox.setSelected(clientGuiState.isSkatesServiceSharpening());
     }
 
     public boolean updateDatesAndValidateTime() {
@@ -49,15 +49,28 @@ public class SetDetailsController extends SkatesServiceTimeValidationController 
             return;
         }
 
+        if (!validateRequiredFields()) {
+            return;
+        }
+
         clientGuiState.setSkatesServiceDateEnd(dateEnd);
         clientGuiState.setSkatesStateAfterService(stateAfterServiceChoiceBox.getValue());
-        clientGuiState.setSkatesServiceIsSharpening(sharpeningCheckBox.isSelected());
-        clientGuiState.setSkatesServiceIsRepairing(repairingCheckBox.isSelected());
+        clientGuiState.setSkatesServiceSharpening(sharpeningCheckBox.isSelected());
+        clientGuiState.setSkatesServiceRepairing(repairingCheckBox.isSelected());
 
         skatesServiceService.saveSkatesService(clientGuiState);
         clientGuiState.clear();
 
         clientGui.setSuccessScene();
+    }
+
+    private boolean validateRequiredFields() {
+        if (stateAfterServiceChoiceBox.getValue() == null) {
+            errorText.setText("Błąd: stan łyżew po przeglądzie jest wymagany.");
+            return false;
+        }
+
+        return true;
     }
 
     public void onGoBackClicked(Event e) throws IOException {

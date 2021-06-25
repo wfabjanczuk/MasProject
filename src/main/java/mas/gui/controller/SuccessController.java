@@ -7,6 +7,6 @@ import java.io.IOException;
 
 public class SuccessController extends Controller {
     public void onGoBackClicked(Event e) throws IOException {
-        clientGui.setIntroScene();
+        clientGui.clearStateAndSetIntroScene();
     }
 }

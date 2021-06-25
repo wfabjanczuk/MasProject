@@ -1,8 +1,6 @@
 package mas.gui.controller;
 
 import javafx.event.Event;
-import javafx.scene.control.DatePicker;
-import jfxtras.scene.control.LocalDateTimePicker;
 import jfxtras.scene.control.LocalDateTimeTextField;
 import mas.entity.SkatesService;
 import mas.gui.controller.base.SkatesServiceTimeValidationController;
@@ -54,6 +52,6 @@ public class SetTimeController extends SkatesServiceTimeValidationController {
     }
 
     public void onCancelClicked(Event e) throws IOException {
-        clientGui.setIntroScene();
+        clientGui.clearStateAndSetIntroScene();
     }
 }

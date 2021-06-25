@@ -15,6 +15,6 @@ public class ConfirmSkatesController extends ChosenSkatesController {
     }
 
     public void onCancelClicked(Event e) throws IOException {
-        clientGui.setIntroScene();
+        clientGui.clearStateAndSetIntroScene();
     }
 }

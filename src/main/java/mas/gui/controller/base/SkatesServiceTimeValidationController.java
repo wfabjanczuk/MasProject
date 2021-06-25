@@ -31,8 +31,8 @@ abstract public class SkatesServiceTimeValidationController extends ChosenSkates
             case ZERO_TIME_DIFFERENCE:
                 errorText.setText("Błąd: czas trwania przeglądu nie może być równy 0.");
                 return false;
-            case DATE_START_AFTER_DATE_END:
-                errorText.setText("Błąd: data rozpoczęcia nie może wystąpić po dacie zakończenia.");
+            case DATE_END_BEFORE_DATE_START:
+                errorText.setText("Błąd: data zakończenia nie może wystąpić przed datą rozpoczęcia.");
                 return false;
             case OVERLAPPING_SERVICE_EXISTS:
                 errorText.setText("Błąd: istnieje już przegląd wybranym okresie.");

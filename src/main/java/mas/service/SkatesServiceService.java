@@ -24,7 +24,7 @@ public class SkatesServiceService {
         }
 
         if (dateEnd != null && dateStart.after(dateEnd)) {
-            return SkatesServiceTimeValidation.DATE_START_AFTER_DATE_END;
+            return SkatesServiceTimeValidation.DATE_END_BEFORE_DATE_START;
         }
 
         if (skatesServiceRepository.doesOverlappingServiceExists(skatesId, dateStart, dateEnd)) {
@@ -42,8 +42,8 @@ public class SkatesServiceService {
         mas.entity.SkatesService skatesService = new mas.entity.SkatesService(
                 clientGuiState.getSkatesServiceDateStart(),
                 clientGuiState.getSkatesServiceDateEnd(),
-                clientGuiState.isSkatesServiceIsSharpening(),
-                clientGuiState.isSkatesServiceIsRepairing(),
+                clientGuiState.isSkatesServiceSharpening(),
+                clientGuiState.isSkatesServiceRepairing(),
                 clientGuiState.getSkatesStateAfterService(),
                 clientGuiState.getSkates()
         );
