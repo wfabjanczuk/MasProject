@@ -32,32 +32,32 @@ public class ClientGui extends Application {
 
     public void clearStateAndSetIntroScene() throws IOException {
         clientGuiState.clear();
-        setScene(primaryStage, ClientGuiRouter.templateIntro, "Intro");
+        setScene(primaryStage, ClientGuiTemplates.intro, "Intro");
     }
 
     public void setConfirmSkatesScene() throws IOException {
-        setScene(primaryStage, ClientGuiRouter.templateConfirmSkates, "Dodaj przegląd: Łyżwy");
+        setScene(primaryStage, ClientGuiTemplates.confirmSkates, "Dodaj przegląd: Łyżwy");
     }
 
     public void setTimeScene() throws IOException {
-        setScene(primaryStage, ClientGuiRouter.templateSetTime, "Dodaj przegląd: Czas trwania");
+        setScene(primaryStage, ClientGuiTemplates.setTime, "Dodaj przegląd: Czas trwania");
     }
 
     public void setNewerServiceScene() throws IOException {
-        setScene(primaryStage, ClientGuiRouter.templateNewerService, "Ostrzeżenie: Istnieje nowszy przegląd");
+        setScene(primaryStage, ClientGuiTemplates.newerService, "Ostrzeżenie: Istnieje nowszy przegląd");
     }
 
     public void setSkatesBookingsScene(boolean isLastStep) throws IOException {
         SkatesBookingsController.setIsLastStep(isLastStep);
-        setScene(primaryStage, ClientGuiRouter.templateSkatesBookings, "Ostrzeżenie: Łyżwy są zarezerwowane");
+        setScene(primaryStage, ClientGuiTemplates.skatesBookings, "Ostrzeżenie: Łyżwy są zarezerwowane");
     }
 
     public void setDetailsScene() throws IOException {
-        setScene(primaryStage, ClientGuiRouter.templateSetDetails, "Dodaj przegląd: Szczegóły");
+        setScene(primaryStage, ClientGuiTemplates.setDetails, "Dodaj przegląd: Szczegóły");
     }
 
     public void setSuccessScene() throws IOException {
-        setScene(primaryStage, ClientGuiRouter.templateSuccess, "Sukces: zapisano przegląd");
+        setScene(primaryStage, ClientGuiTemplates.success, "Sukces: zapisano przegląd");
     }
 
     private void setScene(Stage primaryStage, String template, String title) throws IOException {
