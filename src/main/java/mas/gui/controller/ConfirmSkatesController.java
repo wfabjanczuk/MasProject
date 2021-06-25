@@ -10,7 +10,7 @@ public class ConfirmSkatesController extends ChosenSkatesController {
     }
 
     public void onConfirmSkatesClicked(Event e) throws IOException {
-        clientGui.setSaveTimeScene();
+        clientGui.setTimeScene();
     }
 
     public void onCancelClicked(Event e) throws IOException {

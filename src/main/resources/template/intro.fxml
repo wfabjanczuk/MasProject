@@ -69,7 +69,7 @@
                         </VBox>
                         <VBox alignment="CENTER" prefHeight="200.0" prefWidth="120.0">
                            <children>
-                              <Button fx:id="addSkatesServiceButton" mnemonicParsing="false" onAction="#onAddSkatesServiceClicked" text="Dodaj przegląd" />
+                              <Button fx:id="addSkatesServiceButton" mnemonicParsing="false" onAction="#onAddSkatesServiceClicked" text="Uruchom p.u." />
                            </children>
                         </VBox>
                      </children>

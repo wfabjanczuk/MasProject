@@ -47,4 +47,10 @@ public class DateService {
                 ? java.sql.Date.valueOf(dateToConvert)
                 : null;
     }
+
+    public static LocalDate convertToLocalDateViaSqlDate(Date dateToConvert) {
+        return (dateToConvert != null)
+                ? new java.sql.Date(dateToConvert.getTime()).toLocalDate()
+                : null;
+    }
 }

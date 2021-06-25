@@ -38,7 +38,7 @@ public class IntroController extends Controller {
             return;
         }
 
-        clientGui.getState().setSkatesChoice(skatesChoice);
+        clientGuiState.setSkatesChoice(skatesChoice);
         clientGui.setConfirmSkatesScene();
     }
 }

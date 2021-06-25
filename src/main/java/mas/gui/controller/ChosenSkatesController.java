@@ -7,7 +7,7 @@ import mas.model.SkatesChoice;
 
 import java.text.SimpleDateFormat;
 
-public class ChosenSkatesController extends Controller {
+abstract public class ChosenSkatesController extends Controller {
     protected static final SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
     protected SkatesChoice skatesChoice;
 
@@ -20,7 +20,7 @@ public class ChosenSkatesController extends Controller {
     public Text skatesStateText;
 
     public void showSkatesChoice() {
-        skatesChoice = clientGui.getState().getSkatesChoice();
+        skatesChoice = clientGuiState.getSkatesChoice();
 
         skatesIdText.setText(String.valueOf(skatesChoice.getId()));
         skatesModelText.setText(skatesChoice.getModel());
