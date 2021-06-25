@@ -1,5 +1,6 @@
 package mas.service;
 
+import mas.entity.SkatesService;
 import mas.gui.ClientGuiState;
 import mas.model.SkatesServiceTimeValidation;
 import mas.repository.SkatesServiceRepository;
@@ -27,6 +28,10 @@ public class SkatesServiceService {
         }
 
         return SkatesServiceTimeValidation.SUCCESS;
+    }
+
+    public SkatesService findNewerService(Date dateStart) {
+        return skatesServiceRepository.findNewestSkatesServiceAfter(dateStart);
     }
 
     public boolean saveSkatesService(ClientGuiState clientGuiState) {

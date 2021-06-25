@@ -5,6 +5,7 @@ import org.hibernate.Transaction;
 import org.hibernate.query.Query;
 
 import java.util.Date;
+import java.util.List;
 
 public class SkatesServiceRepository extends Repository {
     public boolean doesOverlappingServiceExists(int skatesId, Date dateStart, Date dateEnd) {
@@ -33,6 +34,18 @@ public class SkatesServiceRepository extends Repository {
         return (dateEnd != null)
                 ? query.setParameter("dateEnd", dateEnd)
                 : query;
+    }
+
+    public SkatesService findNewestSkatesServiceAfter(Date date) {
+        String hql = "SELECT ss FROM SkatesService ss WHERE ss.dateStart > :date ORDER BY ss.dateStart desc";
+
+        Query<SkatesService> query = session.createQuery(hql, SkatesService.class)
+                .setParameter("date", date)
+                .setMaxResults(1);
+
+        List<SkatesService> result = query.getResultList();
+
+        return result.isEmpty() ? null : result.get(0);
     }
 
     public boolean saveSkatesService(SkatesService skatesService) {

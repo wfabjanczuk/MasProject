@@ -6,6 +6,7 @@ import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.DatePicker;
 import javafx.scene.text.Text;
 import mas.entity.SkatesState;
+import mas.gui.controller.base.SkatesServiceTimeValidationController;
 import mas.service.DateService;
 import mas.service.SkatesStateService;
 

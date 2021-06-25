@@ -4,6 +4,7 @@ import javafx.event.Event;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.text.Text;
 import mas.entity.Skates;
+import mas.gui.controller.base.Controller;
 import mas.model.SkatesChoice;
 import mas.service.SkatesService;
 import util.HibernateUtil;

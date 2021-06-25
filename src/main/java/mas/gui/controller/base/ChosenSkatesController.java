@@ -1,4 +1,4 @@
-package mas.gui.controller;
+package mas.gui.controller.base;
 
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;

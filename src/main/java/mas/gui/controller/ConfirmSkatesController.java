@@ -1,6 +1,7 @@
 package mas.gui.controller;
 
 import javafx.event.Event;
+import mas.gui.controller.base.ChosenSkatesController;
 
 import java.io.IOException;
 

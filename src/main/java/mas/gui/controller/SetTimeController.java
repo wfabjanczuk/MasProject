@@ -2,6 +2,8 @@ package mas.gui.controller;
 
 import javafx.event.Event;
 import javafx.scene.control.DatePicker;
+import mas.entity.SkatesService;
+import mas.gui.controller.base.SkatesServiceTimeValidationController;
 import mas.service.DateService;
 
 import java.io.IOException;
@@ -38,7 +40,12 @@ public class SetTimeController extends SkatesServiceTimeValidationController {
         clientGuiState.setSkatesServiceDateStart(dateStart);
         clientGuiState.setSkatesServiceDateEnd(dateEnd);
 
+        SkatesService newerSkatesService = skatesServiceService.findNewerService(dateStart);
 
+        if (newerSkatesService != null) {
+            errorText.setText("Istnieje nowszy przegląd!");
+            return;
+        }
 
         clientGui.setDetailsScene();
     }

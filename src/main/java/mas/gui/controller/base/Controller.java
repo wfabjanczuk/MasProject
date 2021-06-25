@@ -1,4 +1,4 @@
-package mas.gui.controller;
+package mas.gui.controller.base;
 
 import mas.gui.ClientGui;
 import mas.gui.ClientGuiState;

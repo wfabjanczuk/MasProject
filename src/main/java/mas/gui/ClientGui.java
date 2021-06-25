@@ -4,7 +4,7 @@ import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
-import mas.gui.controller.Controller;
+import mas.gui.controller.base.Controller;
 import util.HibernateUtil;
 
 import java.io.IOException;
