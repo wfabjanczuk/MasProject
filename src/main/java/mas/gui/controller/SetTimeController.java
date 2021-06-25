@@ -40,10 +40,11 @@ public class SetTimeController extends SkatesServiceTimeValidationController {
         clientGuiState.setSkatesServiceDateStart(dateStart);
         clientGuiState.setSkatesServiceDateEnd(dateEnd);
 
-        SkatesService newerSkatesService = skatesServiceService.findNewerService(dateStart);
+        SkatesService newestService = skatesServiceService.findNewestService(skates.getId(), dateStart);
 
-        if (newerSkatesService != null) {
-            errorText.setText("Istnieje nowszy przegląd!");
+        if (newestService != null) {
+            clientGuiState.setNewestService(newestService);
+            clientGui.setNewerServiceScene();
             return;
         }
 

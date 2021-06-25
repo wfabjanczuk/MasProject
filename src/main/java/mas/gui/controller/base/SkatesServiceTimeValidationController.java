@@ -1,7 +1,6 @@
 package mas.gui.controller.base;
 
 import javafx.scene.text.Text;
-import mas.gui.controller.base.ChosenSkatesController;
 import mas.model.SkatesServiceTimeValidation;
 import mas.service.SkatesServiceService;
 

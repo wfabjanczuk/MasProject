@@ -36,10 +36,11 @@ public class SkatesServiceRepository extends Repository {
                 : query;
     }
 
-    public SkatesService findNewestSkatesServiceAfter(Date date) {
-        String hql = "SELECT ss FROM SkatesService ss WHERE ss.dateStart > :date ORDER BY ss.dateStart desc";
+    public SkatesService findNewestSkatesServiceAfter(int skatesId, Date date) {
+        String hql = "SELECT ss FROM SkatesService ss WHERE ss.skates.id = :skatesId AND ss.dateStart >= :date ORDER BY ss.dateStart DESC";
 
         Query<SkatesService> query = session.createQuery(hql, SkatesService.class)
+                .setParameter("skatesId", skatesId)
                 .setParameter("date", date)
                 .setMaxResults(1);
 

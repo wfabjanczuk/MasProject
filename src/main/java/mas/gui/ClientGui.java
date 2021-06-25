@@ -13,6 +13,7 @@ public class ClientGui extends Application {
     private static final String templateIntro = "template/intro.fxml";
     private static final String templateConfirmSkates = "template/confirm-skates.fxml";
     private static final String templateSetTime = "template/set-time.fxml";
+    private static final String templateNewerService = "template/newer-service.fxml";
     private static final String templateSetDetails = "template/set-details.fxml";
     private static final String templateSuccess = "template/success.fxml";
 
@@ -45,6 +46,10 @@ public class ClientGui extends Application {
 
     public void setTimeScene() throws IOException {
         setScene(primaryStage, templateSetTime, "Dodaj przegląd: Czas trwania");
+    }
+
+    public void setNewerServiceScene() throws IOException {
+        setScene(primaryStage, templateNewerService, "Ostrzeżenie: Istnieje nowszy przegląd");
     }
 
     public void setDetailsScene() throws IOException {

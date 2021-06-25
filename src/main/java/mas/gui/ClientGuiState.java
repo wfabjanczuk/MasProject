@@ -1,19 +1,20 @@
 package mas.gui;
 
 import mas.entity.Skates;
+import mas.entity.SkatesService;
 import mas.entity.SkatesState;
-import mas.model.SkatesChoice;
 
 import java.util.Date;
 
 public class ClientGuiState {
-    private SkatesChoice skatesChoice;
     private Skates skates;
     private Date skatesServiceDateStart;
     private Date skatesServiceDateEnd;
     private SkatesState skatesStateAfterService;
     private boolean skatesServiceIsSharpening = false;
     private boolean skatesServiceIsRepairing = false;
+
+    private SkatesService newestService;
 
     public ClientGuiState() {
     }
@@ -66,13 +67,21 @@ public class ClientGuiState {
         this.skatesServiceIsRepairing = skatesServiceIsRepairing;
     }
 
+    public SkatesService getNewestService() {
+        return newestService;
+    }
+
+    public void setNewestService(SkatesService newestService) {
+        this.newestService = newestService;
+    }
+
     public void clear() {
-        skatesChoice = null;
         skates = null;
         skatesServiceDateStart = null;
         skatesServiceDateEnd = null;
         skatesStateAfterService = null;
         skatesServiceIsSharpening = false;
         skatesServiceIsRepairing = false;
+        newestService = null;
     }
 }

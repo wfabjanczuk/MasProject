@@ -30,8 +30,8 @@ public class SkatesServiceService {
         return SkatesServiceTimeValidation.SUCCESS;
     }
 
-    public SkatesService findNewerService(Date dateStart) {
-        return skatesServiceRepository.findNewestSkatesServiceAfter(dateStart);
+    public SkatesService findNewestService(int skatesId, Date dateStart) {
+        return skatesServiceRepository.findNewestSkatesServiceAfter(skatesId, dateStart);
     }
 
     public boolean saveSkatesService(ClientGuiState clientGuiState) {

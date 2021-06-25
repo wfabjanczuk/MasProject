@@ -5,10 +5,7 @@ import javafx.scene.image.ImageView;
 import javafx.scene.text.Text;
 import mas.entity.Skates;
 
-import java.text.SimpleDateFormat;
-
 abstract public class ChosenSkatesController extends Controller {
-    protected static final SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
     protected Skates skates;
 
     public ImageView skatesImageView;
