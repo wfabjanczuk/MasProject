@@ -11,9 +11,12 @@ import java.util.*;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
-public class TestDataGenerator {
+public class DataGenerator {
     private static long peselSeed = 73110167178L;
     private static final long peselInterval = 723627797L;
+
+    private static Set<Skates> skatesWithBookings = new HashSet<>();
+    private static Set<Skates> skatesWithServices = new HashSet<>();
 
     public static void main(String[] args) {
         Session session = HibernateUtil.getSessionFactory().openSession();
@@ -40,11 +43,10 @@ public class TestDataGenerator {
 
             getTickets(skatingSessions, clients).forEach(session::persist);
 
-            Set<Skates> skates = getSkates();
+            List<Skates> skates = getSkates();
             skates.forEach(session::persist);
-            getSkatesBookings(skatingSessions, clients, skates).forEach(session::persist);
-
-            getSkatesServices(skates, technicians).forEach(session::persist);
+            getSkatesBookings(skatingSessions, clients).forEach(session::persist);
+            getSkatesServices(technicians).forEach(session::persist);
 
             transaction.commit();
         } catch (Exception exception) {
@@ -194,7 +196,7 @@ public class TestDataGenerator {
                         dateSessionStart,
                         dateSessionEnd,
                         new BigDecimal(ticketPrice),
-                        TestDescriptionGenerator.generateText(200),
+                        DescriptionGenerator.generateText(200),
                         isPrivate,
                         isRegular,
                         isPrivate ? null : iceRink.getArea() / 10,
@@ -252,54 +254,64 @@ public class TestDataGenerator {
         return tickets;
     }
 
-    private static Set<Skates> getSkates() {
-        Set<Skates> skates = new HashSet<>();
+    private static List<Skates> getSkates() {
+        List<Skates> skates = new ArrayList<>();
 
-        skates.add(new Skates(
+        Skates vapor = new Skates(
                 "Łyżwy hokejowe Bauer Vapor X700 2017 SR",
                 "42 / 7.0 EE",
                 java.sql.Date.valueOf("2021-05-" + getRandomDayOfMonth()),
                 BigDecimal.valueOf(50),
                 SkatesState.FUNCTIONAL,
                 "vapor.jpg"
-        ));
-        skates.add(new Skates(
+        ), supreme = new Skates(
                 "Łyżwy hokejowe Bauer Supreme Ultrasonic SR",
                 "8.5 / Fit1",
                 java.sql.Date.valueOf("2021-05-" + getRandomDayOfMonth()),
                 BigDecimal.valueOf(100),
-                SkatesState.WITHDRAWN,
+                SkatesState.FUNCTIONAL,
                 "supreme.jpg"
-        ));
-        skates.add(new Skates(
+        ), risport = new Skates(
                 "Łyżwy figurowe Risport Rf Light z płozą MK Flight białe SR",
                 "41",
                 java.sql.Date.valueOf("2021-05-" + getRandomDayOfMonth()),
                 BigDecimal.valueOf(25),
                 SkatesState.FUNCTIONAL,
                 "risport.jpg"
-        ));
-        skates.add(new Skates(
+        ), graf = new Skates(
                 "Łyżwy figurowe Graf Arosa Gold SR",
                 "39",
                 java.sql.Date.valueOf("2021-05-" + getRandomDayOfMonth()),
                 BigDecimal.valueOf(20),
-                SkatesState.WITHDRAWN,
+                SkatesState.FUNCTIONAL,
                 "graf.jpg"
-        ));
-        skates.add(new Skates(
+        ), bladerunner = new Skates(
                 "Łyżwy regulowane Bladerunner Meet The Invaders",
                 "33 - 36.5",
                 java.sql.Date.valueOf("2021-05-" + getRandomDayOfMonth()),
                 BigDecimal.valueOf(10),
-                SkatesState.IN_SERVICE,
+                SkatesState.FUNCTIONAL,
                 "bladerunner.jpg"
-        ));
+        );
+
+        skatesWithServices.add(vapor);
+        skatesWithServices.add(supreme);
+        skatesWithServices.add(bladerunner);
+
+        skatesWithBookings.add(risport);
+        skatesWithBookings.add(graf);
+        skatesWithBookings.add(bladerunner);
+
+        skates.add(vapor);
+        skates.add(supreme);
+        skates.add(risport);
+        skates.add(graf);
+        skates.add(bladerunner);
 
         return skates;
     }
 
-    private static Set<SkatesBooking> getSkatesBookings(Set<SkatingSession> skatingSessions, Set<Client> clients, Set<Skates> skates) {
+    private static Set<SkatesBooking> getSkatesBookings(Set<SkatingSession> skatingSessions, Set<Client> clients) {
         Set<SkatesBooking> skatesBookings = new HashSet<>();
 
         skatingSessions.forEach(skatingSession -> {
@@ -307,56 +319,56 @@ public class TestDataGenerator {
                     .filter(client -> client.getId() > (int) (Math.random() * 10))
                     .findAny()
                     .get();
-            Skates chosenSkates = skates.stream()
-                    .filter(s -> s.getId() > (2 + (int) (Math.random() * 3)))
-                    .findAny()
-                    .get();
             Date dateBooking = java.sql.Date.valueOf("2021-05-" + getRandomDayOfMonth());
 
-            skatesBookings.add(new SkatesBooking(dateBooking, false, chosenClient, skatingSession, chosenSkates));
+            skatesWithBookings.forEach(skates -> skatesBookings.add(new SkatesBooking(
+                    dateBooking,
+                    false,
+                    chosenClient,
+                    skatingSession,
+                    skates
+            )));
         });
 
         return skatesBookings;
     }
 
-    private static Set<SkatesService> getSkatesServices(Set<Skates> skates, Set<Technician> technicians) {
+    private static Set<SkatesService> getSkatesServices(Set<Technician> technicians) {
         Set<SkatesService> skatesServices = new HashSet<>();
 
-        skates.stream()
-                .filter(s -> s.getId() > 2)
-                .forEach(s -> {
-                    Set<Technician> chosenTechnicians = new HashSet<>();
+        skatesWithServices.forEach(skates -> {
+            Set<Technician> chosenTechnicians = new HashSet<>();
 
-                    technicians.stream()
-                            .filter(t -> (int) (Math.random() * 3) == 0 || chosenTechnicians.isEmpty())
-                            .forEach(chosenTechnicians::add);
+            technicians.stream()
+                    .filter(t -> (int) (Math.random() * 3) == 0 || chosenTechnicians.isEmpty())
+                    .forEach(chosenTechnicians::add);
 
-                    SkatesService randomSkateService = new SkatesService(
-                            java.sql.Date.valueOf("2021-05-01"),
-                            java.sql.Date.valueOf("2021-05-" + getRandomDayOfMonth()),
-                            (int) (Math.random() * 2) > 0,
-                            (int) (Math.random() * 2) > 0,
-                            s.getSkatesState(),
-                            s
-                    ), lastDaySkateService = new SkatesService(
-                            java.sql.Date.valueOf("2021-05-30"),
-                            java.sql.Date.valueOf("2021-05-31"),
-                            (int) (Math.random() * 2) > 0,
-                            (int) (Math.random() * 2) > 0,
-                            s.getSkatesState(),
-                            s
-                    );
-                    randomSkateService.setTechnicians(chosenTechnicians);
-                    lastDaySkateService.setTechnicians(chosenTechnicians);
+            SkatesService randomSkateService = new SkatesService(
+                    java.sql.Date.valueOf("2021-05-01"),
+                    java.sql.Date.valueOf("2021-05-" + getRandomDayOfMonth()),
+                    (int) (Math.random() * 2) > 0,
+                    (int) (Math.random() * 2) > 0,
+                    SkatesState.WITHDRAWN,
+                    skates
+            ), lastDaySkateService = new SkatesService(
+                    java.sql.Date.valueOf("2021-05-30"),
+                    java.sql.Date.valueOf("2021-05-31"),
+                    (int) (Math.random() * 2) > 0,
+                    (int) (Math.random() * 2) > 0,
+                    skates.getSkatesState(),
+                    skates
+            );
+            randomSkateService.setTechnicians(chosenTechnicians);
+            lastDaySkateService.setTechnicians(chosenTechnicians);
 
-                    skatesServices.add(randomSkateService);
-                    skatesServices.add(lastDaySkateService);
-                });
+            skatesServices.add(randomSkateService);
+            skatesServices.add(lastDaySkateService);
+        });
 
         return skatesServices;
     }
 
     private static int getRandomDayOfMonth() {
-        return 1 + (int) (Math.random() * 27);
+        return 2 + (int) (Math.random() * 26);
     }
 }
