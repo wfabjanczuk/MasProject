@@ -1,10 +1,13 @@
 package mas.gui;
 
 import mas.entity.Skates;
+import mas.entity.SkatesBooking;
 import mas.entity.SkatesService;
 import mas.entity.SkatesState;
 
 import java.util.Date;
+import java.util.LinkedList;
+import java.util.List;
 
 public class ClientGuiState {
     private Skates skates;
@@ -15,6 +18,7 @@ public class ClientGuiState {
     private boolean skatesServiceRepairing = false;
 
     private SkatesService newestService;
+    private List<SkatesBooking> firstSkatesBookings = new LinkedList<>();
 
     public ClientGuiState() {
     }
@@ -75,6 +79,14 @@ public class ClientGuiState {
         this.newestService = newestService;
     }
 
+    public List<SkatesBooking> getFirstSkatesBookings() {
+        return firstSkatesBookings;
+    }
+
+    public void setFirstSkatesBookings(List<SkatesBooking> firstSkatesBookings) {
+        this.firstSkatesBookings = firstSkatesBookings;
+    }
+
     public void clear() {
         skates = null;
         skatesServiceDateStart = null;
@@ -83,5 +95,6 @@ public class ClientGuiState {
         skatesServiceSharpening = false;
         skatesServiceRepairing = false;
         newestService = null;
+        firstSkatesBookings = new LinkedList<>();
     }
 }

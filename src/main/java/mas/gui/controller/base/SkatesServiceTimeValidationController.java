@@ -1,13 +1,17 @@
 package mas.gui.controller.base;
 
 import javafx.scene.text.Text;
+import mas.entity.SkatesBooking;
 import mas.model.SkatesServiceTimeValidation;
+import mas.service.SkatesBookingService;
 import mas.service.SkatesServiceService;
 
 import java.util.Date;
+import java.util.List;
 
 abstract public class SkatesServiceTimeValidationController extends ChosenSkatesController {
     protected final SkatesServiceService skatesServiceService;
+    protected final SkatesBookingService skatesBookingService;
     protected Date dateStart;
     protected Date dateEnd;
 
@@ -15,6 +19,7 @@ abstract public class SkatesServiceTimeValidationController extends ChosenSkates
 
     public SkatesServiceTimeValidationController() {
         skatesServiceService = new SkatesServiceService();
+        skatesBookingService = new SkatesBookingService();
     }
 
     public boolean validateSkatesServiceTime(Date dateStart, Date dateEnd) {
@@ -41,5 +46,16 @@ abstract public class SkatesServiceTimeValidationController extends ChosenSkates
                 errorText.setText(null);
         }
         return true;
+    }
+
+    public boolean validateSkatesBookings(Date dateStart) {
+        List<SkatesBooking> skatesBookings = skatesBookingService.findServicedSkatesBookingsAfter(skates.getId(), dateStart);
+
+        if (skatesBookings.isEmpty()) {
+            return true;
+        }
+
+        clientGuiState.setFirstSkatesBookings(skatesBookings);
+        return false;
     }
 }
