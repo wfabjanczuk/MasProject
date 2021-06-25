@@ -14,6 +14,7 @@ public class ClientGui extends Application {
     private static final String templateConfirmSkates = "template/confirm-skates.fxml";
     private static final String templateSetTime = "template/set-time.fxml";
     private static final String templateSetDetails = "template/set-details.fxml";
+    private static final String templateSuccess = "template/success.fxml";
 
     private static Stage primaryStage;
     private static ClientGuiState clientGuiState;
@@ -48,6 +49,10 @@ public class ClientGui extends Application {
 
     public void setDetailsScene() throws IOException {
         setScene(primaryStage, templateSetDetails, "Dodaj przegląd: Szczegóły");
+    }
+
+    public void setSuccessScene() throws IOException {
+        setScene(primaryStage, templateSuccess, "Sukces: zapisano przegląd");
     }
 
     private void setScene(Stage primaryStage, String template, String title) throws IOException {

@@ -37,6 +37,9 @@ public class SetTimeController extends SkatesServiceTimeValidationController {
 
         clientGuiState.setSkatesServiceDateStart(dateStart);
         clientGuiState.setSkatesServiceDateEnd(dateEnd);
+
+
+
         clientGui.setDetailsScene();
     }
 

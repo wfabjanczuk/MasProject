@@ -65,4 +65,14 @@ public class ClientGuiState {
     public void setSkatesServiceIsRepairing(boolean skatesServiceIsRepairing) {
         this.skatesServiceIsRepairing = skatesServiceIsRepairing;
     }
+
+    public void clear() {
+        skatesChoice = null;
+        skates = null;
+        skatesServiceDateStart = null;
+        skatesServiceDateEnd = null;
+        skatesStateAfterService = null;
+        skatesServiceIsSharpening = false;
+        skatesServiceIsRepairing = false;
+    }
 }

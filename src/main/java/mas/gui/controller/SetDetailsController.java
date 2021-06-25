@@ -54,6 +54,9 @@ public class SetDetailsController extends SkatesServiceTimeValidationController 
         clientGuiState.setSkatesServiceIsRepairing(repairingCheckBox.isSelected());
 
         skatesServiceService.saveSkatesService(clientGuiState);
+        clientGuiState.clear();
+
+        clientGui.setSuccessScene();
     }
 
     public void onGoBackClicked(Event e) throws IOException {
