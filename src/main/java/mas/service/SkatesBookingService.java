@@ -23,6 +23,6 @@ public class SkatesBookingService {
     }
 
     public boolean cancelBookings(List<Integer> ids) {
-        return true;
+        return skatesBookingRepository.cancelSelectedBookings(ids);
     }
 }
