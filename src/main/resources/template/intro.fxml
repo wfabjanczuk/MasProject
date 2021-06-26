@@ -83,35 +83,35 @@
                      <children>
                         <HBox alignment="CENTER_LEFT" prefHeight="40.0" prefWidth="200.0">
                            <children>
-                              <VBox prefHeight="200.0" prefWidth="100.0">
+                              <VBox prefHeight="200.0" prefWidth="120.0">
                                  <children>
                                     <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Testowe przeglądy:">
                                        <font>
                                           <Font name="System Bold" size="12.0" />
                                        </font>
                                     </Text>
-                                    <Text strokeType="OUTSIDE" strokeWidth="0.0" text="wygenerowane w 2021-05" />
+                                    <Text strokeType="OUTSIDE" strokeWidth="0.0" text="w miesiącu 2021-05" />
                                  </children>
                                  <padding>
-                                    <Insets right="30.0" />
+                                    <Insets right="40.0" />
                                  </padding>
                               </VBox>
-                              <VBox prefHeight="200.0" prefWidth="100.0">
+                              <VBox prefHeight="200.0" prefWidth="120.0">
                                  <children>
                                     <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Testowe rezerwacje:">
                                        <font>
                                           <Font name="System Bold" size="12.0" />
                                        </font>
                                     </Text>
-                                    <Text strokeType="OUTSIDE" strokeWidth="0.0" text="wygenerowane w 2021-07" />
+                                    <Text strokeType="OUTSIDE" strokeWidth="0.0" text="w miesiącu 2021-07" />
                                  </children>
                                  <padding>
-                                    <Insets left="30.0" />
+                                    <Insets left="40.0" />
                                  </padding>
                               </VBox>
                            </children>
                         </HBox>
-                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Testowe łyżwy z przeglądami, ale bez rezerwacji:">
+                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Testowe przeglądy: TAK, rezerwacje: NIE">
                            <font>
                               <Font name="System Bold" size="12.0" />
                            </font>
@@ -121,7 +121,7 @@
                         </Text>
                         <Text strokeType="OUTSIDE" strokeWidth="0.0" text="[ID: 1] Łyżwy hokejowe Bauer Vapor X700 2017 SR" />
                         <Text strokeType="OUTSIDE" strokeWidth="0.0" text="[ID: 2] Łyżwy hokejowe Bauer Supreme Ultrasonic SR" />
-                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Testowe łyżwy z rezerwacjami, ale bez przeglądów:">
+                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Testowe przeglądy: NIE, rezerwacje TAK">
                            <font>
                               <Font name="System Bold" size="12.0" />
                            </font>
@@ -131,7 +131,7 @@
                         </Text>
                         <Text strokeType="OUTSIDE" strokeWidth="0.0" text="[ID: 3] Łyżwy figurowe Risport Rf Light z płozą MK Flight białe SR" />
                         <Text strokeType="OUTSIDE" strokeWidth="0.0" text="[ID: 4] Łyżwy figurowe Graf Arosa Gold SR" />
-                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Testowe łyżwy z przeglądami i rezerwacjami:">
+                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Testowe przeglądy: TAK, rezerwacje: TAK">
                            <font>
                               <Font name="System Bold" size="12.0" />
                            </font>

@@ -66,19 +66,14 @@ public class SetDetailsController extends SkatesServiceTimeValidationController 
         techniciansComboBox.getCheckModel().checkIndices(checkedTechnicianChoicesIds);
     }
 
-    public boolean updateDatesAndValidateTime() {
+    public void onSaveDetailsClicked(Event e) throws IOException {
         dateEnd = DateService.convertToDateViaSqlDate(dateEndDatePicker.getLocalDateTime());
 
-        return validateSkatesServiceTime(dateStart, dateEnd);
-    }
-
-
-    public void onSaveDetailsClicked(Event e) throws IOException {
         if (!validateRequiredFields()) {
             return;
         }
 
-        if (!updateDatesAndValidateTime()) {
+        if (!validateSkatesServiceTime(dateStart, dateEnd)) {
             return;
         }
 
@@ -110,8 +105,10 @@ public class SetDetailsController extends SkatesServiceTimeValidationController 
     }
 
     private boolean validateRequiredFields() {
-        if (stateAfterServiceChoiceBox.getValue() == null) {
-            errorText.setText("Błąd: stan łyżew po przeglądzie jest wymagany.");
+        System.out.println(dateEnd);
+        System.out.println(stateAfterServiceChoiceBox.getValue());
+        if (dateEnd != null && stateAfterServiceChoiceBox.getValue() == null) {
+            errorText.setText("Błąd: w przypadku podania daty zakończenia, stan łyżew po przeglądzie jest wymagany.");
             return false;
         }
 

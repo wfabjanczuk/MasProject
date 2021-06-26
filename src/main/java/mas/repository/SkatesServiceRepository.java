@@ -57,14 +57,9 @@ public class SkatesServiceRepository extends Repository {
 
         try {
             transaction.begin();
-
-            boolean isNewest = findNewestSkatesServiceAfter(
-                    skatesService.getSkates().getId(),
-                    skatesService.getDateStart()
-            ) == null;
-
             skatesService.setSkates(session.get(Skates.class, skatesService.getSkates().getId()));
-            if (isNewest) {
+
+            if (skatesService.getDateEnd() != null && isAddedServiceTheNewest(skatesService)) {
                 skatesService.getSkates().setSkatesState(skatesService.getSkatesStateAfterService());
             }
 
@@ -78,5 +73,12 @@ public class SkatesServiceRepository extends Repository {
 
             return false;
         }
+    }
+
+    private boolean isAddedServiceTheNewest(SkatesService skatesService) {
+        return findNewestSkatesServiceAfter(
+                skatesService.getSkates().getId(),
+                skatesService.getDateStart()
+        ) == null;
     }
 }
