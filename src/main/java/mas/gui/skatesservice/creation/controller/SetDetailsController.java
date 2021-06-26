@@ -50,7 +50,20 @@ public class SetDetailsController extends SkatesServiceTimeValidationController 
         stateAfterServiceChoiceBox.setValue(clientGuiState.getSkatesStateAfterService());
         sharpeningCheckBox.setSelected(clientGuiState.isSkatesServiceSharpening());
         repairingCheckBox.setSelected(clientGuiState.isSkatesServiceSharpening());
-        techniciansComboBox.getItems().addAll(technicianService.getTechnicianChoices());
+
+        List<TechnicianChoice> technicianChoices = technicianService.getTechnicianChoices();
+        techniciansComboBox.getItems().addAll(technicianChoices);
+
+        int[] checkedTechnicianChoicesIds = clientGuiState.getTechnicians()
+                .stream()
+                .mapToInt(technician -> technicianChoices.stream()
+                        .filter(tc -> tc.getId().equals(technician.getId()))
+                        .mapToInt(technicianChoices::indexOf)
+                        .findFirst()
+                        .orElse(-1)
+                )
+                .toArray();
+        techniciansComboBox.getCheckModel().checkIndices(checkedTechnicianChoicesIds);
     }
 
     public boolean updateDatesAndValidateTime() {
@@ -87,9 +100,12 @@ public class SetDetailsController extends SkatesServiceTimeValidationController 
             return;
         }
 
-        skatesServiceService.saveSkatesService(clientGuiState);
-        clientGuiState.clear();
+        if (!skatesServiceService.saveSkatesService(clientGuiState)) {
+            clientGui.setErrorScene();
+            return;
+        }
 
+        clientGuiState.clear();
         clientGui.setSuccessScene();
     }
 

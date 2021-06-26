@@ -68,9 +68,12 @@ public class SkatesBookingsController extends Controller {
             return;
         }
 
-        skatesServiceService.saveSkatesService(clientGuiState);
-        clientGuiState.clear();
+        if (!skatesServiceService.saveSkatesService(clientGuiState)) {
+            clientGui.setErrorScene();
+            return;
+        }
 
+        clientGuiState.clear();
         clientGui.setSuccessScene();
     }
 }

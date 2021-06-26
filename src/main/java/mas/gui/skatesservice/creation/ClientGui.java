@@ -56,8 +56,12 @@ public class ClientGui extends Application {
         setScene(primaryStage, ClientGuiTemplates.setDetails, "Dodaj przegląd: Szczegóły");
     }
 
+    public void setErrorScene() throws IOException {
+        setScene(primaryStage, ClientGuiTemplates.error, "Błąd: Nie zapisano przeglądu");
+    }
+
     public void setSuccessScene() throws IOException {
-        setScene(primaryStage, ClientGuiTemplates.success, "Sukces: zapisano przegląd");
+        setScene(primaryStage, ClientGuiTemplates.success, "Sukces: Zapisano przegląd");
     }
 
     private void setScene(Stage primaryStage, String template, String title) throws IOException {

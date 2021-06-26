@@ -8,4 +8,5 @@ public class ClientGuiTemplates {
     public static final String skatesBookings = "template/skates-bookings.fxml";
     public static final String setDetails = "template/set-details.fxml";
     public static final String success = "template/success.fxml";
+    public static final String error = "template/error.fxml";
 }

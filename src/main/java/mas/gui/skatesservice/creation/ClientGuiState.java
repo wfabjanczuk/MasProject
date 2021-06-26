@@ -102,6 +102,7 @@ public class ClientGuiState {
         skatesStateAfterService = null;
         skatesServiceSharpening = false;
         skatesServiceRepairing = false;
+        technicians = new HashSet<>();
         newestService = null;
         upcomingSkatesBooking = new LinkedList<>();
     }
