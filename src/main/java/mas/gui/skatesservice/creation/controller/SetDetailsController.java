@@ -3,7 +3,6 @@ package mas.gui.skatesservice.creation.controller;
 import javafx.event.Event;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.ChoiceBox;
-import javafx.scene.control.ComboBox;
 import javafx.scene.text.Text;
 import jfxtras.scene.control.LocalDateTimeTextField;
 import mas.entity.SkatesState;
@@ -12,6 +11,7 @@ import mas.model.TechnicianChoice;
 import mas.service.DateService;
 import mas.service.SkatesStateService;
 import mas.service.TechnicianService;
+import org.controlsfx.control.CheckComboBox;
 
 import java.io.IOException;
 
@@ -24,7 +24,7 @@ public class SetDetailsController extends SkatesServiceTimeValidationController 
     public ChoiceBox<SkatesState> stateAfterServiceChoiceBox;
     public CheckBox sharpeningCheckBox;
     public CheckBox repairingCheckBox;
-    public ComboBox<TechnicianChoice> techniciansComboBox;
+    public CheckComboBox<TechnicianChoice> techniciansComboBox;
 
     public SetDetailsController() {
         super();
