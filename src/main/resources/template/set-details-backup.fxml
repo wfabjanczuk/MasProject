@@ -5,7 +5,7 @@
 <?import javafx.scene.control.CheckBox?>
 <?import javafx.scene.control.ChoiceBox?>
 <?import javafx.scene.control.ComboBox?>
-<?import jfxtras.scene.control.LocalDateTimeTextField?>
+<?import javafx.scene.control.DatePicker?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
@@ -15,7 +15,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="480.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="mas.gui.skatesservice.creation.controller.SetDetailsController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="480.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="mas.gui.skatesservice.creation.controller.SetDetailsController">
    <children>
       <VBox alignment="TOP_CENTER" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
@@ -181,7 +181,7 @@
                               </VBox>
                               <VBox alignment="CENTER_LEFT" prefHeight="50.0" prefWidth="190.0">
                                  <children>
-                                    <LocalDateTimeTextField fx:id="dateEndDatePicker" prefWidth="180.0" />
+                                    <DatePicker fx:id="dateEndDatePicker" prefWidth="180.0" />
                                  </children>
                                  <HBox.margin>
                                     <Insets left="10.0" />
@@ -266,7 +266,7 @@
                            <children>
                               <VBox alignment="CENTER_RIGHT" prefHeight="50.0" prefWidth="150.0">
                                  <children>
-                                    <Label text="Technicy:">
+                                    <Label text="Stan po przeglądzie:">
                                        <font>
                                           <Font name="System Bold" size="12.0" />
                                        </font>

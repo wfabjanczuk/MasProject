@@ -3,22 +3,33 @@ package mas.gui.skatesservice.creation.controller;
 import javafx.event.Event;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.ChoiceBox;
+import javafx.scene.control.ComboBox;
 import javafx.scene.text.Text;
 import jfxtras.scene.control.LocalDateTimeTextField;
 import mas.entity.SkatesState;
 import mas.gui.skatesservice.creation.controller.base.SkatesServiceTimeValidationController;
+import mas.model.TechnicianChoice;
 import mas.service.DateService;
 import mas.service.SkatesStateService;
+import mas.service.TechnicianService;
 
 import java.io.IOException;
 
 public class SetDetailsController extends SkatesServiceTimeValidationController {
+    private final TechnicianService technicianService;
+
     public Text dateStartText;
     public LocalDateTimeTextField dateEndDatePicker;
 
     public ChoiceBox<SkatesState> stateAfterServiceChoiceBox;
     public CheckBox sharpeningCheckBox;
     public CheckBox repairingCheckBox;
+    public ComboBox<TechnicianChoice> techniciansComboBox;
+
+    public SetDetailsController() {
+        super();
+        technicianService = new TechnicianService();
+    }
 
     public void initialize() {
         showSkatesChoice();
@@ -35,6 +46,7 @@ public class SetDetailsController extends SkatesServiceTimeValidationController 
         stateAfterServiceChoiceBox.setValue(clientGuiState.getSkatesStateAfterService());
         sharpeningCheckBox.setSelected(clientGuiState.isSkatesServiceSharpening());
         repairingCheckBox.setSelected(clientGuiState.isSkatesServiceSharpening());
+        techniciansComboBox.getItems().addAll(technicianService.getTechnicianChoices());
     }
 
     public boolean updateDatesAndValidateTime() {
@@ -45,11 +57,11 @@ public class SetDetailsController extends SkatesServiceTimeValidationController 
 
 
     public void onSaveDetailsClicked(Event e) throws IOException {
-        if (!updateDatesAndValidateTime()) {
+        if (!validateRequiredFields()) {
             return;
         }
 
-        if (!validateRequiredFields()) {
+        if (!updateDatesAndValidateTime()) {
             return;
         }
 
