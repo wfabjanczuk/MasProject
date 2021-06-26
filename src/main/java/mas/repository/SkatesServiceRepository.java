@@ -19,12 +19,14 @@ public class SkatesServiceRepository extends Repository {
     private String getHqlForOverlappingService(Date dateEnd) {
         if (dateEnd == null) {
             return "SELECT ss FROM SkatesService ss WHERE ss.skates.id = :skatesId AND " +
-                    "ss.dateStart <= :dateStart AND :dateStart < ss.dateEnd";
+                    "(ss.dateStart <= :dateStart AND :dateStart < ss.dateEnd OR " +
+                    "ss.dateStart = :dateStart AND ss.dateEnd IS NULL)";
         }
 
         return "SELECT ss FROM SkatesService ss WHERE ss.skates.id = :skatesId AND " +
-                "NOT (ss.dateStart < :dateStart AND ss.dateEnd <= :dateStart OR " +
-                "ss.dateStart >= :dateEnd AND ss.dateEnd > :dateEnd)";
+                "(NOT (ss.dateStart < :dateStart AND ss.dateEnd <= :dateStart OR " +
+                "ss.dateStart >= :dateEnd AND ss.dateEnd > :dateEnd) OR " +
+                "(:dateStart <= ss.dateStart AND ss.dateStart <= :dateEnd AND ss.dateEnd IS NULL))";
     }
 
     private Query<SkatesService> getQueryForOverlappingService(String hql, int skatesId, Date dateStart, Date dateEnd) {
