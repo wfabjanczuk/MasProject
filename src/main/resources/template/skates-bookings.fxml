@@ -6,71 +6,76 @@
 <?import org.controlsfx.control.CheckListView?>
 <?import javafx.scene.control.CheckBox?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="360.0" prefWidth="640.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="mas.gui.skatesservice.creation.controller.SkatesBookingsController">
    <children>
-      <VBox alignment="TOP_CENTER" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-         <children>
-            <VBox alignment="CENTER" maxHeight="560.0" maxWidth="560.0" prefHeight="360.0" prefWidth="560.0">
+      <ScrollPane fitToHeight="true" fitToWidth="true" prefHeight="200.0" prefViewportHeight="480.0" prefViewportWidth="600.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <content>
+            <VBox alignment="TOP_CENTER" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                <children>
-                  <Label text="Nadchodzące rezerwacje">
-                     <font>
-                        <Font name="System Bold" size="18.0" />
-                     </font>
-                     <VBox.margin>
-                        <Insets bottom="10.0" top="10.0" />
-                     </VBox.margin>
-                  </Label>
-                  <HBox prefHeight="20.0" prefWidth="200.0">
+                  <VBox alignment="CENTER" minWidth="590.0" minHeight="350.0" maxHeight="560.0" maxWidth="600.0" prefHeight="360.0" prefWidth="600.0">
                      <children>
-                        <VBox alignment="CENTER_LEFT" prefHeight="200.0" prefWidth="200.0">
+                        <Label text="Nadchodzące rezerwacje">
+                           <font>
+                              <Font name="System Bold" size="18.0" />
+                           </font>
+                           <VBox.margin>
+                              <Insets bottom="10.0" top="10.0" />
+                           </VBox.margin>
+                        </Label>
+                        <HBox prefHeight="20.0" prefWidth="200.0">
                            <children>
-                              <CheckBox fx:id="toggleAllCheckBox" mnemonicParsing="false" text="Zaznacz/odznacz wszystko">
-                                 <VBox.margin>
-                                    <Insets left="8.0" />
-                                 </VBox.margin>
-                              </CheckBox>
+                              <VBox alignment="CENTER_LEFT" prefHeight="200.0" prefWidth="200.0">
+                                 <children>
+                                    <CheckBox fx:id="toggleAllCheckBox" mnemonicParsing="false" text="Zaznacz/odznacz wszystko">
+                                       <VBox.margin>
+                                          <Insets left="8.0" />
+                                       </VBox.margin>
+                                    </CheckBox>
+                                 </children>
+                              </VBox>
+                           </children>
+                           <VBox.margin>
+                              <Insets bottom="5.0" top="5.0" />
+                           </VBox.margin>
+                        </HBox>
+                        <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0">
+                           <VBox.margin>
+                              <Insets bottom="10.0" />
+                           </VBox.margin>
+                           <children>
+                              <CheckListView fx:id="skatesBookingsListView" prefHeight="200.0" prefWidth="200.0" />
                            </children>
                         </VBox>
-                     </children>
-                     <VBox.margin>
-                        <Insets bottom="5.0" top="5.0" />
-                     </VBox.margin>
-                  </HBox>
-                  <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0">
-                     <VBox.margin>
-                        <Insets bottom="10.0" />
-                     </VBox.margin>
-                     <children>
-                        <CheckListView fx:id="skatesBookingsListView" prefHeight="200.0" prefWidth="200.0" />
+                        <HBox alignment="CENTER" prefHeight="40.0" prefWidth="200.0">
+                           <children>
+                              <VBox alignment="CENTER" prefHeight="200.0" prefWidth="150.0">
+                                 <children>
+                                    <Button fx:id="cancelSelectedButton" mnemonicParsing="false" onAction="#onCancelSelectedClicked" text="Anuluj zaznaczone" />
+                                 </children>
+                                 <HBox.margin>
+                                    <Insets right="10.0" />
+                                 </HBox.margin>
+                              </VBox>
+                              <VBox alignment="CENTER" prefHeight="200.0" prefWidth="160.0">
+                                 <children>
+                                    <Button fx:id="saveAndContinueButton" mnemonicParsing="false" onAction="#onSaveAndContinueClicked" text="Zachowaj i kontynuuj" />
+                                 </children>
+                                 <HBox.margin>
+                                    <Insets left="10.0" />
+                                 </HBox.margin>
+                              </VBox>
+                           </children>
+                        </HBox>
                      </children>
                   </VBox>
-                  <HBox alignment="CENTER" prefHeight="40.0" prefWidth="200.0">
-                     <children>
-                        <VBox alignment="CENTER" prefHeight="200.0" prefWidth="150.0">
-                           <children>
-                              <Button fx:id="cancelSelectedButton" mnemonicParsing="false" onAction="#onCancelSelectedClicked" text="Anuluj zaznaczone" />
-                           </children>
-                           <HBox.margin>
-                              <Insets right="10.0" />
-                           </HBox.margin>
-                        </VBox>
-                        <VBox alignment="CENTER" prefHeight="200.0" prefWidth="160.0">
-                           <children>
-                              <Button fx:id="saveAndContinueButton" mnemonicParsing="false" onAction="#onSaveAndContinueClicked" text="Zachowaj i kontynuuj" />
-                           </children>
-                           <HBox.margin>
-                              <Insets left="10.0" />
-                           </HBox.margin>
-                        </VBox>
-                     </children>
-                  </HBox>
                </children>
             </VBox>
-         </children>
-      </VBox>
+         </content>
+      </ScrollPane>
    </children>
 </AnchorPane>
