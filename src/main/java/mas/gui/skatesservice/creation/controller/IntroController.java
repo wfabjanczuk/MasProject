@@ -24,8 +24,8 @@ public class IntroController extends Controller {
     }
 
     public void initialize() {
-        this.skatesChoiceBox.setOnAction(e -> errorText.setText(null));
-        this.skatesChoiceBox.getItems().addAll(skatesService.getSkatesChoicesList());
+        skatesChoiceBox.setOnAction(e -> errorText.setText(null));
+        skatesChoiceBox.getItems().addAll(skatesService.getSkatesChoicesList());
     }
 
     public void closeResources() {
@@ -33,7 +33,7 @@ public class IntroController extends Controller {
     }
 
     public void onAddSkatesServiceClicked(Event e) throws IOException {
-        SkatesChoice skatesChoice = this.skatesChoiceBox.getValue();
+        SkatesChoice skatesChoice = skatesChoiceBox.getValue();
 
         if (skatesChoice == null) {
             errorText.setText(skatesNotChosenError);

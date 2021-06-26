@@ -15,14 +15,14 @@ public class SetTimeController extends SkatesServiceTimeValidationController {
     public void initialize() {
         showSkatesChoice();
 
-        this.dateStartDatePicker.setLocale(DateService.getPolishLocale());
-        this.dateEndDatePicker.setLocale(DateService.getPolishLocale());
+        dateStartDatePicker.setLocale(DateService.getPolishLocale());
+        dateEndDatePicker.setLocale(DateService.getPolishLocale());
 
         dateStart = clientGuiState.getSkatesServiceDateStart();
         dateEnd = clientGuiState.getSkatesServiceDateEnd();
 
-        this.dateStartDatePicker.setLocalDateTime(DateService.convertToLocalDateViaSqlDate(dateStart));
-        this.dateEndDatePicker.setLocalDateTime(DateService.convertToLocalDateViaSqlDate(dateEnd));
+        dateStartDatePicker.setLocalDateTime(DateService.convertToLocalDateViaSqlDate(dateStart));
+        dateEndDatePicker.setLocalDateTime(DateService.convertToLocalDateViaSqlDate(dateEnd));
     }
 
     public boolean updateDatesAndValidateTime() {

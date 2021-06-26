@@ -4,10 +4,17 @@ import org.hibernate.Session;
 import util.HibernateUtil;
 
 abstract public class Repository {
-    protected Session session;
+    protected static Session session;
 
     public Repository() {
-        resetSession();
+        startSessionIfClosed();
+    }
+
+    protected void startSessionIfClosed() {
+        if (session != null && session.isOpen()) {
+            return;
+        }
+        session = HibernateUtil.getSessionFactory().openSession();
     }
 
     protected void resetSession() {

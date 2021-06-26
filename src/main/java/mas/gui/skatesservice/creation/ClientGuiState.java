@@ -3,11 +3,10 @@ package mas.gui.skatesservice.creation;
 import mas.entity.Skates;
 import mas.entity.SkatesService;
 import mas.entity.SkatesState;
+import mas.entity.person.Technician;
 import mas.model.SkatesBookingChoice;
 
-import java.util.Date;
-import java.util.LinkedList;
-import java.util.List;
+import java.util.*;
 
 public class ClientGuiState {
     private Skates skates;
@@ -16,6 +15,7 @@ public class ClientGuiState {
     private SkatesState skatesStateAfterService;
     private boolean skatesServiceSharpening = false;
     private boolean skatesServiceRepairing = false;
+    private Set<Technician> technicians = new HashSet<>();
 
     private SkatesService newestService;
     private List<SkatesBookingChoice> upcomingSkatesBooking = new LinkedList<>();
@@ -69,6 +69,14 @@ public class ClientGuiState {
 
     public void setSkatesServiceRepairing(boolean skatesServiceRepairing) {
         this.skatesServiceRepairing = skatesServiceRepairing;
+    }
+
+    public Set<Technician> getTechnicians() {
+        return technicians;
+    }
+
+    public void setTechnicians(Set<Technician> technicians) {
+        this.technicians = technicians;
     }
 
     public SkatesService getNewestService() {

@@ -1,5 +1,6 @@
 package mas.repository;
 
+import mas.entity.Skates;
 import mas.entity.SkatesService;
 import org.hibernate.Transaction;
 import org.hibernate.query.Query;
@@ -54,6 +55,17 @@ public class SkatesServiceRepository extends Repository {
 
         try {
             transaction.begin();
+
+            boolean isNewest = findNewestSkatesServiceAfter(
+                    skatesService.getSkates().getId(),
+                    skatesService.getDateStart()
+            ) == null;
+
+            skatesService.setSkates(session.get(Skates.class, skatesService.getSkates().getId()));
+            if (isNewest) {
+                skatesService.getSkates().setSkatesState(skatesService.getSkatesStateAfterService());
+            }
+
             session.persist(skatesService);
             transaction.commit();
 

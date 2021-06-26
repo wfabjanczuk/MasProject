@@ -11,4 +11,11 @@ public class TechnicianRepository extends Repository {
                 .getResultStream()
                 .collect(Collectors.toList());
     }
+
+    public List<Technician> findByIds(List<Integer> ids) {
+        return session.createQuery("SELECT t FROM Technician t WHERE t.id IN (:ids)", Technician.class)
+                .setParameterList("ids", ids)
+                .getResultStream()
+                .collect(Collectors.toList());
+    }
 }

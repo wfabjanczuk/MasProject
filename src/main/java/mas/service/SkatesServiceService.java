@@ -47,6 +47,7 @@ public class SkatesServiceService {
                 clientGuiState.getSkatesStateAfterService(),
                 clientGuiState.getSkates()
         );
+        skatesService.setTechnicians(clientGuiState.getTechnicians());
 
         return skatesServiceRepository.saveSkatesService(skatesService);
     }

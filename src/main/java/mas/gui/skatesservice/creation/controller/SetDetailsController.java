@@ -6,6 +6,7 @@ import javafx.scene.control.ChoiceBox;
 import javafx.scene.text.Text;
 import jfxtras.scene.control.LocalDateTimeTextField;
 import mas.entity.SkatesState;
+import mas.entity.person.Technician;
 import mas.gui.skatesservice.creation.controller.base.SkatesServiceTimeValidationController;
 import mas.model.TechnicianChoice;
 import mas.service.DateService;
@@ -14,6 +15,9 @@ import mas.service.TechnicianService;
 import org.controlsfx.control.CheckComboBox;
 
 import java.io.IOException;
+import java.util.List;
+import java.util.Set;
+import java.util.stream.Collectors;
 
 public class SetDetailsController extends SkatesServiceTimeValidationController {
     private final TechnicianService technicianService;
@@ -37,10 +41,10 @@ public class SetDetailsController extends SkatesServiceTimeValidationController 
         dateStart = clientGuiState.getSkatesServiceDateStart();
         dateEnd = clientGuiState.getSkatesServiceDateEnd();
 
-        this.dateEndDatePicker.setLocale(DateService.getPolishLocale());
+        dateEndDatePicker.setLocale(DateService.getPolishLocale());
 
         dateStartText.setText(DateService.simpleDateTimeFormat.format(dateStart));
-        this.dateEndDatePicker.setLocalDateTime(DateService.convertToLocalDateViaSqlDate(dateEnd));
+        dateEndDatePicker.setLocalDateTime(DateService.convertToLocalDateViaSqlDate(dateEnd));
 
         stateAfterServiceChoiceBox.getItems().addAll(SkatesStateService.getPossibleStatesAfterService());
         stateAfterServiceChoiceBox.setValue(clientGuiState.getSkatesStateAfterService());
@@ -65,10 +69,18 @@ public class SetDetailsController extends SkatesServiceTimeValidationController 
             return;
         }
 
+        List<Integer> technicianIds = techniciansComboBox.getCheckModel()
+                .getCheckedItems()
+                .stream()
+                .map(TechnicianChoice::getId)
+                .collect(Collectors.toList());
+        Set<Technician> technicians = technicianService.getTechniciansByIds(technicianIds);
+
         clientGuiState.setSkatesServiceDateEnd(dateEnd);
         clientGuiState.setSkatesStateAfterService(stateAfterServiceChoiceBox.getValue());
         clientGuiState.setSkatesServiceSharpening(sharpeningCheckBox.isSelected());
         clientGuiState.setSkatesServiceRepairing(repairingCheckBox.isSelected());
+        clientGuiState.setTechnicians(technicians);
 
         if (!validateSkatesBookings(dateStart)) {
             clientGui.setSkatesBookingsScene(true);
@@ -84,6 +96,11 @@ public class SetDetailsController extends SkatesServiceTimeValidationController 
     private boolean validateRequiredFields() {
         if (stateAfterServiceChoiceBox.getValue() == null) {
             errorText.setText("Błąd: stan łyżew po przeglądzie jest wymagany.");
+            return false;
+        }
+
+        if (techniciansComboBox.getCheckModel().getCheckedItems().isEmpty()) {
+            errorText.setText("Błąd: należy wybrać co najmniej jednego technika.");
             return false;
         }
 
